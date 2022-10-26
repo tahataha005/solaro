@@ -9,3 +9,8 @@ const userTypeSchema = mongoose.Schema({
         trim: true,
     },
 });
+
+//Creating user type schema
+const UserType = mongoose.model("UserType", userTypeSchema);
+
+module.exports = UserType;
