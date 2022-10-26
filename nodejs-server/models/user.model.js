@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 //Creating a user schema
 const userSchema = mongoose.Schema({
+    user_type: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "UserType",
+    },
     email: {
         type: String,
         required: "email is required",
