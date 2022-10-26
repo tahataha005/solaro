@@ -17,7 +17,15 @@ const signUp = async (req, res) => {
 
         //Saving the created user in database
         await user.save();
-        res.json(user);
+
+        //Creating a new token when authenticated
+        const token = jwt.sign(
+            { id: user._id, email: user.email },
+            "sOlArO101"
+        );
+
+        //Returning user id and new token
+        res.status(200).json({ user_id: user._id, token });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
