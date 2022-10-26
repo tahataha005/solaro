@@ -1,10 +1,11 @@
 const express = require("express");
+require("dotenv").config();
 
 //Initilizing app as express method
 const app = express();
 
 //Listening on server port and logging status
-app.listen(8000, err => {
+app.listen(process.env.PORT, err => {
     if (err) console.log(err);
-    else console.log("Server is running on PORT 8000");
+    else console.log(`Server is running on PORT ${process.env.PORT}`);
 });
