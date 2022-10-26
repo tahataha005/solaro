@@ -15,3 +15,6 @@ app.listen(process.env.PORT, err => {
 //Using created routes
 const authRoutes = require("./routes/auth.route.js");
 app.use("/auth", authRoutes);
+
+const readRoutes = require("./routes/read.route.js");
+app.use("/read", readRoutes);
