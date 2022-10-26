@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//Creating a solar system schema
 const solarSystemSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -18,3 +19,8 @@ const solarSystemSchema = mongoose.Schema({
         default: 0,
     },
 });
+
+//Creating a solar system model
+const SolarSystem = mongoose.model("SolarSystem", solarSystemSchema);
+
+module.exports = SolarSystem;
