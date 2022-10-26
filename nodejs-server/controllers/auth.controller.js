@@ -28,24 +28,32 @@ const logIn = async (req, res) => {
     //Destructuring req data
     const { email, password } = req.body;
 
-    //Searching for given email
-    const user = await User.findOne({ email });
+    try {
+        //Searching for given email
+        const user = await User.findOne({ email });
 
-    //If email not in found return invalid
-    if (!user) return res.status(404).json({ message: "Invalid Credentials" });
+        //If email not in found return invalid
+        if (!user)
+            return res.status(404).json({ message: "Invalid Credentials" });
 
-    //Comparing given pass with hashed user pass
-    const passCheck = await bcrypt.compare(password, user.password);
+        //Comparing given pass with hashed user pass
+        const passCheck = await bcrypt.compare(password, user.password);
 
-    //If not comparison returned false
-    if (!passCheck)
-        return res.status(404).json({ message: "Invalid Credentials" });
+        //If not comparison returned false
+        if (!passCheck)
+            return res.status(404).json({ message: "Invalid Credentials" });
 
-    //Creating a new token when authenticated
-    const token = jwt.sign({ id: user._id, email: user.email }, "sOlArO101");
+        //Creating a new token when authenticated
+        const token = jwt.sign(
+            { id: user._id, email: user.email },
+            "sOlArO101"
+        );
 
-    //Returning user id and new token
-    res.status(200).json({ user_id: user._id, token });
+        //Returning user id and new token
+        res.status(200).json({ user_id: user._id, token });
+    } catch (error) {
+        res.status(400).json({ message: err.message });
+    }
 };
 
 module.exports = { signUp, logIn };
