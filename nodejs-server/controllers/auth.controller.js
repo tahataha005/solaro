@@ -2,15 +2,16 @@ const User = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//Function to sign up a new user
+//Signing up a new user
 const signUp = async (req, res) => {
     //Destructuring req data
     const { user_type, email, password } = req.body;
 
     try {
+        //Creating a new instance of User model
         const user = new User();
 
-        //Assigning user credentials
+        //Assigning user attributes
         user.user_type = user_type;
         user.email = email;
         user.password = await bcrypt.hash(password, 10);
