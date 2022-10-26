@@ -3,7 +3,6 @@ const controllerMiddleware = (req, res, next) => {
     try {
         //If true => pass
         if (req.user.user_type.user_type === "controller") next();
-        
         //If false => unauthorized
         else res.status(401).json({ message: "Unauthorized" });
     } catch (err) {
