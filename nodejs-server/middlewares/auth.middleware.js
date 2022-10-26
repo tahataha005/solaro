@@ -18,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
         );
 
         //Passing user to request
-        res.user = user;
+        req.user = user;
 
         //Authentication successfull / Pass the middleware
         next();
