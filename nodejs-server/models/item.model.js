@@ -24,3 +24,8 @@ const itemSchema = mongoose.Schema({
         default: Date.now,
     },
 });
+
+//Creating an item model
+const Item = mongoose.model("Item", itemSchema);
+
+module.exports = Item;
