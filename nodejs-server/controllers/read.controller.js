@@ -43,4 +43,23 @@ const getAllItems = async (req, res) => {
     }
 };
 
-module.exports = { getSolarStats, getAllItems };
+//Searching for item by its id
+const getItem = async (req, res) => {
+    try {
+        //Destructuring req data
+        const { item_id } = req.params;
+
+        //Geting item by id
+        const item = await Item.findOne({ item_id });
+
+        //If not found return not found
+        if (!item) return res.status(404).json({ message: "Item not found" });
+
+        //Returning recieved system
+        res.status(200).json(item);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+module.exports = { getSolarStats, getAllItems, getItem };
