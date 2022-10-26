@@ -22,7 +22,7 @@ const signUp = async (req, res) => {
         //Creating a new token when authenticated
         const token = jwt.sign(
             { id: user._id, email: user.email },
-            "sOlArO101"
+            process.env.SECRET_KEY
         );
 
         //Returning user id and new token
@@ -55,7 +55,7 @@ const logIn = async (req, res) => {
         //Creating a new token when authenticated
         const token = jwt.sign(
             { id: user._id, email: user.email },
-            "sOlArO101"
+            process.env.SECRET_KEY
         );
 
         //Returning user id and new token
