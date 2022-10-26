@@ -1,5 +1,6 @@
 const User = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 //Function to sign up a new user
 const signUp = async (req, res) => {
@@ -40,8 +41,11 @@ const logIn = async (req, res) => {
     if (!passCheck)
         return res.status(404).json({ message: "Invalid Credentials" });
 
-    //Return authenticated
-    res.status(200).json({ message: "Authenticated" });
+    //Creating a new token when authenticated
+    const token = jwt.sign({ id: user._id, email: user.email }, "sOlArO101");
+
+    //Returning user id and new token
+    res.status(200).json({ user_id: user._id, token });
 };
 
 module.exports = { signUp, logIn };
