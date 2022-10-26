@@ -15,3 +15,8 @@ const peakSchema = mongoose.Schema({
         required: "date is required",
     },
 });
+
+//Creating a peak model
+const Peak = mongoose.model("Peak", peakSchema);
+
+module.exports = Peak;
