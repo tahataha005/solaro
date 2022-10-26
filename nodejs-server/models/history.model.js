@@ -19,3 +19,8 @@ const historySchema = mongoose.Schema({
         required: "average consumption is required",
     },
 });
+
+//Creating history model
+const History = mongoose.model("History", historySchema);
+
+module.exports = History;
