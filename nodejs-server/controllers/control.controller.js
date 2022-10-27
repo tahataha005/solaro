@@ -99,7 +99,29 @@ const editItem = async (req, res) => {
         //Returning updated item
         res.status(200).json({ updated: item });
     } catch (err) {
-        res.status(200).json({ message: err.message });
+        res.status(400).json({ message: err.message });
+    }
+};
+
+const controlItem = async (req, res) => {
+    const { item_id, status } = req.body;
+
+    try {
+        if (status === "on") {
+            const item = await Item.findByIdAndUpdate(item_id, {
+                status: true,
+            });
+            return res.status(200).json({ message: `${item.name} turned on` });
+        }
+        if (status === "off") {
+            const item = await Item.findByIdAndUpdate(item_id, {
+                status: false,
+            });
+            return res.status(200).json({ message: `${item.name} turned off` });
+        }
+        res.status(400).json({ message: "a problem occured assigning status" });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -109,4 +131,5 @@ module.exports = {
     dropSolarSystem,
     dropItem,
     editItem,
+    controlItem,
 };
