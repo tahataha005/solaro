@@ -83,4 +83,29 @@ const dropItem = async (req, res) => {
     }
 };
 
-module.exports = { addSolarSystem, addItem, dropSolarSystem, dropItem };
+//Editing item by its id
+const editItem = async (req, res) => {
+    //Destructuring req data
+    const { item_id, name, ideal_consumption } = req.body;
+
+    try {
+        //Updating item by it
+        const item = await Item.findByIdAndUpdate(item_id, {
+            name: name,
+            ideal_consumption: ideal_consumption,
+        });
+
+        //Returning updated item
+        res.status(200).json({ updated: item });
+    } catch (err) {
+        res.status(200).json({ message: err.message });
+    }
+};
+
+module.exports = {
+    addSolarSystem,
+    addItem,
+    dropSolarSystem,
+    dropItem,
+    editItem,
+};
