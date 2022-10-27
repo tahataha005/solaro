@@ -18,3 +18,6 @@ app.use("/auth", authRoutes);
 
 const readRoutes = require("./routes/read.route.js");
 app.use("/read", readRoutes);
+
+const controlRoutes = require("./routes/control.route.js");
+app.use("/control", controlRoutes);
