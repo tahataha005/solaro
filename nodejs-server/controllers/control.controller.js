@@ -7,7 +7,7 @@ const addSolarSystem = async (req, res) => {
     //Destructuring req data
     const { user, connection } = req.body;
     try {
-        //Cerating a new instance of SolarSystem model
+        //Creating a new instance of SolarSystem model
         const system = new SolarSystem();
 
         //Assigning solar system attributes
@@ -26,4 +26,29 @@ const addSolarSystem = async (req, res) => {
     }
 };
 
-module.exports = { addSolarSystem };
+const addItem = async (req, res) => {
+    //Destructuring req data
+    const { solar_system, name, ideal_consumption } = req.body;
+
+    try {
+        //Creating a new instance of Item model
+        const item = new Item();
+
+        //Assigning item attributes
+        item.solar_system = solar_system;
+        item.name = name;
+        item.ideal_consumption = ideal_consumption;
+        item.live_consumption = 0;
+        item.timestamp = null;
+
+        //Saving item in database
+        await item.save();
+
+        //Returning created item id
+        res.status(200).json({ item_id: item._id });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+module.exports = { addSolarSystem, addItem };
