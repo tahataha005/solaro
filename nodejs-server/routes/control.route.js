@@ -10,6 +10,7 @@ const {
     dropSolarSystem,
     dropItem,
     editItem,
+    controlItem,
 } = require("../controllers/control.controller.js");
 
 //Creating routes
@@ -18,5 +19,6 @@ router.delete("/system/", dropSolarSystem);
 router.post("/item", addItem);
 router.delete("/item", dropItem);
 router.put("/item", editItem);
+router.put("/item/status", controlItem);
 
 module.exports = router;
