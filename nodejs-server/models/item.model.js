@@ -11,6 +11,10 @@ const itemSchema = mongoose.Schema({
         required: "name is required",
         trim: true,
     },
+    status: {
+        type: Boolean,
+        default: false,
+    },
     ideal_consumption: {
         type: Number,
         required: "ideal consumption is required",
