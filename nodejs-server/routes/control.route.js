@@ -4,9 +4,13 @@ const { Router } = require("express");
 const router = Router();
 
 //Importing functions from controllers
-const { addSolarSystem } = require("../controllers/control.controller.js");
+const {
+    addSolarSystem,
+    addItem,
+} = require("../controllers/control.controller.js");
 
 //Creating routes
 router.post("/system", addSolarSystem);
+router.post("/item", addItem);
 
 module.exports = router;
