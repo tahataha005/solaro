@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 
 //Creating a solar system schema
 const solarSystemSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: 0,
+    },
     connection: {
         type: String,
         required: "connection is required",
