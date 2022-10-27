@@ -12,12 +12,16 @@ app.listen(process.env.PORT, err => {
     else console.log(`Server is running on PORT ${process.env.PORT}`);
 });
 
+//Importing middlewares
+const controllerMiddleware = require("./middlewares/controller.middleware.js");
+const authMiddleware = require("./middlewares/auth.middleware.js");
+
 //Using created routes
 const authRoutes = require("./routes/auth.route.js");
 app.use("/auth", authRoutes);
 
 const readRoutes = require("./routes/read.route.js");
-app.use("/read", readRoutes);
+app.use("/read", authMiddleware, readRoutes);
 
 const controlRoutes = require("./routes/control.route.js");
-app.use("/control", controlRoutes);
+app.use("/control", authMiddleware, controllerMiddleware, controlRoutes);
