@@ -38,6 +38,7 @@ const addItem = async (req, res) => {
         item.solar_system = solar_system;
         item.name = name;
         item.ideal_consumption = ideal_consumption;
+        item.status = false;
         item.live_consumption = 0;
         item.timestamp = null;
 
