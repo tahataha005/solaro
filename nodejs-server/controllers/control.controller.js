@@ -67,4 +67,20 @@ const dropSolarSystem = async (req, res) => {
     }
 };
 
-module.exports = { addSolarSystem, addItem, dropSolarSystem };
+//Deleting item by id
+const dropItem = async (req, res) => {
+    //Destructuring req data
+    const { item_id } = req.body;
+
+    try {
+        //Searching for item by id and deleting it
+        const item = await Item.findByIdAndDelete(item_id);
+
+        //Returning deleted item
+        res.status(200).json({ deleted: item });
+    } catch (err) {
+        res.status(200).json({ message: err.message });
+    }
+};
+
+module.exports = { addSolarSystem, addItem, dropSolarSystem, dropItem };
