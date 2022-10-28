@@ -1,4 +1,3 @@
-const Item = require("../models/item.model.js");
 const User = require("../models/user.model.js");
 
 //Searching for system by user id
@@ -13,7 +12,7 @@ const getSolarStats = async (req, res) => {
         //Searching for the desired solar system
         const system = user.system.filter(system => {
             return system.name == system_name;
-        });
+        })[0];
 
         //If not found return not found
         if (!system)
@@ -30,10 +29,17 @@ const getSolarStats = async (req, res) => {
 const getAllItems = async (req, res) => {
     try {
         //Destructuring req data
-        const { system_id } = req.params;
+        const { user_id, system_name } = req.params;
 
         //Geting items belonging to system by its id
-        const items = await Item.find({ solar_system: system_id });
+        const user = await User.findById(user_id);
+
+        //Searching for the desired solar system
+        const system = user.system.filter(system => {
+            return system.name == system_name;
+        })[0];
+
+        const items = system.items;
 
         //If not found return not found
         if (!items)
@@ -43,25 +49,6 @@ const getAllItems = async (req, res) => {
 
         //Returning recieved items
         res.status(200).json(items);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
-
-//Searching for item by its id
-const getItem = async (req, res) => {
-    try {
-        //Destructuring req data
-        const { item_id } = req.params;
-
-        //Geting item by id
-        const item = await Item.findOne({ item_id });
-
-        //If not found return not found
-        if (!item) return res.status(404).json({ message: "Item not found" });
-
-        //Returning recieved system
-        res.status(200).json(item);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
