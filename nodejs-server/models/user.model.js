@@ -1,5 +1,30 @@
 const mongoose = require("mongoose");
 
+//Creating an item schema
+const itemSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: "name is required",
+        trim: true,
+    },
+    status: {
+        type: Boolean,
+        default: false,
+    },
+    ideal_consumption: {
+        type: Number,
+        required: "ideal consumption is required",
+    },
+    live_consumption: {
+        type: Number,
+        default: 0,
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
 //Creating a solar system schema
 const solarSystemSchema = mongoose.Schema({
     name: {
@@ -20,6 +45,7 @@ const solarSystemSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
+    items: [itemSchema],
 });
 
 //Creating a user schema
