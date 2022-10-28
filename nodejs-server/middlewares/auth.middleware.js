@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model.js");
-const UserType = require("../models/user.type.model.js");
 
 //Authenticating user
 const authMiddleware = async (req, res, next) => {
@@ -9,7 +8,6 @@ const authMiddleware = async (req, res, next) => {
 
     //If token is not present return unauthorized
     if (!token) return res.status(401).json({ message: "Unauthorized" });
-
     try {
         //Decoding token and making sure payload is present in database
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
