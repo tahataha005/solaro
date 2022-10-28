@@ -1,26 +1,30 @@
 const User = require("../models/user.model.js");
-const SolarSystem = require("../models/solar.system.model.js");
-const Item = require("../models/item.model.js");
 
 //Adding a new solar system
 const addSolarSystem = async (req, res) => {
     //Destructuring req data
-    const { user, connection } = req.body;
-    try {
-        //Creating a new instance of SolarSystem model
-        const system = new SolarSystem();
+    const { user_id, connection, system_name } = req.body;
 
+    try {
         //Assigning solar system attributes
-        system.user = user;
-        system.connection = connection;
-        system.charging = 0;
-        system.consumption = 0;
+        const system = {
+            name: system_name,
+            connection: connection,
+            charging: 0,
+            consumption: 0,
+        };
+
+        //Getting user to add solar system
+        const user = await User.findById(user_id);
+
+        //Pushing new system to array of systems in user
+        user.system.push(system);
 
         //Saving solar system in database
-        await system.save();
+        await user.save();
 
-        //Returning created system id
-        res.status(200).json({ system_id: system._id });
+        //Returning created system
+        res.status(200).json({ added: system });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -52,17 +56,25 @@ const addItem = async (req, res) => {
     }
 };
 
-//Deleting solar system by id
+//Deleting solar system by name
 const dropSolarSystem = async (req, res) => {
     //Destructuring req data
-    const { system_id } = req.body;
+    const { user_id, system_name } = req.body;
 
     try {
-        //Searching for system by id and deleting it
-        const system = await SolarSystem.findByIdAndDelete(system_id);
+        //Getting user by id to delete solar system from
+        const user = await User.findById(user_id);
 
-        //Returning deleted system
-        res.status(200).json({ deleted: system });
+        //Filtering array of solar systems
+        user.system = user.system.filter(system => {
+            return system.name != system_name;
+        });
+
+        //Saving changes in user's solar systems
+        await user.save();
+
+        //Returning user solar systems
+        res.status(200).json(user.system);
     } catch (err) {
         res.status(200).json({ message: err.message });
     }
