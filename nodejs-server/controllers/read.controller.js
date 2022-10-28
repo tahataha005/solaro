@@ -1,14 +1,19 @@
-const SolarSystem = require("../models/solar.system.model.js");
 const Item = require("../models/item.model.js");
+const User = require("../models/user.model.js");
 
 //Searching for system by user id
 const getSolarStats = async (req, res) => {
     try {
         //Destructuring req data
-        const { user_id } = req.params;
+        const { user_id, system_name } = req.params;
 
-        //Geting system belonging to user by his id
-        const system = await SolarSystem.findOne({ user: user_id });
+        //Geting user by id
+        const user = await User.findById(user_id);
+
+        //Searching for the desired solar system
+        const system = user.system.filter(system => {
+            return system.name == system_name;
+        });
 
         //If not found return not found
         if (!system)
