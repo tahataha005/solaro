@@ -8,8 +8,8 @@ const {
     getItem,
 } = require("../controllers/read.controller.js");
 
-router.get("/system/:user_id", getSolarStats);
+router.get("/system/:user_id/:system_name", getSolarStats);
 router.get("/item/:item_id", getItem);
-router.get("/items/:system_id", getAllItems);
+router.get("/items/:user_id/:system_name", getAllItems);
 
 module.exports = router;
