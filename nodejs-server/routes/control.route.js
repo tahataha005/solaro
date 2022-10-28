@@ -15,10 +15,10 @@ const {
 
 //Creating routes
 router.post("/system", addSolarSystem);
-router.delete("/system/", dropSolarSystem);
+router.delete("/system", dropSolarSystem);
 router.post("/item", addItem);
 router.delete("/item", dropItem);
 router.put("/item", editItem);
-router.put("/item/status", controlItem);
+router.put("/", controlItem);
 
 module.exports = router;
