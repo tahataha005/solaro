@@ -1,6 +1,5 @@
-import 'dart:ui';
+import 'tools/color.constructor.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/register/register.page.dart';
 
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Color.fromRGBO(0, 114, 187, 1),
+        primarySwatch: createMaterialColor(Color.fromRGBO(0, 114, 187, 1)),
         accentColor: Color.fromRGBO(255, 186, 73, 1),
       ),
       home: RegisterPage(),
