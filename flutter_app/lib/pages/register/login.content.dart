@@ -9,7 +9,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.amber,
       height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
         children: [
@@ -40,8 +39,9 @@ class _LoginState extends State<Login> {
             height: 60,
             child: ElevatedButton(
               onPressed: () {},
-              child:
-                  Text("LOG IN", style: Theme.of(context).textTheme.labelLarge),
+              child: Text(
+                "LOG IN",
+              ),
             ),
           ),
         ],
