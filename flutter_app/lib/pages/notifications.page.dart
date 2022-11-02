@@ -30,6 +30,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
         backgroundColor: Colors.white,
         elevation: 0.5,
       ),
+      body: Column(
+        children: notifications.map((notification) {
+          return Text(notification.system_name);
+        }).toList(),
+      ),
     );
   }
 }
