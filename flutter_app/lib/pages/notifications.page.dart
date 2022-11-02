@@ -20,9 +20,15 @@ class _NotificationsPageState extends State<NotificationsPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        title: Image.asset(
-          "assets/images/Header-Logo.png",
+        title: Container(
+          width: 180,
+          child: Image.asset(
+            "assets/images/Header-Logo.png",
+            fit: BoxFit.cover,
+          ),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0.5,
       ),
     );
   }
