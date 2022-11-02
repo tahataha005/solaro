@@ -45,6 +45,14 @@ class _LandingPageState extends State<LandingPage> {
         ]),
   ];
 
+  String stringBuilder(List items) {
+    String itemss = "";
+    for (var i = 0; i < items.length; i++) {
+      itemss = itemss + items[i] + ", ";
+    }
+    return itemss;
+  }
+
   Widget systemsBuilder(system) {
     return InkWell(
       onTap: () {},
