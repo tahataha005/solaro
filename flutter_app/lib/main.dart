@@ -1,7 +1,9 @@
-import 'tools/color.constructor.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/register/register.page.dart';
+
+import './tools/color.constructor.dart';
+import './pages/register/register.page.dart';
+import './pages/landing.page.dart';
+import './pages/notifications.page.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,14 +22,16 @@ class MyApp extends StatelessWidget {
                 color: Colors.white,
               ),
               labelLarge: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                fontFamily: "Inter",
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
               titleMedium: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+                fontFamily: "Inter",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
               bodySmall: const TextStyle(
                 fontFamily: "Inter",
                 fontSize: 16,
@@ -42,7 +46,12 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: RegisterPage(),
+      home: LandingPage(),
+      routes: {
+        "/first": (context) => RegisterPage(),
+        "/landing": (context) => LandingPage(),
+        "/notifications": (context) => NotificationsPage()
+      },
     );
   }
 }
