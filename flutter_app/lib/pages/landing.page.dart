@@ -53,6 +53,19 @@ class _LandingPageState extends State<LandingPage> {
     return itemss;
   }
 
+  Color randColor(String name) {
+    int countName = name.length;
+    while (countName >= 3) {
+      countName = countName % 3;
+    }
+    List colors = [
+      Theme.of(context).primaryColor,
+      Theme.of(context).accentColor,
+      Colors.blueGrey,
+    ];
+    return colors[countName];
+  }
+
   Widget systemsBuilder(system) {
     return InkWell(
       onTap: () {},
