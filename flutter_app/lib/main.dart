@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './tools/color.constructor.dart';
 import './pages/register/register.page.dart';
 import './pages/landing.page.dart';
+import './pages/notifications.page.dart';
 
 void main() => runApp(MyApp());
 
@@ -46,7 +47,11 @@ class MyApp extends StatelessWidget {
             ),
       ),
       home: LandingPage(),
-      routes: {"/first": (context) => RegisterPage()},
+      routes: {
+        "/first": (context) => RegisterPage(),
+        "/landing": (context) => LandingPage(),
+        "/notifications": (context) => NotificationsPage()
+      },
     );
   }
 }
