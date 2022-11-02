@@ -38,25 +38,23 @@ class _MainPageState extends State<MainPage> {
               borderRadius: BorderRadius.circular(30),
               color: Colors.white,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Consumption:",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Container(
-                  child: Container(),
-                ),
-                Text(
-                  "Consumption:",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Container(
-                  child: Container(),
-                ),
-              ],
-            ),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                "Consumption:",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Container(
+                child: Container(),
+              ),
+              Text(
+                "Charging:",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Container(
+                child: Container(),
+              ),
+            ]),
           ),
         ]),
       ),
