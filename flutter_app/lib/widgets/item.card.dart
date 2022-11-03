@@ -36,25 +36,27 @@ class ItemCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.height * 0.21,
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  item_name,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                CostumedButton(
-                  height: 50,
-                  width: double.infinity,
-                  raduis: 15,
-                  background: Theme.of(context).primaryColor,
-                  text: "View",
-                )
-              ],
+          Flexible(
+            fit: FlexFit.loose,
+            child: Container(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    item_name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  CostumedButton(
+                    height: 50,
+                    width: double.infinity,
+                    raduis: 15,
+                    background: Theme.of(context).primaryColor,
+                    text: "View",
+                  )
+                ],
+              ),
             ),
           )
         ],
