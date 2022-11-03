@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.model.dart';
+import 'package:flutter_app/widgets/content.card.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 import 'package:flutter_app/widgets/labeled.progress.bar.dart';
 
@@ -9,10 +10,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  double maxConsumption = 7;
-  double system_charging = 5;
-  double system_consumption = 3.5;
-
   final List items = [
     Item(
       item_name: "Refrigerator",
@@ -36,8 +33,12 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    double maxConsumption = 7;
+    double system_charging = 5;
+    double system_consumption = 3.5;
     double currentConsumption = system_consumption / 7;
     double currentCharging = system_charging / 7;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
@@ -66,14 +67,8 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
-                ),
-                child: Column(
+              ContentCard(
+                content: Column(
                   children: [
                     LabeledProgressBar(
                       label: "Charging",
@@ -93,27 +88,14 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                height: 500,
-                width: double.infinity,
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
-                ),
-                child: Text("Bar Graph"),
+              ContentCard(
+                content: Text("Bar Graph"),
               ),
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
-                ),
-                child: Column(children: [
+              ContentCard(
+                content: Column(children: [
                   items.length > 0
                       ? ItemCard(item_name: items[0].item_name)
                       : Container(),
