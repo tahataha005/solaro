@@ -1,6 +1,4 @@
-import 'package:flutter/animation.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
 class CostumedButton extends StatelessWidget {
   final double height;
@@ -19,6 +17,21 @@ class CostumedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SizedBox(
+      height: height,
+      width: width,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(background),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(raduis),
+            ),
+          ),
+        ),
+        onPressed: () {},
+        child: Text(text),
+      ),
+    );
   }
 }
