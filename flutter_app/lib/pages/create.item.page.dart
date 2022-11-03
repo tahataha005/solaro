@@ -34,6 +34,14 @@ class _CreateItemPageState extends State<CreateItemPage> {
               ],
             ),
           ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              child: SizedBox(
+                child: Icon(Icons.add),
+              ),
+            ),
+          )
         ],
       ),
     );
