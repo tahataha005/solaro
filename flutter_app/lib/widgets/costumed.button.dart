@@ -6,6 +6,7 @@ class CostumedButton extends StatelessWidget {
   final double raduis;
   final Color background;
   final String text;
+  final onPressed;
 
   CostumedButton({
     required this.height,
@@ -13,6 +14,7 @@ class CostumedButton extends StatelessWidget {
     required this.raduis,
     required this.background,
     required this.text,
+    this.onPressed = null,
   });
 
   @override
@@ -29,7 +31,7 @@ class CostumedButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(text),
       ),
     );
