@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/main.page.dart';
 
 import './tools/color.constructor.dart';
 import './pages/register/register.page.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: createMaterialColor(Color.fromRGBO(0, 114, 187, 1)),
         accentColor: Color.fromRGBO(255, 186, 73, 1),
+        primaryColorLight: Color.fromRGBO(233, 235, 248, 1),
         fontFamily: "Inter",
         textTheme: ThemeData.light().textTheme.copyWith(
               labelMedium: const TextStyle(
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: LandingPage(),
+      home: MainPage(),
       routes: {
         "/first": (context) => RegisterPage(),
         "/landing": (context) => LandingPage(),
