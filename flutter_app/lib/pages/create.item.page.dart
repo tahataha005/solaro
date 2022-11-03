@@ -50,9 +50,47 @@ class _CreateItemPageState extends State<CreateItemPage> {
                     child: Icon(Icons.add, size: 200, color: Colors.white),
                   ),
                 ),
-                TextField(),
-                TextField(),
-                TextField(),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                  label: Text(
+                    "Item Name",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                )),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                  label: Text(
+                    "Ideal Consumption",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                )),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                  label: Text(
+                    "Connection",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                )),
+                SizedBox(
+                  height: 40,
+                ),
+                CostumedButton(
+                  height: 50,
+                  width: double.infinity,
+                  raduis: 15,
+                  background: Theme.of(context).primaryColor,
+                  text: "ADD",
+                  onPressed: () {},
+                )
               ],
             ),
           ),
