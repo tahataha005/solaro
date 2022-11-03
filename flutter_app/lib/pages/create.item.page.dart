@@ -8,6 +8,34 @@ class CreateItemPage extends StatefulWidget {
 class _CreateItemPageState extends State<CreateItemPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(20),
+            width: double.infinity,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).padding.top,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_back),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
