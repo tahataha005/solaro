@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.model.dart';
 import 'package:flutter_app/widgets/content.card.dart';
+import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 import 'package:flutter_app/widgets/labeled.progress.bar.dart';
 
@@ -105,24 +106,13 @@ class _MainPageState extends State<MainPage> {
                   items.length > 2
                       ? ItemCard(item_name: items[2].item_name)
                       : Container(),
-                  SizedBox(
+                  CostumedButton(
                     height: 50,
                     width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).accentColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Text("ADD"),
-                    ),
-                  )
+                    raduis: 15,
+                    background: Theme.of(context).accentColor,
+                    text: "ADD",
+                  ),
                 ]),
               ),
               SizedBox(
