@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/costumed.button.dart';
 
 class CreateItemPage extends StatefulWidget {
   @override
@@ -29,25 +30,32 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
               ],
             ),
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.width - 20,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).primaryColorLight,
-              ),
-              child: SizedBox(
-                child: Icon(Icons.add, size: 200, color: Colors.white),
-              ),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.width - 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Theme.of(context).primaryColorLight,
+                  ),
+                  child: SizedBox(
+                    child: Icon(Icons.add, size: 200, color: Colors.white),
+                  ),
+                ),
+                TextField(),
+                TextField(),
+                TextField(),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
