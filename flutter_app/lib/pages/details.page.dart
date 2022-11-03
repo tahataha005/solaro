@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/item.model.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/widgets/item.card.dart';
 
 class DetailsPage extends StatefulWidget {
   @override
@@ -9,9 +11,29 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
+    final List items = [
+      Item(
+        item_name: "Refrigerator",
+        ideal_consumption: 3,
+        live_consumption: 2.8,
+        status: true,
+      ),
+      Item(
+        item_name: "Lights",
+        ideal_consumption: 1.5,
+        live_consumption: 1.4,
+        status: true,
+      ),
+      Item(
+        item_name: "Mokhe",
+        ideal_consumption: 100,
+        live_consumption: 101,
+        status: true,
+      ),
+    ];
     String dropdownvalue = 'Monday';
 
-    var drops = [
+    final drops = [
       'Monday',
       'Tuesday',
       'Wednesday',
@@ -63,7 +85,11 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             SizedBox(
               height: 20,
-            )
+            ),
+            Column(
+                children: items
+                    .map((item) => ItemCard(item_name: item.item_name))
+                    .toList())
           ],
         ),
       ),
