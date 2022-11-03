@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/details.page.dart';
+import 'package:flutter_app/pages/item.page.dart';
 import 'package:flutter_app/pages/main.page.dart';
 
 import './tools/color.constructor.dart';
@@ -30,6 +31,11 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
+              titleLarge: const TextStyle(
+                fontFamily: "Inter",
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
               titleMedium: const TextStyle(
                 fontFamily: "Inter",
                 fontSize: 20,
@@ -49,7 +55,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: DetailsPage(),
+      home: ItemPage(),
       routes: {
         "/first": (context) => RegisterPage(),
         "/landing": (context) => LandingPage(),
