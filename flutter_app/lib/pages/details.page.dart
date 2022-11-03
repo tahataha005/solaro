@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.model.dart';
+import 'package:flutter_app/widgets/content.card.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 
@@ -83,6 +84,22 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
+            ContentCard(
+              content: Text("Graph"),
+              color: Theme.of(context).primaryColorLight,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CostumedButton(
+                height: 50,
+                width: double.infinity,
+                raduis: 15,
+                background: Theme.of(context).primaryColor,
+                text: "Graph"),
             SizedBox(
               height: 20,
             ),
