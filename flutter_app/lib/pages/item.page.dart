@@ -69,13 +69,24 @@ class _ItemPageState extends State<ItemPage> {
             ),
           ),
           Container(
+            height: 320,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Theme.of(context).primaryColorLight,
+            ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
                   "Refrigerator",
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
                   "Consumption:",
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Row(
                   children: [
@@ -84,6 +95,12 @@ class _ItemPageState extends State<ItemPage> {
                       width: 20,
                     ),
                     Container(
+                      width: 60,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: Center(
                         child: Text("5"),
                       ),
@@ -97,12 +114,33 @@ class _ItemPageState extends State<ItemPage> {
                       width: 20,
                     ),
                     Container(
+                      width: 60,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: Center(
                         child: Text("4.8"),
                       ),
                     )
                   ],
                 ),
+                CostumedButton(
+                  height: 50,
+                  width: double.infinity,
+                  raduis: 15,
+                  background: status
+                      ? Theme.of(context).accentColor
+                      : Theme.of(context).primaryColor,
+                  text: status ? "ON" : "OFF",
+                  onPressed: () {
+                    setState(() {
+                      status = !status;
+                      print(status);
+                    });
+                  },
+                )
               ],
             ),
           )
