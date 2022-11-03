@@ -85,7 +85,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 50,
             ),
             ContentCard(
               content: Text("Graph"),
@@ -101,7 +101,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 background: Theme.of(context).primaryColor,
                 text: "Graph"),
             SizedBox(
-              height: 20,
+              height: 50,
             ),
             Column(
                 children: items
