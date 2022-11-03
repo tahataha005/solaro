@@ -68,6 +68,44 @@ class _ItemPageState extends State<ItemPage> {
               ],
             ),
           ),
+          Container(
+            child: Column(
+              children: [
+                Text(
+                  "Refrigerator",
+                ),
+                Text(
+                  "Consumption:",
+                ),
+                Row(
+                  children: [
+                    Text("Ideal:"),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      child: Center(
+                        child: Text("5"),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("Ideal:"),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      child: Center(
+                        child: Text("4.8"),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
