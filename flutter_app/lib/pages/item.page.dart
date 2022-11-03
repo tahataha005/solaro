@@ -32,12 +32,29 @@ class _ItemPageState extends State<ItemPage> {
               height: 50,
             ),
             Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.width - 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0, 3), //(x,y)
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                    ),
                     child: Image.asset(
                       "assets/images/Item 1.png",
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ],
