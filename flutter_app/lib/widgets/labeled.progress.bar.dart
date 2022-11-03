@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LabeledProgressBar extends StatelessWidget {
   final String label;
   final double progress;
-  final Color progress_color;
+  final progress_color;
 
   LabeledProgressBar({
     required this.label,
@@ -14,9 +14,10 @@ class LabeledProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          label + ":",
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Stack(
