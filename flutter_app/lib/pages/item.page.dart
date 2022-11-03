@@ -31,6 +31,18 @@ class _ItemPageState extends State<ItemPage> {
             SizedBox(
               height: 50,
             ),
+            Container(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ClipRRect(
+                    child: Image.asset(
+                      "assets/images/Item 1.png",
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
