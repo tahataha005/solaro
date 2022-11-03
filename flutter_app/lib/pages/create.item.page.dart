@@ -37,8 +37,14 @@ class _CreateItemPageState extends State<CreateItemPage> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.width - 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Theme.of(context).primaryColorLight,
+              ),
               child: SizedBox(
-                child: Icon(Icons.add),
+                child: Icon(Icons.add, size: 200, color: Colors.white),
               ),
             ),
           )
