@@ -10,6 +10,30 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.all(20),
+        width: double.infinity,
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.arrow_back),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
