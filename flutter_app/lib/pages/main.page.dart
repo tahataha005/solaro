@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.model.dart';
 import 'package:flutter_app/widgets/item.card.dart';
+import 'package:flutter_app/widgets/labeled.progress.bar.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -73,63 +74,18 @@ class _MainPageState extends State<MainPage> {
                   color: Colors.white,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Charging:",
-                      style: Theme.of(context).textTheme.titleMedium,
+                    LabeledProgressBar(
+                      label: "Charging",
+                      progress: currentCharging,
+                      progress_color: Theme.of(context).accentColor,
                     ),
-                    Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 15),
-                          height: 40,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColorLight,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        FractionallySizedBox(
-                          widthFactor: currentCharging,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).accentColor,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                        )
-                      ],
-                    ),
-                    Text(
-                      "Consumption:",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 15),
-                          height: 40,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColorLight,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        FractionallySizedBox(
-                          widthFactor: currentConsumption,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: currentConsumption >= currentCharging
-                                    ? Colors.red
-                                    : Theme.of(context).accentColor,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                        )
-                      ],
+                    LabeledProgressBar(
+                      label: "Consumption",
+                      progress: currentConsumption,
+                      progress_color: currentConsumption > currentCharging
+                          ? Colors.red[900]
+                          : Theme.of(context).accentColor,
                     ),
                   ],
                 ),
