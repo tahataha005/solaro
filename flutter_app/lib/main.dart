@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/create.item.page.dart';
 import 'package:flutter_app/pages/details.page.dart';
 import 'package:flutter_app/pages/item.page.dart';
 import 'package:flutter_app/pages/main.page.dart';
@@ -55,12 +56,13 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: ItemPage(),
+      home: CreateItemPage(),
       routes: {
         "/first": (context) => RegisterPage(),
         "/landing": (context) => LandingPage(),
         "/notifications": (context) => NotificationsPage(),
         "/main": (context) => MainPage(),
+        "/item": (context) => ItemPage(),
       },
     );
   }
