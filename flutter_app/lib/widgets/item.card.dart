@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/costumed.button.dart';
 
 class ItemCard extends StatelessWidget {
   final String item_name;
@@ -46,20 +47,12 @@ class ItemCard extends StatelessWidget {
                   item_name,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                SizedBox(
-                  width: double.infinity,
+                CostumedButton(
                   height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("VIEW"),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
+                  width: double.infinity,
+                  raduis: 15,
+                  background: Theme.of(context).primaryColor,
+                  text: "View",
                 )
               ],
             ),
