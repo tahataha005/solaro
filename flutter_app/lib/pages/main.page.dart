@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
       status: true,
     ),
     Item(
-      item_name: "Mokhe",
+      item_name: "TV",
       ideal_consumption: 100,
       live_consumption: 101,
       status: true,
@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     double maxConsumption = 7;
     double system_charging = 5;
-    double system_consumption = 3.5;
+    double system_consumption = 3;
     double currentConsumption = system_consumption / 7;
     double currentCharging = system_charging / 7;
 
@@ -111,7 +111,10 @@ class _MainPageState extends State<MainPage> {
                     width: double.infinity,
                     raduis: 15,
                     background: Theme.of(context).accentColor,
-                    text: "ADD",
+                    text: "ALL",
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/items");
+                    },
                   ),
                 ]),
               ),
