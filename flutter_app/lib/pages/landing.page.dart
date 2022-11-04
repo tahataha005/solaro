@@ -139,7 +139,9 @@ class _LandingPageState extends State<LandingPage> {
             SizedBox(
               width: 100,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/notifications");
+                },
                 icon: Icon(
                   Icons.notifications_active_outlined,
                   color: Theme.of(context).primaryColor,
