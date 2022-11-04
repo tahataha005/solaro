@@ -39,7 +39,7 @@ class ItemCard extends StatelessWidget {
           Flexible(
             fit: FlexFit.loose,
             child: Container(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20, top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
