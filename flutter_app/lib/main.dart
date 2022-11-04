@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: ItemsPage(),
+      home: RegisterPage(),
       routes: {
         "/first": (context) => RegisterPage(),
         "/landing": (context) => LandingPage(),
@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
         "/details": (context) => DetailsPage(),
         "/item": (context) => ItemPage(),
         "/items": (context) => ItemsPage(),
+        "/create": (context) => CreateItemPage()
       },
     );
   }
