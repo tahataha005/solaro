@@ -23,7 +23,7 @@ class _ItemsPageState extends State<ItemsPage> {
       status: true,
     ),
     Item(
-      item_name: "Mokhe",
+      item_name: "Dryer",
       ideal_consumption: 100,
       live_consumption: 101,
       status: true,
@@ -67,7 +67,9 @@ class _ItemsPageState extends State<ItemsPage> {
                     raduis: 15,
                     background: Theme.of(context).accentColor,
                     text: "ADD",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/create");
+                    },
                   )
                 ],
               ),
