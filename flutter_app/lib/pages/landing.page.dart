@@ -68,7 +68,9 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget systemsBuilder(system) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, "/main");
+      },
       splashColor: Theme.of(context).accentColor,
       child: Container(
         decoration: BoxDecoration(
