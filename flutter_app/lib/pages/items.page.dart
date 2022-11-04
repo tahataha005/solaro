@@ -74,6 +74,11 @@ class _ItemsPageState extends State<ItemsPage> {
               SizedBox(
                 height: 20,
               ),
+              Column(
+                children: items
+                    .map((item) => ItemCard(item_name: item.item_name))
+                    .toList(),
+              )
             ],
           ),
         ),
