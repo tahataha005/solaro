@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/create.item.page.dart';
 import 'package:flutter_app/pages/details.page.dart';
 import 'package:flutter_app/pages/item.page.dart';
+import 'package:flutter_app/pages/items.page.dart';
 import 'package:flutter_app/pages/main.page.dart';
 
 import './tools/color.constructor.dart';
@@ -56,13 +57,15 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: CreateItemPage(),
+      home: ItemsPage(),
       routes: {
         "/first": (context) => RegisterPage(),
         "/landing": (context) => LandingPage(),
         "/notifications": (context) => NotificationsPage(),
         "/main": (context) => MainPage(),
+        "/details": (context) => DetailsPage(),
         "/item": (context) => ItemPage(),
+        "/items": (context) => ItemsPage(),
       },
     );
   }
