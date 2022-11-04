@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/costumed.button.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -34,16 +35,16 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: 70,
           ),
-          SizedBox(
-            width: double.infinity,
+          CostumedButton(
             height: 60,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "LOG IN",
-              ),
-            ),
-          ),
+            width: double.infinity,
+            raduis: 15,
+            background: Theme.of(context).primaryColor,
+            text: "LOG IN",
+            onPressed: () {
+              Navigator.popAndPushNamed(context, "/landing");
+            },
+          )
         ],
       ),
     );
