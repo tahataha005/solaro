@@ -92,7 +92,7 @@ const dropSolarSystem = async (req, res) => {
 
 //Deleting item by name
 const dropItem = async (req, res) => {
-    const { user_id, system_name, item_name } = req.body;
+    const { user_id, system_id, item_id } = req.body;
 
     try {
         //Getting user by id to delete solar system from
@@ -100,21 +100,22 @@ const dropItem = async (req, res) => {
 
         //Filtering array of solar systems
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Filtering items to remove desired item
         system.items = system.items.filter(item => {
-            return item.name != item_name;
+            return item.id != item_id;
         });
 
         //Saving changes in user
         await user.save();
 
+        console.log(system.items);
         //Returning deleted item
-        res.status(200).json(user.system.items);
+        res.status(200).json(system.items);
     } catch (err) {
-        res.status(200).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
