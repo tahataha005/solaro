@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/costumed.button.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -46,15 +47,15 @@ class _SignUpState extends State<SignUp> {
           SizedBox(
             height: 70,
           ),
-          SizedBox(
-            width: double.infinity,
+          CostumedButton(
             height: 60,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "SIGN UP",
-              ),
-            ),
+            width: double.infinity,
+            raduis: 15,
+            background: Theme.of(context).primaryColor,
+            text: "SIGN UP",
+            onPressed: () {
+              Navigator.popAndPushNamed(context, "/landing");
+            },
           ),
         ],
       ),

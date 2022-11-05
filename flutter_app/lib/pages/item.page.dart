@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:provider/provider.dart';
+import '../providers/items.provider.dart';
 
 class ItemPage extends StatefulWidget {
-  const ItemPage({super.key});
-
   @override
   State<ItemPage> createState() => _ItemPageState();
 }
 
 class _ItemPageState extends State<ItemPage> {
-  bool status = false;
   @override
   Widget build(BuildContext context) {
+    final item_name = ModalRoute.of(context)?.settings.arguments as String;
+    final loaded_item = Provider.of<Items>(context).findByName(item_name);
+    bool status = loaded_item.status;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,7 +32,9 @@ class _ItemPageState extends State<ItemPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: Icon(Icons.arrow_back),
                     ),
                   ],
@@ -68,6 +74,83 @@ class _ItemPageState extends State<ItemPage> {
               ],
             ),
           ),
+          Container(
+            height: 320,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Theme.of(context).primaryColorLight,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  loaded_item.item_name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "Consumption:",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Row(
+                  children: [
+                    Text("Ideal:"),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 60,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          loaded_item.ideal_consumption.toString(),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("Ideal:"),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 60,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(loaded_item.live_consumption.toString()),
+                      ),
+                    )
+                  ],
+                ),
+                CostumedButton(
+                  height: 50,
+                  width: double.infinity,
+                  raduis: 15,
+                  background: status
+                      ? Theme.of(context).accentColor
+                      : Theme.of(context).primaryColor,
+                  text: status ? "ON" : "OFF",
+                  onPressed: () {
+                    setState(() {
+                      loaded_item.toggleStatus();
+                    });
+                  },
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

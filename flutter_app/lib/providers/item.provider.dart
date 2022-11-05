@@ -1,8 +1,10 @@
-class Item {
+import 'package:flutter/cupertino.dart';
+
+class Item extends ChangeNotifier {
   final String item_name;
   final double ideal_consumption;
   final double live_consumption;
-  final bool status;
+  bool status;
 
   Item({
     required this.item_name,
@@ -10,4 +12,9 @@ class Item {
     required this.live_consumption,
     required this.status,
   });
+
+  void toggleStatus() {
+    status = !status;
+    notifyListeners();
+  }
 }
