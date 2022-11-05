@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/providers/item.model.dart';
+import 'package:flutter_app/providers/item.provider.dart';
 
 class Items extends ChangeNotifier {
   List<Item> _items = [
