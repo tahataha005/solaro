@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/item.model.dart';
+import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
 import '../providers/items.provider.dart';
@@ -144,8 +144,7 @@ class _ItemPageState extends State<ItemPage> {
                   text: status ? "ON" : "OFF",
                   onPressed: () {
                     setState(() {
-                      status = !status;
-                      print(status);
+                      loaded_item.toggleStatus();
                     });
                   },
                 )
