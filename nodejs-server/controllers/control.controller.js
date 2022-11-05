@@ -122,8 +122,7 @@ const dropItem = async (req, res) => {
 //Editing item by name
 const editItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name, item_name, name, ideal_consumption } =
-        req.body;
+    const { user_id, system_id, item_id, name, ideal_consumption } = req.body;
 
     try {
         //Getting user by id
@@ -131,12 +130,12 @@ const editItem = async (req, res) => {
 
         //Filtering array of solar systems
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Filtering items to get desired item
         const item = system.items.filter(item => {
-            return item.name == item_name;
+            return item.id == item_id;
         })[0];
 
         //Updating item according to obtained attributes
