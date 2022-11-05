@@ -69,7 +69,7 @@ const addItem = async (req, res) => {
 //Deleting solar system by name
 const dropSolarSystem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name } = req.body;
+    const { user_id, system_id } = req.body;
 
     try {
         //Getting user by id to delete solar system from
@@ -77,7 +77,7 @@ const dropSolarSystem = async (req, res) => {
 
         //Filtering array of solar systems
         user.system = user.system.filter(system => {
-            return system.name != system_name;
+            return system.name != system_id;
         });
 
         //Saving changes in user's solar systems
