@@ -38,4 +38,8 @@ class Items extends ChangeNotifier {
   List<Item> get items {
     return [..._items];
   }
+
+  Item findByName(name) {
+    return items.firstWhere((item) => item.item_name == name);
+  }
 }
