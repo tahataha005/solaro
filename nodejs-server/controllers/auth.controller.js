@@ -15,6 +15,8 @@ const signUp = async (req, res) => {
         user.user_type = user_type;
         user.email = email;
         user.password = await bcrypt.hash(password, 10);
+        user.system = [];
+        user.system.items = [];
 
         //Saving the created user in database
         await user.save();

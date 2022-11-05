@@ -2,14 +2,20 @@ const express = require("express");
 require("dotenv").config();
 require("./config/db.config.js");
 
+const ip = require("ip");
+const address = ip.address();
+
 //Initilizing app as express method
 const app = express();
 app.use(express.json());
 
 //Listening on server port and logging status
-app.listen(process.env.PORT, err => {
+app.listen(process.env.PORT, address, err => {
     if (err) console.log(err);
-    else console.log(`Server is running on PORT ${process.env.PORT}`);
+    else
+        console.log(
+            `Server is running on PORT ${process.env.PORT} / IP Address ${address}`
+        );
 });
 
 //Importing middlewares

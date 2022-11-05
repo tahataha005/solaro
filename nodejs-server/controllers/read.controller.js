@@ -4,14 +4,14 @@ const User = require("../models/user.model.js");
 const getSolarStats = async (req, res) => {
     try {
         //Destructuring req data
-        const { user_id, system_name } = req.params;
+        const { user_id, system_id } = req.params;
 
         //Geting user by id
         const user = await User.findById(user_id);
 
         //Searching for the desired solar system
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //If not found return not found
@@ -54,4 +54,4 @@ const getAllItems = async (req, res) => {
     }
 };
 
-module.exports = { getSolarStats, getAllItems, getItem };
+module.exports = { getSolarStats, getAllItems };

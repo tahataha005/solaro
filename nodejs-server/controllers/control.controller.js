@@ -33,7 +33,7 @@ const addSolarSystem = async (req, res) => {
 //Adding w new item to solar system
 const addItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name, name, ideal_consumption } = req.body;
+    const { user_id, system_id, name, ideal_consumption } = req.body;
 
     try {
         //Getting user by id
@@ -41,7 +41,7 @@ const addItem = async (req, res) => {
 
         //Searching for solar system to add item to
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Creating and new item object
@@ -69,7 +69,7 @@ const addItem = async (req, res) => {
 //Deleting solar system by name
 const dropSolarSystem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name } = req.body;
+    const { user_id, system_id } = req.body;
 
     try {
         //Getting user by id to delete solar system from
@@ -77,7 +77,7 @@ const dropSolarSystem = async (req, res) => {
 
         //Filtering array of solar systems
         user.system = user.system.filter(system => {
-            return system.name != system_name;
+            system.id.toString() != system_id;
         });
 
         //Saving changes in user's solar systems
@@ -92,7 +92,7 @@ const dropSolarSystem = async (req, res) => {
 
 //Deleting item by name
 const dropItem = async (req, res) => {
-    const { user_id, system_name, item_name } = req.body;
+    const { user_id, system_id, item_id } = req.body;
 
     try {
         //Getting user by id to delete solar system from
@@ -100,29 +100,29 @@ const dropItem = async (req, res) => {
 
         //Filtering array of solar systems
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Filtering items to remove desired item
         system.items = system.items.filter(item => {
-            return item.name != item_name;
+            return item.id != item_id;
         });
 
         //Saving changes in user
         await user.save();
 
+        console.log(system.items);
         //Returning deleted item
-        res.status(200).json(user.system.items);
+        res.status(200).json(system.items);
     } catch (err) {
-        res.status(200).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
 //Editing item by name
 const editItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name, item_name, name, ideal_consumption } =
-        req.body;
+    const { user_id, system_id, item_id, name, ideal_consumption } = req.body;
 
     try {
         //Getting user by id
@@ -130,12 +130,12 @@ const editItem = async (req, res) => {
 
         //Filtering array of solar systems
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Filtering items to get desired item
         const item = system.items.filter(item => {
-            return item.name == item_name;
+            return item.id == item_id;
         })[0];
 
         //Updating item according to obtained attributes
@@ -156,7 +156,7 @@ const editItem = async (req, res) => {
 
 const controlItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name, item_name, trigger } = req.body;
+    const { user_id, system_id, item_id, trigger } = req.body;
 
     //Assigning status according to request
     let status = true;
@@ -168,12 +168,12 @@ const controlItem = async (req, res) => {
 
         //Filtering array of solar systems
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Filtering items to get desired item
         const item = system.items.filter(item => {
-            return item.name == item_name;
+            return item.id == item_id;
         })[0];
 
         //if item not found return not found

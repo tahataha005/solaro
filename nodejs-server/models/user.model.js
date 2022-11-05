@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const itemSchema = mongoose.Schema({
     name: {
         type: String,
-        required: "name is required",
+        // required: "name is required",
         trim: true,
     },
     status: {
@@ -13,7 +13,7 @@ const itemSchema = mongoose.Schema({
     },
     ideal_consumption: {
         type: Number,
-        required: "ideal consumption is required",
+        // required: "ideal consumption is required",
     },
     live_consumption: {
         type: Number,
@@ -27,15 +27,20 @@ const itemSchema = mongoose.Schema({
 
 //Creating a solar system schema
 const solarSystemSchema = mongoose.Schema({
+    // id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     unique: true,
+    //     index: true,
+    //     auto: true,
+    // },
     name: {
         type: String,
-        required: true,
-        unique: true,
+        // required: true,
         trim: 0,
     },
     connection: {
         type: String,
-        required: "connection is required",
+        // required: "connection is required",
     },
     charging: {
         type: Number,
