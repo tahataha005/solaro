@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/create.item.page.dart';
-import 'package:flutter_app/pages/details.page.dart';
-import 'package:flutter_app/pages/item.page.dart';
-import 'package:flutter_app/pages/items.page.dart';
-import 'package:flutter_app/pages/main.page.dart';
-import 'package:flutter_app/models/item.model.dart';
-import 'package:flutter_app/providers/items.provider.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
+import './pages/create.item.page.dart';
+import './pages/details.page.dart';
+import './pages/item.page.dart';
+import './pages/items.page.dart';
+import './pages/main.page.dart';
+import './providers/items.provider.dart';
 import './tools/color.constructor.dart';
 import './pages/register/register.page.dart';
 import './pages/landing.page.dart';
