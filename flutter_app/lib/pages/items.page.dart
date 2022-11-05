@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.model.dart';
+import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
+import 'package:provider/provider.dart';
 
 class ItemsPage extends StatefulWidget {
   @override
@@ -9,41 +11,10 @@ class ItemsPage extends StatefulWidget {
 }
 
 class _ItemsPageState extends State<ItemsPage> {
-  final List items = [
-    Item(
-      item_name: "Refrigerator",
-      ideal_consumption: 3,
-      live_consumption: 2.8,
-      status: true,
-    ),
-    Item(
-      item_name: "Lights",
-      ideal_consumption: 1.5,
-      live_consumption: 1.4,
-      status: true,
-    ),
-    Item(
-      item_name: "Dryer",
-      ideal_consumption: 100,
-      live_consumption: 101,
-      status: true,
-    ),
-    Item(
-      item_name: "TV",
-      ideal_consumption: 4.5,
-      live_consumption: 0,
-      status: false,
-    ),
-    Item(
-      item_name: "Heater",
-      ideal_consumption: 2,
-      live_consumption: 0,
-      status: false,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final loaded_items = Provider.of<Items>(context);
+    final items = loaded_items.items;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(20),
@@ -76,10 +47,12 @@ class _ItemsPageState extends State<ItemsPage> {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                children: items
-                    .map((item) => ItemCard(item_name: item.item_name))
-                    .toList(),
+              Consumer<Items>(
+                builder: (context, items, child) => Column(
+                  children: items.items
+                      .map((item) => ItemCard(item_name: item.item_name))
+                      .toList(),
+                ),
               )
             ],
           ),
