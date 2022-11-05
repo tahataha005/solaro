@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/item.model.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:provider/provider.dart';
+import '../providers/items.provider.dart';
 
 class ItemPage extends StatefulWidget {
-  const ItemPage({super.key});
-
   @override
   State<ItemPage> createState() => _ItemPageState();
 }
 
+bool status = false;
+
 class _ItemPageState extends State<ItemPage> {
-  bool status = false;
   @override
   Widget build(BuildContext context) {
+    final item_name = ModalRoute.of(context)?.settings.arguments as String;
+    final loaded_item = Provider.of<Items>(context).findByName(item_name);
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +88,7 @@ class _ItemPageState extends State<ItemPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  "Refrigerator",
+                  loaded_item.item_name,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
