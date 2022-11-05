@@ -33,7 +33,7 @@ const addSolarSystem = async (req, res) => {
 //Adding w new item to solar system
 const addItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name, name, ideal_consumption } = req.body;
+    const { user_id, system_id, name, ideal_consumption } = req.body;
 
     try {
         //Getting user by id
@@ -41,7 +41,7 @@ const addItem = async (req, res) => {
 
         //Searching for solar system to add item to
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Creating and new item object
