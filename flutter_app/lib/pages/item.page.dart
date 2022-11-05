@@ -9,13 +9,12 @@ class ItemPage extends StatefulWidget {
   State<ItemPage> createState() => _ItemPageState();
 }
 
-bool status = false;
-
 class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     final item_name = ModalRoute.of(context)?.settings.arguments as String;
     final loaded_item = Provider.of<Items>(context).findByName(item_name);
+    bool status = loaded_item.status;
 
     return Scaffold(
       body: Column(
@@ -109,7 +108,9 @@ class _ItemPageState extends State<ItemPage> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
-                        child: Text("5"),
+                        child: Text(
+                          loaded_item.ideal_consumption.toString(),
+                        ),
                       ),
                     )
                   ],
@@ -128,7 +129,7 @@ class _ItemPageState extends State<ItemPage> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
-                        child: Text("4.8"),
+                        child: Text(loaded_item.live_consumption.toString()),
                       ),
                     )
                   ],
