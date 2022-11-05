@@ -26,32 +26,32 @@ const getSolarStats = async (req, res) => {
 };
 
 //Searching for all items belonging to solar system by system id
-// const getAllItems = async (req, res) => {
-//     try {
-//         //Destructuring req data
-//         const { user_id, system_name } = req.params;
+const getAllItems = async (req, res) => {
+    try {
+        //Destructuring req data
+        const { user_id, system_name } = req.params;
 
-//         //Geting items belonging to system by its id
-//         const user = await User.findById(user_id);
+        //Geting items belonging to system by its id
+        const user = await User.findById(user_id);
 
-//         //Searching for the desired solar system
-//         const system = user.system.filter(system => {
-//             return system.name == system_name;
-//         })[0];
+        //Searching for the desired solar system
+        const system = user.system.filter(system => {
+            return system.name == system_name;
+        })[0];
 
-//         const items = system.items;
+        const items = system.items;
 
-//         //If not found return not found
-//         if (!items)
-//             return res
-//                 .status(404)
-//                 .json({ message: "No items found or system id doesn't exist" });
+        //If not found return not found
+        if (!items)
+            return res
+                .status(404)
+                .json({ message: "No items found or system id doesn't exist" });
 
-//         //Returning recieved items
-//         res.status(200).json(items);
-//     } catch (err) {
-//         res.status(400).json({ message: err.message });
-//     }
-// };
+        //Returning recieved items
+        res.status(200).json(items);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
 
 module.exports = { getSolarStats, getAllItems };
