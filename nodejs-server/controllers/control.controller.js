@@ -77,7 +77,7 @@ const dropSolarSystem = async (req, res) => {
 
         //Filtering array of solar systems
         user.system = user.system.filter(system => {
-            return system.name != system_id;
+            system.id.toString() != system_id;
         });
 
         //Saving changes in user's solar systems
