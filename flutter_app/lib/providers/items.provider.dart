@@ -34,4 +34,8 @@ class Items extends ChangeNotifier {
       status: false,
     ),
   ];
+
+  List<Item> get items {
+    return [..._items];
+  }
 }
