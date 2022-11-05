@@ -156,7 +156,7 @@ const editItem = async (req, res) => {
 
 const controlItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_name, item_name, trigger } = req.body;
+    const { user_id, system_id, item_id, trigger } = req.body;
 
     //Assigning status according to request
     let status = true;
@@ -168,12 +168,12 @@ const controlItem = async (req, res) => {
 
         //Filtering array of solar systems
         const system = user.system.filter(system => {
-            return system.name == system_name;
+            return system.id == system_id;
         })[0];
 
         //Filtering items to get desired item
         const item = system.items.filter(item => {
-            return item.name == item_name;
+            return item.id == item_id;
         })[0];
 
         //if item not found return not found
