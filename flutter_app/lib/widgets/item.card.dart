@@ -55,7 +55,11 @@ class ItemCard extends StatelessWidget {
                     background: Theme.of(context).primaryColor,
                     text: "View",
                     onPressed: () {
-                      Navigator.pushNamed(context, "/item");
+                      Navigator.pushNamed(
+                        context,
+                        "/item",
+                        arguments: item_name,
+                      );
                     },
                   )
                 ],
