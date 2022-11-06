@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/user.provider.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/costumed.button.dart';
+import '../../models/exception.model.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,12 +13,22 @@ class _LoginState extends State<Login> {
   final enteredEmail = TextEditingController();
   final enteredPassword = TextEditingController();
   final _form = GlobalKey<FormState>();
+  String err = "";
 
   void validate() => _form.currentState?.validate();
 
   Future submit(email, password) async {
-    await Provider.of<User>(context, listen: false).login(email, password);
-    Navigator.of(context).pushNamed("/landing");
+    try {
+      setState(() {
+        err = "";
+      });
+      await Provider.of<User>(context, listen: false).login(email, password);
+      Navigator.of(context).pushNamed("/landing");
+    } on HttpException catch (error) {
+      setState(() {
+        err = error.message;
+      });
+    }
   }
 
   @override
@@ -76,6 +87,13 @@ class _LoginState extends State<Login> {
                 ),
               ],
             ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            err,
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           SizedBox(
             height: 70,
