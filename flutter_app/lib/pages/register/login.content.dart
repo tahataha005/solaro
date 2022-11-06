@@ -13,23 +13,29 @@ class _LoginState extends State<Login> {
       height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
         children: [
-          TextField(
-            decoration: InputDecoration(
-              label: Text(
-                "Email",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 35,
-          ),
-          TextField(
-            decoration: InputDecoration(
-              label: Text(
-                "Password",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+          Form(
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Email",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Password",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(
