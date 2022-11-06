@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/user.provider.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/costumed.button.dart';
 
 class Login extends StatefulWidget {
@@ -12,6 +14,11 @@ class _LoginState extends State<Login> {
   final _form = GlobalKey<FormState>();
 
   void validate() => _form.currentState?.validate();
+
+  Future submit(email, password) async {
+    await Provider.of<User>(context, listen: false).login(email, password);
+    Navigator.of(context).pushNamed("/landing");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +86,9 @@ class _LoginState extends State<Login> {
             raduis: 15,
             background: Theme.of(context).primaryColor,
             text: "LOG IN",
-            onPressed: () {},
+            onPressed: () {
+              submit(enteredEmail.text, enteredPassword.text);
+            },
           ),
         ],
       ),
