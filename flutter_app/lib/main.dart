@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 
 import './pages/create.item.page.dart';
 import './pages/details.page.dart';
@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: Items(),
+        ),
+        ChangeNotifierProvider.value(
+          value: User(token: "", userId: ""),
         ),
       ],
       child: MaterialApp(
@@ -63,6 +66,11 @@ class MyApp extends StatelessWidget {
                 bodyLarge: const TextStyle(
                   fontFamily: "Inter",
                   fontSize: 24,
+                ),
+                displayMedium: const TextStyle(
+                  color: Color.fromARGB(255, 183, 28, 28),
+                  fontFamily: "Inter",
+                  fontSize: 16,
                 ),
               ),
         ),
