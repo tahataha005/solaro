@@ -7,6 +7,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final enteredEmail = TextEditingController();
+  final enteredPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,6 +20,7 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 TextFormField(
+                  controller: enteredEmail,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     label: Text(
@@ -29,6 +33,7 @@ class _LoginState extends State<Login> {
                   height: 35,
                 ),
                 TextFormField(
+                  controller: enteredPassword,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     label: Text(
