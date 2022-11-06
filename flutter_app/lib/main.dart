@@ -67,6 +67,11 @@ class MyApp extends StatelessWidget {
                   fontFamily: "Inter",
                   fontSize: 24,
                 ),
+                displayMedium: const TextStyle(
+                  color: Color.fromARGB(255, 183, 28, 28),
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                ),
               ),
         ),
         home: RegisterPage(),
