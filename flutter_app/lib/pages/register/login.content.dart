@@ -46,6 +46,12 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   controller: enteredPassword,
                   textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Please enter feild";
+                    }
+                    return null;
+                  },
                   decoration: InputDecoration(
                     label: Text(
                       "Password",
