@@ -16,7 +16,8 @@ class _LoginState extends State<Login> {
           Form(
             child: Column(
               children: [
-                TextField(
+                TextFormField(
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     label: Text(
                       "Email",
@@ -27,7 +28,8 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   height: 35,
                 ),
-                TextField(
+                TextFormField(
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     label: Text(
                       "Password",
