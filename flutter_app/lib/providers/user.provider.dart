@@ -34,6 +34,10 @@ class User extends ChangeNotifier {
       );
       final data = json.decode(response.body);
 
+      if (data["message"] != null) {
+        throw HttpException(data["message"]);
+      }
+
       userId = data["user_id"];
       token = data["token"];
     } catch (e) {
