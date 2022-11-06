@@ -11,6 +11,8 @@ class _LoginState extends State<Login> {
   final enteredPassword = TextEditingController();
   final _form = GlobalKey<FormState>();
 
+  void validate() => _form.currentState?.validate();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,12 +28,15 @@ class _LoginState extends State<Login> {
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter feild";
+                      return "Please enter field";
                     }
                     if (!value.contains("@")) {
                       return "Please enter a valid email";
                     }
                     return null;
+                  },
+                  onFieldSubmitted: (_) {
+                    validate();
                   },
                   decoration: InputDecoration(
                     label: Text(
@@ -48,9 +53,12 @@ class _LoginState extends State<Login> {
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter feild";
+                      return "Please enter field";
                     }
                     return null;
+                  },
+                  onFieldSubmitted: (_) {
+                    validate();
                   },
                   decoration: InputDecoration(
                     label: Text(
