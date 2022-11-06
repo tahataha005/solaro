@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:http/http.dart' as http;
+
+import '../../widgets/costumed.button.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,6 +13,28 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final enteredEmail = TextEditingController();
   final enteredPassword = TextEditingController();
+
+  Future login(email, password) async {
+    final url = Uri.http("192.168.1.177:8000", "/auth/login");
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: json.encode(
+          {
+            "email": email,
+            "password": password,
+          },
+        ),
+      );
+      final data = json.decode(response.body);
+      print(data);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
