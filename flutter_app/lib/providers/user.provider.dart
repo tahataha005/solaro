@@ -8,4 +8,8 @@ class User extends ChangeNotifier {
     required this.userId,
     required this.token,
   });
+
+  String get getUserId {
+    return userId;
+  }
 }
