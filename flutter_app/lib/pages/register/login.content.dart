@@ -9,7 +9,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final enteredEmail = TextEditingController();
   final enteredPassword = TextEditingController();
-  var _form = GlobalKey<FormState>();
+  final _form = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,15 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   controller: enteredEmail,
                   textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Please enter feild";
+                    }
+                    if (!value.contains("@")) {
+                      return "Please enter a valid email";
+                    }
+                    return null;
+                  },
                   decoration: InputDecoration(
                     label: Text(
                       "Email",
