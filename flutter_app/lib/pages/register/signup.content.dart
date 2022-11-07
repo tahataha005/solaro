@@ -6,11 +6,13 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
+enum UserType { controller, viewer }
+
 class _SignUpState extends State<SignUp> {
+  UserType? _userType = UserType.viewer;
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.amber,
       height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
         children: [
@@ -44,6 +46,35 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Column(children: [
+            ListTile(
+              title: Text("Controller"),
+              leading: Radio(
+                value: UserType.controller,
+                groupValue: _userType,
+                onChanged: (UserType? value) {
+                  setState(() {
+                    _userType = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text("Viewer"),
+              leading: Radio(
+                value: UserType.viewer,
+                groupValue: _userType,
+                onChanged: (UserType? value) {
+                  setState(() {
+                    _userType = value;
+                  });
+                },
+              ),
+            ),
+          ]),
           SizedBox(
             height: 70,
           ),
