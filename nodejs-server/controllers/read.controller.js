@@ -9,6 +9,9 @@ const getUser = async (req, res) => {
         //Geting user by id
         const user = await User.findById(user_id);
 
+        //Return not found if user wasn't found
+        if (!user) return res.status(404).json({ message: "User Not Found" });
+
         //Returning recieved user
         return res.status(200).json(user);
     } catch (error) {
