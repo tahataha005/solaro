@@ -1,6 +1,16 @@
 const User = require("../models/user.model.js");
 
-const getUser = async (req, res) => {};
+//Getting user by id
+const getUser = async (req, res) => {
+    //Destructuring req data
+    const { user_id } = req.params;
+
+    //Geting user by id
+    const user = await User.findById(user_id);
+
+    //Returning recieved user
+    return res.status(200).json(user);
+};
 
 //Searching for system by user id
 const getSolarStats = async (req, res) => {
@@ -56,4 +66,4 @@ const getAllItems = async (req, res) => {
     }
 };
 
-module.exports = { getSolarStats, getAllItems };
+module.exports = { getSolarStats, getAllItems, getUser };
