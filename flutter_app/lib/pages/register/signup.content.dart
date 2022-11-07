@@ -16,7 +16,7 @@ class _SignUpState extends State<SignUp> {
   final _password = TextEditingController();
   final _confirm = TextEditingController();
   final _form = GlobalKey<FormState>();
-  bool _validated = false;
+  String _err = "";
   String _userType = userTypes["viewer"];
 
   Future submit(email, password, userType) async {
@@ -28,7 +28,11 @@ class _SignUpState extends State<SignUp> {
       await Provider.of<User>(context, listen: false)
           .signUp(email, password, userType);
       Navigator.popAndPushNamed(context, "/landing");
-    } on HttpException catch (e) {}
+    } on HttpException catch (e) {
+      setState(() {
+        _err = "error";
+      });
+    }
   }
 
   bool validated() {
@@ -109,6 +113,7 @@ class _SignUpState extends State<SignUp> {
                   ]),
             ),
           ),
+          if (_err != "") Text(_err),
           Column(children: [
             ListTile(
               title: Text("Controller"),
