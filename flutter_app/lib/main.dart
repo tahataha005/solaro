@@ -27,9 +27,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: User(token: "", userId: ""),
         ),
-        ChangeNotifierProvider.value(
-          value: Systems(),
-        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
