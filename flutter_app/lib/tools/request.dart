@@ -33,6 +33,16 @@ Future sendRequest({required String route, method = "GET", load}) async {
     return data;
   }
 
+  if (method == "DELETE") {
+    final response = await http.delete(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(load),
+    );
+    final data = json.decode(response.body);
+    return data;
+  }
+
   return Future(() {
     return "Not a valid method";
   });
