@@ -57,7 +57,11 @@ class User extends ChangeNotifier {
           "user_type": userType,
         },
       );
-      print(response);
+
+      if (response["message"] != null) {
+        print(response["message"]);
+        throw HttpException(response["message"]);
+      }
     } catch (e) {
       print(e);
     }
