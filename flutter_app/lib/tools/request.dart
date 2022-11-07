@@ -13,6 +13,16 @@ Future sendRequest({required String route, method = "GET", load}) async {
     return data;
   }
 
+  if (method == "POST") {
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(load),
+    );
+    final data = json.decode(response.body);
+    return data;
+  }
+
   return Future(() {
     return "Not a valid method";
   });
