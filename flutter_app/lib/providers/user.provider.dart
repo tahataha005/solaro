@@ -47,15 +47,19 @@ class User extends ChangeNotifier {
   }
 
   Future signUp(email, password, userType) async {
-    final response = await sendRequest(
-      method: "POST",
-      route: "/auth/signup",
-      load: {
-        "email": email,
-        "password": password,
-        "user_type": userType,
-      },
-    );
-    print(response);
+    try {
+      final response = await sendRequest(
+        method: "POST",
+        route: "/auth/signup",
+        load: {
+          "email": email,
+          "password": password,
+          "user_type": userType,
+        },
+      );
+      print(response);
+    } catch (e) {
+      print(e);
+    }
   }
 }
