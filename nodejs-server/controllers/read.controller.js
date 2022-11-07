@@ -5,11 +5,15 @@ const getUser = async (req, res) => {
     //Destructuring req data
     const { user_id } = req.params;
 
-    //Geting user by id
-    const user = await User.findById(user_id);
+    try {
+        //Geting user by id
+        const user = await User.findById(user_id);
 
-    //Returning recieved user
-    return res.status(200).json(user);
+        //Returning recieved user
+        return res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ message: err.message });
+    }
 };
 
 //Searching for system by user id
