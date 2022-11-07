@@ -41,7 +41,7 @@ const logIn = async (req, res) => {
 
     try {
         //Searching for given email
-        const user = await User.findOne({ email }).select("password");
+        const user = await User.findOne({ email });
 
         //If email not in found return invalid
         if (!user)
@@ -62,7 +62,7 @@ const logIn = async (req, res) => {
 
         //Returning user id and new token
         res.status(200).json({ user_id: user._id, token });
-    } catch (err) {
+    } catch (error) {
         res.status(400).json({ message: err.message });
     }
 };
