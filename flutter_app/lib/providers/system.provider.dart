@@ -1,9 +1,12 @@
-class System {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/providers/item.provider.dart';
+
+class System extends ChangeNotifier {
   final String name;
   final String connection;
-  final double charging;
-  final double consumption;
-  final List items;
+  double charging;
+  double consumption;
+  List<Item> items;
 
   System({
     required this.name,

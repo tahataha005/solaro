@@ -6,13 +6,8 @@ import '../tools/request.dart';
 import '../models/exception.model.dart';
 
 class User extends ChangeNotifier {
-  String userId;
-  String token;
-
-  User({
-    required this.userId,
-    required this.token,
-  });
+  String userId = "";
+  String token = "";
 
   String get getUserId {
     return userId;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,10 @@ class MyApp extends StatelessWidget {
           value: Items(),
         ),
         ChangeNotifierProvider.value(
-          value: User(token: "", userId: ""),
+          value: User(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Systems(),
         ),
       ],
       child: MaterialApp(
@@ -71,6 +75,11 @@ class MyApp extends StatelessWidget {
                   color: Color.fromARGB(255, 183, 28, 28),
                   fontFamily: "Inter",
                   fontSize: 16,
+                ),
+                displaySmall: const TextStyle(
+                  color: Color.fromRGBO(0, 114, 187, 1),
+                  fontFamily: "Inter",
+                  fontSize: 20,
                 ),
               ),
         ),
