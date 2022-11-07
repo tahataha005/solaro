@@ -44,4 +44,6 @@ class User extends ChangeNotifier {
       rethrow;
     }
   }
+
+  Future signUp(email, password) async {}
 }
