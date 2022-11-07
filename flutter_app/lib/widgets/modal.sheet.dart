@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:provider/provider.dart';
 
 class ModalSheet extends StatefulWidget {
@@ -13,16 +14,9 @@ class _ModalSheetState extends State<ModalSheet> {
   final _enteredConnection = TextEditingController();
   final _form = GlobalKey<FormState>();
 
-  Future addSystem() async {
-    Provider.of<Systems>(context, listen: false).addSystem(
-      System(
-        name: _enteredName.text,
-        connection: _enteredConnection.text,
-        consumption: 0,
-        charging: 0,
-        items: [],
-      ),
-    );
+  Future addSystem(String userId, System system) async {
+    await Provider.of<Systems>(context, listen: false)
+        .addSystem(userId, system);
     Navigator.of(context).pop();
   }
 
@@ -79,7 +73,16 @@ class _ModalSheetState extends State<ModalSheet> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               onPressed: () {
-                addSystem();
+                System system = System(
+                  name: _enteredName.text,
+                  connection: _enteredConnection.text,
+                  consumption: 0,
+                  charging: 0,
+                  items: [],
+                );
+                String userId =
+                    Provider.of<User>(context, listen: false).getUserId;
+                addSystem(userId, system);
               },
             ),
           )
