@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/System.model.dart';
 
@@ -152,6 +150,9 @@ class _LandingPageState extends State<LandingPage> {
               ),
             )
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
         ),
         body: Container(
           color: Colors.white,
