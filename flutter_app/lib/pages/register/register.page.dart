@@ -22,8 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width * 0.4,
-              margin: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.width * 0.2),
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.2,
+                bottom: MediaQuery.of(context).size.width * 0.1,
+              ),
               child: Image.asset(
                 "assets/images/Logo.png",
                 fit: BoxFit.cover,
