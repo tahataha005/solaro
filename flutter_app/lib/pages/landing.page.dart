@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/System.model.dart';
+import 'package:flutter_app/widgets/modal.sheet.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -157,7 +158,12 @@ class _LandingPageState extends State<LandingPage> {
           margin: EdgeInsets.all(10),
           child: FloatingActionButton(
             child: Icon(Icons.add, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => ModalSheet(),
+              );
+            },
           ),
         ),
         body: Container(
