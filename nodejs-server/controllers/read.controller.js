@@ -5,9 +5,18 @@ const getUser = async (req, res) => {
     //Destructuring req data
     const { user_id } = req.params;
 
-    const user = await User.findById(user_id);
+    try {
+        //Geting user by id
+        const user = await User.findById(user_id);
 
-    return res.status(200).json(user);
+        //Return not found if user wasn't found
+        if (!user) return res.status(404).json({ message: "User Not Found" });
+
+        //Returning recieved user
+        return res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ message: err.message });
+    }
 };
 
 //Searching for system by user id
