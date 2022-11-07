@@ -19,23 +19,44 @@ class _ModalSheetState extends State<ModalSheet> {
         children: [
           Text(
             "Add Solar System",
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           Container(
+            height: 150,
             child: Form(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextFormField(),
-                  TextFormField(),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Name",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Connection",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          TextButton(
-            child: Text(
-              "ADD SYSTEM",
+          Container(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              child: Text(
+                "ADD SYSTEM",
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              onPressed: () {},
             ),
-            onPressed: () {},
-          ),
+          )
         ],
       ),
     );
