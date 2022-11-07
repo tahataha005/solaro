@@ -62,6 +62,9 @@ class User extends ChangeNotifier {
         print(response["message"]);
         throw HttpException(response["message"]);
       }
+
+      userId = response["user_id"];
+      token = response["token"];
     } catch (e) {
       print(e);
     }
