@@ -13,8 +13,9 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           TextField(
             decoration: InputDecoration(
@@ -24,9 +25,6 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ),
-          SizedBox(
-            height: 35,
-          ),
           TextField(
             decoration: InputDecoration(
               label: Text(
@@ -35,9 +33,6 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ),
-          SizedBox(
-            height: 35,
-          ),
           TextField(
             decoration: InputDecoration(
               label: Text(
@@ -45,9 +40,6 @@ class _SignUpState extends State<SignUp> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
-          ),
-          SizedBox(
-            height: 20,
           ),
           Column(children: [
             ListTile(
@@ -75,9 +67,6 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ]),
-          SizedBox(
-            height: 70,
-          ),
           CostumedButton(
             height: 60,
             width: double.infinity,
