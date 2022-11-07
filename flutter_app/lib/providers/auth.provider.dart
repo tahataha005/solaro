@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../tools/request.dart';
 import '../models/exception.model.dart';
 
 class User extends ChangeNotifier {
@@ -40,5 +41,26 @@ class User extends ChangeNotifier {
     }
   }
 
-  Future signUp(email, password) async {}
+  Future signUp(email, password, userType) async {
+    try {
+      final response = await sendRequest(
+        method: "POST",
+        route: "/auth/signup",
+        load: {
+          "email": email,
+          "password": password,
+          "user_type": userType,
+        },
+      );
+
+      if (response["message"] != null) {
+        throw HttpException(response["message"]);
+      }
+
+      userId = response["user_id"];
+      token = response["token"];
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

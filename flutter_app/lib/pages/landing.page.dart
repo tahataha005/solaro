@@ -12,6 +12,9 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   String stringBuilder(List items) {
+    if (items.isEmpty) {
+      return "No items yet";
+    }
     String itemsString = "";
     for (var i = 0; i < items.length; i++) {
       itemsString = itemsString + items[i].item_name + ", ";
