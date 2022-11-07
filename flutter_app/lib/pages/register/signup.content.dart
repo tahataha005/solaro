@@ -10,6 +10,7 @@ enum UserType { controller, viewer }
 
 class _SignUpState extends State<SignUp> {
   UserType? _userType = UserType.viewer;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,28 +18,37 @@ class _SignUpState extends State<SignUp> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          TextField(
-            decoration: InputDecoration(
-              label: Text(
-                "Email",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              label: Text(
-                "Password",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              label: Text(
-                "Confirm Password",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+          Form(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text(
+                          "Email",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text(
+                          "Password",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text(
+                          "Confirm Password",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    )
+                  ]),
             ),
           ),
           Column(children: [
@@ -73,9 +83,7 @@ class _SignUpState extends State<SignUp> {
             raduis: 15,
             background: Theme.of(context).primaryColor,
             text: "SIGN UP",
-            onPressed: () {
-              Navigator.popAndPushNamed(context, "/landing");
-            },
+            onPressed: () {},
           ),
         ],
       ),
