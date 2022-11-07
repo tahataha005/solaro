@@ -22,7 +22,7 @@ class _LoginState extends State<Login> {
       setState(() {
         err = "";
       });
-      await Provider.of<User>(context, listen: false).login(email, password);
+      await Provider.of<Auth>(context, listen: false).login(email, password);
       Navigator.of(context).pushNamed("/landing");
     } on HttpException catch (error) {
       setState(() {

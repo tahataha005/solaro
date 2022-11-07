@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           value: Items(),
         ),
         ChangeNotifierProvider.value(
-          value: User(),
+          value: Auth(),
         ),
         ChangeNotifierProvider.value(
           value: Systems(),

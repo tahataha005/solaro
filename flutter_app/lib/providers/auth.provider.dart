@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../tools/request.dart';
 import '../models/exception.model.dart';
 
-class User extends ChangeNotifier {
+class Auth extends ChangeNotifier {
   String userId = "";
   String token = "";
 
