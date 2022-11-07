@@ -14,6 +14,7 @@ class _SignUpState extends State<SignUp> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _confirm = TextEditingController();
+  final _form = GlobalKey<FormState>();
   String _userType = userTypes["viewer"];
 
   Future submit(email, password, userType) async {
@@ -30,6 +31,7 @@ class _SignUpState extends State<SignUp> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Form(
+            key: _form,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.3,
               child: Column(
@@ -38,6 +40,18 @@ class _SignUpState extends State<SignUp> {
                     TextFormField(
                       controller: _email,
                       textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter email";
+                        }
+                        if (!value.contains("@")) {
+                          return "Not a valid email";
+                        }
+                        return null;
+                      },
+                      onFieldSubmitted: (value) {
+                        _form.currentState?.validate();
+                      },
                       decoration: InputDecoration(
                         label: Text(
                           "Email",
@@ -48,6 +62,18 @@ class _SignUpState extends State<SignUp> {
                     TextFormField(
                       controller: _password,
                       textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter password";
+                        }
+                        if (value.length < 10) {
+                          return "Should be minimum 10 characters";
+                        }
+                        return null;
+                      },
+                      onFieldSubmitted: (value) {
+                        _form.currentState?.validate();
+                      },
                       decoration: InputDecoration(
                         label: Text(
                           "Password",
@@ -58,6 +84,18 @@ class _SignUpState extends State<SignUp> {
                     TextFormField(
                       controller: _confirm,
                       textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please confirm password";
+                        }
+                        if (value != _password.text) {
+                          return "Doesn't match password";
+                        }
+                        return null;
+                      },
+                      onFieldSubmitted: (value) {
+                        _form.currentState?.validate();
+                      },
                       decoration: InputDecoration(
                         label: Text(
                           "Confirm Password",
