@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
 
 class ModalSheet extends StatefulWidget {
   @override
@@ -9,6 +8,9 @@ class ModalSheet extends StatefulWidget {
 class _ModalSheetState extends State<ModalSheet> {
   @override
   Widget build(BuildContext context) {
+    final _enteredName = TextEditingController();
+    final _enteredConnection = TextEditingController();
+
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.width,
@@ -28,6 +30,7 @@ class _ModalSheetState extends State<ModalSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextFormField(
+                    controller: _enteredName,
                     decoration: InputDecoration(
                       label: Text(
                         "Name",
@@ -36,6 +39,7 @@ class _ModalSheetState extends State<ModalSheet> {
                     ),
                   ),
                   TextFormField(
+                    controller: _enteredConnection,
                     decoration: InputDecoration(
                       label: Text(
                         "Connection",
