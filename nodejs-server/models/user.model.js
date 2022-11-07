@@ -66,7 +66,6 @@ const userSchema = mongoose.Schema({
         type: String,
         required: "password is required",
         trim: true,
-        select: false,
     },
     user_type: {
         type: String,
