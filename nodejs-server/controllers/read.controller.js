@@ -1,5 +1,7 @@
 const User = require("../models/user.model.js");
 
+const getUser = async (req, res) => {};
+
 //Searching for system by user id
 const getSolarStats = async (req, res) => {
     try {
