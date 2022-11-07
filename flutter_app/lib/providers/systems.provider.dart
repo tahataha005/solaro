@@ -6,4 +6,8 @@ class Systems extends ChangeNotifier {
   Systems({
     required this.systems,
   });
+
+  List get getSystems {
+    return [...systems];
+  }
 }
