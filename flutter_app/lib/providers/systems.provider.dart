@@ -21,7 +21,9 @@ class Systems extends ChangeNotifier {
           "connection": system.connection,
         },
       );
-
+      if (response["message"] != null) {
+        throw HttpException(response["message"]);
+      }
       systems.add(system);
       notifyListeners();
     } catch (e) {
