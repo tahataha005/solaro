@@ -151,8 +151,14 @@ class _LandingPageState extends State<LandingPage> {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+        floatingActionButton: Container(
+          width: 70,
+          height: 70,
+          margin: EdgeInsets.all(10),
+          child: FloatingActionButton(
+            child: Icon(Icons.add, color: Colors.white),
+            onPressed: () {},
+          ),
         ),
         body: Container(
           color: Colors.white,
