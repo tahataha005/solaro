@@ -16,7 +16,7 @@ class _SignUpState extends State<SignUp> {
   final _password = TextEditingController();
   final _confirm = TextEditingController();
   final _form = GlobalKey<FormState>();
-  String _err = "";
+  String? errMessage;
   String _userType = userTypes["viewer"];
 
   Future submit(email, password, userType) async {
@@ -25,12 +25,19 @@ class _SignUpState extends State<SignUp> {
     }
 
     try {
+      setState(() {
+        errMessage = null;
+      });
       await Provider.of<User>(context, listen: false)
           .signUp(email, password, userType);
       Navigator.popAndPushNamed(context, "/landing");
     } on HttpException catch (e) {
+      if (e.toString().contains("duplicate")) {
+        errMessage = "Email already taken";
+      }
+      errMessage = "Sorry, somethin went wrong";
       setState(() {
-        _err = "error";
+        errMessage;
       });
     }
   }
@@ -113,7 +120,11 @@ class _SignUpState extends State<SignUp> {
                   ]),
             ),
           ),
-          if (_err != "") Text(_err),
+          if (errMessage != null)
+            Text(
+              errMessage!,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
           Column(children: [
             ListTile(
               title: Text("Controller"),
