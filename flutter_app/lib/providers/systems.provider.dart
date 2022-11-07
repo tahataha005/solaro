@@ -11,17 +11,21 @@ class Systems extends ChangeNotifier {
   }
 
   Future addSystem(String userId, System system) async {
-    final response = await sendRequest(
-      method: "POST",
-      route: "/control/system",
-      load: {
-        "user_id": userId,
-        "system_name": system.name,
-        "connection": system.connection,
-      },
-    );
+    try {
+      final response = await sendRequest(
+        method: "POST",
+        route: "/control/system",
+        load: {
+          "user_id": userId,
+          "system_name": system.name,
+          "connection": system.connection,
+        },
+      );
 
-    systems.add(system);
-    notifyListeners();
+      systems.add(system);
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 }
