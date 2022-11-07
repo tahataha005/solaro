@@ -36,6 +36,8 @@ class _ModalSheetState extends State<ModalSheet> {
     }
   }
 
+  bool? validate() => _form.currentState?.validate();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,35 +58,47 @@ class _ModalSheetState extends State<ModalSheet> {
               style: Theme.of(context).textTheme.displayMedium,
               textAlign: TextAlign.center,
             ),
-          Container(
-            height: 150,
-            child: Form(
-              key: _form,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextFormField(
-                    controller: _enteredName,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "Name",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
+          Form(
+            key: _form,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextFormField(
+                  controller: _enteredName,
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value.toString().isEmpty) {
+                      return "Please enter a name";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Name",
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
-                  TextFormField(
-                    controller: _enteredConnection,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "Connection",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: _enteredConnection,
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value.toString().isEmpty) {
+                      return "Please enter a name";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Connection",
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -95,6 +109,9 @@ class _ModalSheetState extends State<ModalSheet> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               onPressed: () {
+                if (!validate()!) {
+                  return;
+                }
                 System system = System(
                   name: _enteredName.text,
                   connection: _enteredConnection.text,
