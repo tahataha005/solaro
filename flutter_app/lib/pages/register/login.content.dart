@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/costumed.button.dart';
 import '../../models/exception.model.dart';
@@ -22,7 +22,7 @@ class _LoginState extends State<Login> {
       setState(() {
         err = "";
       });
-      await Provider.of<User>(context, listen: false).login(email, password);
+      await Provider.of<Auth>(context, listen: false).login(email, password);
       Navigator.of(context).pushNamed("/landing");
     } on HttpException catch (error) {
       setState(() {

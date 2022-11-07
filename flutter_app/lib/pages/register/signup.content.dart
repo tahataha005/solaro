@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/exception.model.dart';
-import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         errMessage = null;
       });
-      await Provider.of<User>(context, listen: false)
+      await Provider.of<Auth>(context, listen: false)
           .signUp(email, password, userType);
       Navigator.popAndPushNamed(context, "/landing");
     } on HttpException catch (e) {

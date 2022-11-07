@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
-import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:provider/provider.dart';
 
 class ModalSheet extends StatefulWidget {
@@ -120,7 +120,7 @@ class _ModalSheetState extends State<ModalSheet> {
                   items: [],
                 );
                 String userId =
-                    Provider.of<User>(context, listen: false).getUserId;
+                    Provider.of<Auth>(context, listen: false).getUserId;
                 addSystem(userId, system);
               },
             ),
