@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +24,11 @@ class _SignUpState extends State<SignUp> {
       return;
     }
 
-    await Provider.of<User>(context, listen: false)
-        .signUp(email, password, userType);
-    Navigator.popAndPushNamed(context, "/landing");
+    try {
+      await Provider.of<User>(context, listen: false)
+          .signUp(email, password, userType);
+      Navigator.popAndPushNamed(context, "/landing");
+    } on HttpException catch (e) {}
   }
 
   bool validated() {
