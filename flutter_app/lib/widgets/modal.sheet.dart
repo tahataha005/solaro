@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/system.provider.dart';
+import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:provider/provider.dart';
 
 class ModalSheet extends StatefulWidget {
   @override
@@ -9,6 +12,19 @@ class _ModalSheetState extends State<ModalSheet> {
   final _enteredName = TextEditingController();
   final _enteredConnection = TextEditingController();
   final _form = GlobalKey<FormState>();
+
+  Future addSystem() async {
+    Provider.of<Systems>(context, listen: false).addSystem(
+      System(
+        name: _enteredName.text,
+        connection: _enteredConnection.text,
+        consumption: 0,
+        charging: 0,
+        items: [],
+      ),
+    );
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +78,9 @@ class _ModalSheetState extends State<ModalSheet> {
                 "ADD SYSTEM",
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              onPressed: () {},
+              onPressed: () {
+                addSystem();
+              },
             ),
           )
         ],
