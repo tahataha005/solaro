@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   @override
   State<SignUp> createState() => _SignUpState();
 }
 
-enum UserType { controller, viewer }
+Map userTypes = {"controller": "controller", "viewer": "viewer"};
 
 class _SignUpState extends State<SignUp> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _confirm = TextEditingController();
-  UserType? _userType = UserType.viewer;
+  String _userType = userTypes["viewer"];
+
+  Future submit(email, password, userType) async {
+    await Provider.of<User>(context, listen: false)
+        .signUp(email, password, userType);
+    Navigator.popAndPushNamed(context, "/landing");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +72,9 @@ class _SignUpState extends State<SignUp> {
             ListTile(
               title: Text("Controller"),
               leading: Radio(
-                value: UserType.controller,
+                value: userTypes["controller"],
                 groupValue: _userType,
-                onChanged: (UserType? value) {
+                onChanged: (value) {
                   setState(() {
                     _userType = value;
                   });
@@ -76,9 +84,9 @@ class _SignUpState extends State<SignUp> {
             ListTile(
               title: Text("Viewer"),
               leading: Radio(
-                value: UserType.viewer,
+                value: userTypes["viewer"],
                 groupValue: _userType,
-                onChanged: (UserType? value) {
+                onChanged: (value) {
                   setState(() {
                     _userType = value;
                   });
@@ -92,7 +100,9 @@ class _SignUpState extends State<SignUp> {
             raduis: 15,
             background: Theme.of(context).primaryColor,
             text: "SIGN UP",
-            onPressed: () {},
+            onPressed: () {
+              submit(_email.text, _password.text, _userType);
+            },
           ),
         ],
       ),
