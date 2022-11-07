@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/providers/items.provider.dart';
+import 'package:flutter_app/providers/systems.provider.dart';
 
 class User extends ChangeNotifier {
-  Map user = {};
-
-  Map get _user {
-    return {...user};
-  }
+  String? id;
+  String? email;
+  String? userType;
+  Systems? systems;
+  Items? items;
 }
