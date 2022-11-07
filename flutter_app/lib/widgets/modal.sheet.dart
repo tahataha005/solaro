@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
@@ -13,11 +14,26 @@ class _ModalSheetState extends State<ModalSheet> {
   final _enteredName = TextEditingController();
   final _enteredConnection = TextEditingController();
   final _form = GlobalKey<FormState>();
+  String? errMessage;
 
   Future addSystem(String userId, System system) async {
-    await Provider.of<Systems>(context, listen: false)
-        .addSystem(userId, system);
-    Navigator.of(context).pop();
+    try {
+      setState(() {
+        errMessage = null;
+      });
+      await Provider.of<Systems>(context, listen: false)
+          .addSystem(userId, system);
+      Navigator.of(context).pop();
+    } on HttpException catch (e) {
+      errMessage = "Sorry, something woring happened";
+      if (e.toString().contains("Unauthorized")) {
+        errMessage = "Unauthorized action, only controllers can add systems.";
+      }
+
+      setState(() {
+        errMessage;
+      });
+    }
   }
 
   @override
@@ -34,6 +50,12 @@ class _ModalSheetState extends State<ModalSheet> {
             "Add Solar System",
             style: Theme.of(context).textTheme.titleLarge,
           ),
+          if (errMessage != null)
+            Text(
+              errMessage!,
+              style: Theme.of(context).textTheme.displayMedium,
+              textAlign: TextAlign.center,
+            ),
           Container(
             height: 150,
             child: Form(
