@@ -6,11 +6,12 @@ class ModalSheet extends StatefulWidget {
 }
 
 class _ModalSheetState extends State<ModalSheet> {
+  final _enteredName = TextEditingController();
+  final _enteredConnection = TextEditingController();
+  final _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final _enteredName = TextEditingController();
-    final _enteredConnection = TextEditingController();
-
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.width,
@@ -26,11 +27,13 @@ class _ModalSheetState extends State<ModalSheet> {
           Container(
             height: 150,
             child: Form(
+              key: _form,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextFormField(
                     controller: _enteredName,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       label: Text(
                         "Name",
@@ -40,6 +43,7 @@ class _ModalSheetState extends State<ModalSheet> {
                   ),
                   TextFormField(
                     controller: _enteredConnection,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       label: Text(
                         "Connection",
