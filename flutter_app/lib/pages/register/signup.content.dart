@@ -15,12 +15,21 @@ class _SignUpState extends State<SignUp> {
   final _password = TextEditingController();
   final _confirm = TextEditingController();
   final _form = GlobalKey<FormState>();
+  bool _validated = false;
   String _userType = userTypes["viewer"];
 
   Future submit(email, password, userType) async {
+    if (!validated()) {
+      return;
+    }
+
     await Provider.of<User>(context, listen: false)
         .signUp(email, password, userType);
     Navigator.popAndPushNamed(context, "/landing");
+  }
+
+  bool validated() {
+    return _form.currentState!.validate();
   }
 
   @override
@@ -49,9 +58,6 @@ class _SignUpState extends State<SignUp> {
                         }
                         return null;
                       },
-                      onFieldSubmitted: (value) {
-                        _form.currentState?.validate();
-                      },
                       decoration: InputDecoration(
                         label: Text(
                           "Email",
@@ -71,9 +77,6 @@ class _SignUpState extends State<SignUp> {
                         }
                         return null;
                       },
-                      onFieldSubmitted: (value) {
-                        _form.currentState?.validate();
-                      },
                       decoration: InputDecoration(
                         label: Text(
                           "Password",
@@ -92,9 +95,6 @@ class _SignUpState extends State<SignUp> {
                           return "Doesn't match password";
                         }
                         return null;
-                      },
-                      onFieldSubmitted: (value) {
-                        _form.currentState?.validate();
                       },
                       decoration: InputDecoration(
                         label: Text(
