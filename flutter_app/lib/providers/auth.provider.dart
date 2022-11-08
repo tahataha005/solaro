@@ -6,11 +6,15 @@ import '../tools/request.dart';
 import '../models/exception.model.dart';
 
 class Auth extends ChangeNotifier {
-  String userId = "";
-  String token = "";
+  String? userId;
+  String? token;
 
-  String get getUserId {
-    return userId;
+  String? get getUserId {
+    if (userId != null) {
+      return userId;
+    }
+
+    return null;
   }
 
   Future login(email, password) async {
