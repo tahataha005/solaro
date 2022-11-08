@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../config/request.config.dart';
 
-Future sendRequest({required String route, method = "GET", load}) async {
-  final url = Uri.http("192.168.1.177:8000", route);
+Future sendRequest(
+    {required String route, method = "GET", load, context}) async {
+  final url = Uri.http(RequestConfig.url, route);
+  final Map<String, String> headers = RequestConfig().getHeaders(context);
 
   if (method == "GET") {
     final response = await http.get(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: headers,
     );
     final data = json.decode(response.body);
     return data;
@@ -16,7 +19,7 @@ Future sendRequest({required String route, method = "GET", load}) async {
   if (method == "POST") {
     final response = await http.post(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: headers,
       body: json.encode(load),
     );
     final data = json.decode(response.body);
@@ -26,7 +29,7 @@ Future sendRequest({required String route, method = "GET", load}) async {
   if (method == "PUT") {
     final response = await http.put(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: headers,
       body: json.encode(load),
     );
     final data = json.decode(response.body);
@@ -36,7 +39,7 @@ Future sendRequest({required String route, method = "GET", load}) async {
   if (method == "DELETE") {
     final response = await http.delete(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: headers,
       body: json.encode(load),
     );
     final data = json.decode(response.body);
