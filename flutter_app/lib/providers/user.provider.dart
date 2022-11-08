@@ -7,7 +7,7 @@ class User extends ChangeNotifier {
   String? id;
   String? email;
   String? userType;
-  Systems? systems;
+  List? systems;
 
   Future setSystems() async {
     try {
