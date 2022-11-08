@@ -22,9 +22,10 @@ class _ModalSheetState extends State<ModalSheet> {
         errMessage = null;
       });
       await Provider.of<Systems>(context, listen: false)
-          .addSystem(userId, system);
+          .addSystem(userId, system, context);
       Navigator.of(context).pop();
     } on HttpException catch (e) {
+      print(e);
       errMessage = "Sorry, something woring happened";
       if (e.toString().contains("Unauthorized")) {
         errMessage = "Unauthorized action, only controllers can add systems.";
@@ -112,6 +113,7 @@ class _ModalSheetState extends State<ModalSheet> {
                 if (!validate()!) {
                   return;
                 }
+
                 System system = System(
                   name: _enteredName.text,
                   connection: _enteredConnection.text,
@@ -119,9 +121,15 @@ class _ModalSheetState extends State<ModalSheet> {
                   charging: 0,
                   items: [],
                 );
-                String userId =
+
+                String? userId =
                     Provider.of<Auth>(context, listen: false).getUserId;
-                addSystem(userId, system);
+
+                if (userId != null) {
+                  addSystem(userId, system);
+                } else {
+                  Navigator.of(context).popAndPushNamed("/");
+                }
               },
             ),
           )
