@@ -11,9 +11,7 @@ const authMiddleware = async (req, res, next) => {
     try {
         //Decoding token and making sure payload is present in database
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await User.findOne({ email: decoded.email }).populate(
-            "user_type"
-        );
+        const user = await User.findById(decoded.id).populate("user_type");
 
         //Passing user to request
         req.user = user;
