@@ -1,7 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/System.model.dart';
+import 'package:flutter_app/providers/item.provider.dart';
+import 'package:flutter_app/providers/system.provider.dart';
+import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:flutter_app/widgets/modal.sheet.dart';
+import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -9,48 +11,15 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  final List systems = [
-    System(
-        name: "Work",
-        connection: "connect 1",
-        consumption: 100,
-        charging: 80,
-        items: [
-          "item",
-          "hello",
-          "itemmm",
-          "another",
-        ]),
-    System(
-        name: "Home",
-        connection: "connect 2",
-        consumption: 120,
-        charging: 30,
-        items: [
-          "item",
-          "hello",
-          "itemmm",
-          "another",
-        ]),
-    System(
-        name: "Office",
-        connection: "connect 3",
-        consumption: 150,
-        charging: 120,
-        items: [
-          "item",
-          "hello",
-          "itemmm",
-          "another",
-        ]),
-  ];
-
   String stringBuilder(List items) {
-    String itemss = "";
-    for (var i = 0; i < items.length; i++) {
-      itemss = itemss + items[i] + ", ";
+    if (items.isEmpty) {
+      return "No items yet";
     }
-    return itemss;
+    String itemsString = "";
+    for (var i = 0; i < items.length; i++) {
+      itemsString = itemsString + items[i].item_name + ", ";
+    }
+    return itemsString;
   }
 
   Color randColor(String name) {
@@ -125,41 +94,57 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<System> systems = Provider.of<Systems>(context).getSystems;
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 100,
-          title: Container(
-            width: 180,
-            child: Image.asset(
-              "assets/images/Header-Logo.png",
-              fit: BoxFit.cover,
-            ),
+      appBar: AppBar(
+        toolbarHeight: 100,
+        title: Container(
+          width: 180,
+          child: Image.asset(
+            "assets/images/Header-Logo.png",
+            fit: BoxFit.cover,
           ),
-          backgroundColor: Colors.white,
-          elevation: 0.5,
-          actions: [
-            SizedBox(
-              width: 100,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/notifications");
-                },
-                icon: Icon(
-                  Icons.notifications_active_outlined,
-                  color: Theme.of(context).primaryColor,
-                  size: 30,
-                ),
-              ),
-            )
-          ],
         ),
-        body: Container(
-          color: Colors.white,
-          child: Column(
-            children: systems.map((system) {
-              return systemsBuilder(system);
-            }).toList(),
-          ),
-        ));
+        backgroundColor: Colors.white,
+        elevation: 0.5,
+        actions: [
+          SizedBox(
+            width: 100,
+            child: IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/notifications");
+              },
+              icon: Icon(
+                Icons.notifications_active_outlined,
+                color: Theme.of(context).primaryColor,
+                size: 30,
+              ),
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: Container(
+        width: 70,
+        height: 70,
+        margin: EdgeInsets.all(10),
+        child: FloatingActionButton(
+          child: Icon(Icons.add, color: Colors.white),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => ModalSheet(),
+            );
+          },
+        ),
+      ),
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: systems.map((system) {
+            return systemsBuilder(system);
+          }).toList(),
+        ),
+      ),
+    );
   }
 }

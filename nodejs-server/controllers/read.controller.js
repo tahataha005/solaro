@@ -74,3 +74,4 @@ const getAllItems = async (req, res) => {
 };
 
 module.exports = { getSolarStats, getAllItems, getUser };
+
