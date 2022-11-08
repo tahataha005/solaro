@@ -17,6 +17,14 @@ class Auth extends ChangeNotifier {
     return null;
   }
 
+  String? get getToken {
+    if (token != null) {
+      return token;
+    }
+
+    return null;
+  }
+
   Future login(email, password) async {
     final url = Uri.http("192.168.1.177:8000", "/auth/login");
     try {
