@@ -26,7 +26,7 @@ class Auth extends ChangeNotifier {
   }
 
   Future login(email, password) async {
-    final url = Uri.http("192.168.1.177:8000", "/auth/login");
+    final url = Uri.http("192.168.1.12:8000", "/auth/login");
     try {
       final response = await http.post(
         url,
@@ -48,6 +48,7 @@ class Auth extends ChangeNotifier {
 
       userId = data["user_id"];
       token = data["token"];
+      notifyListeners();
     } catch (e) {
       rethrow;
     }
@@ -71,6 +72,7 @@ class Auth extends ChangeNotifier {
 
       userId = response["user_id"];
       token = response["token"];
+      notifyListeners();
     } catch (e) {
       rethrow;
     }
