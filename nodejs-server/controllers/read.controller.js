@@ -21,10 +21,10 @@ const getUser = async (req, res) => {
 
 //Searching for system by user id
 const getSolarStats = async (req, res) => {
-    try {
-        //Destructuring req data
-        const { user_id, system_id } = req.params;
+    //Destructuring req data
+    const { user_id, system_id } = req.params;
 
+    try {
         //Geting user by id
         const user = await User.findById(user_id);
 
@@ -46,10 +46,10 @@ const getSolarStats = async (req, res) => {
 
 //Searching for all items belonging to solar system by system id
 const getAllItems = async (req, res) => {
-    try {
-        //Destructuring req data
-        const { user_id, system_name } = req.params;
+    //Destructuring req data
+    const { user_id, system_name } = req.params;
 
+    try {
         //Geting items belonging to system by its id
         const user = await User.findById(user_id);
 
