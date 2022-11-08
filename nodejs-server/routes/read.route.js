@@ -4,6 +4,7 @@ const router = Router();
 
 const {
     getSolarStats,
+    getUser,
     // getAllItems,
     // getItem,
 } = require("../controllers/read.controller.js");
