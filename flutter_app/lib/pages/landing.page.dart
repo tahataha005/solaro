@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/modal.sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,12 @@ class _LandingPageState extends State<LandingPage> {
     return colors[countName];
   }
 
+  Future userFetch() async {
+    Provider.of<User>(context, listen: false).setSystems();
+  }
+
   Widget systemsBuilder(system) {
+    userFetch();
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, "/main");
