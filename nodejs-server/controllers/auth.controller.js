@@ -41,7 +41,7 @@ const logIn = async (req, res) => {
 
     try {
         //Searching for given email
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).select("password");
 
         //If email not in found return invalid
         if (!user)
