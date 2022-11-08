@@ -10,17 +10,17 @@ class Systems extends ChangeNotifier {
     return [...systems];
   }
 
-  Future addSystem(String userId, System system) async {
+  Future addSystem(String userId, System system, context) async {
     try {
       final response = await sendRequest(
-        method: "POST",
-        route: "/control/system",
-        load: {
-          "user_id": userId,
-          "system_name": system.name,
-          "connection": system.connection,
-        },
-      );
+          method: "POST",
+          route: "/control/system",
+          load: {
+            "user_id": userId,
+            "system_name": system.name,
+            "connection": system.connection,
+          },
+          context: context);
       if (response["message"] != null) {
         throw HttpException(response["message"]);
       }
