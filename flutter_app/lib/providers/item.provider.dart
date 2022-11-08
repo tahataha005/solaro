@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Item extends ChangeNotifier {
+class Item with ChangeNotifier {
   final String item_name;
   final double ideal_consumption;
   final double live_consumption;

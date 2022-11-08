@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/providers/item.provider.dart';
 
-class System extends ChangeNotifier {
+class System with ChangeNotifier {
   final String name;
   final String connection;
   double charging;

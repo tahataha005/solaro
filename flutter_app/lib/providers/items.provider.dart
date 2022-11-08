@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/providers/item.provider.dart';
 
-class Items extends ChangeNotifier {
+class Items with ChangeNotifier {
   List<Item> _items = [
     Item(
       item_name: "Refrigerator",

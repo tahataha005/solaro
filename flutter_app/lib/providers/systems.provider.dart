@@ -3,7 +3,7 @@ import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/tools/request.dart';
 
-class Systems extends ChangeNotifier {
+class Systems with ChangeNotifier {
   List<System> systems = [];
 
   List<System> get getSystems {

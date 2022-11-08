@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/models/exception.model.dart';
-import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/tools/request.dart';
 
-class User extends ChangeNotifier {
+class User with ChangeNotifier {
   String? id;
   String? email;
   String? userType;
