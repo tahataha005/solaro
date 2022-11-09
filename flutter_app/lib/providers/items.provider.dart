@@ -42,4 +42,16 @@ class Items with ChangeNotifier {
   Item findByName(name) {
     return items.firstWhere((item) => item.item_name == name);
   }
+
+  Future addItem(item) async {
+    Item newItem = Item(
+      item_name: item["name"],
+      ideal_consumption: item["ideal_consumption"],
+      live_consumption: item["live_consumption"],
+      status: item["status"],
+    );
+
+    items.add(newItem);
+    notifyListeners();
+  }
 }
