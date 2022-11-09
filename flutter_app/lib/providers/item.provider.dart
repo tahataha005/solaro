@@ -17,4 +17,6 @@ class Item with ChangeNotifier {
     status = !status;
     notifyListeners();
   }
+
+  Future addItem() async {}
 }
