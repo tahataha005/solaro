@@ -30,4 +30,6 @@ class Systems with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future loadSystems() async {}
 }
