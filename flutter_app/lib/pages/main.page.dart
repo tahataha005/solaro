@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/widgets/content.card.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 import 'package:flutter_app/widgets/labeled.progress.bar.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -95,6 +97,9 @@ class _MainPageState extends State<MainPage> {
                     background: Theme.of(context).accentColor,
                     text: "ALL",
                     onPressed: () {
+                      Provider.of<Items>(context, listen: false).emptyItems();
+                      Provider.of<Items>(context, listen: false)
+                          .loadItems(system.items);
                       Navigator.pushNamed(context, "/items");
                     },
                   ),
