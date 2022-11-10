@@ -34,10 +34,10 @@ class _LandingPageState extends State<LandingPage> {
     return colors[countName];
   }
 
-  Widget systemsBuilder(system) {
+  Widget systemsBuilder(System system) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "/main");
+        Navigator.pushNamed(context, "/main", arguments: system);
       },
       splashColor: Theme.of(context).accentColor,
       child: Container(
