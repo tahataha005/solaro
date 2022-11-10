@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/exception.model.dart';
-import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +15,14 @@ class _ModalSheetState extends State<ModalSheet> {
   final _form = GlobalKey<FormState>();
   String? errMessage;
 
-  Future addSystem(String userId, System system) async {
+  Future addSystem(
+      String userId, String systemName, String systemConnection) async {
     try {
       setState(() {
         errMessage = null;
       });
       await Provider.of<Systems>(context, listen: false)
-          .addSystem(userId, system, context);
+          .addSystem(userId, systemName, systemConnection, context);
       Navigator.of(context).pop();
     } on HttpException catch (e) {
       print(e);
@@ -114,19 +114,11 @@ class _ModalSheetState extends State<ModalSheet> {
                   return;
                 }
 
-                System system = System(
-                  name: _enteredName.text,
-                  connection: _enteredConnection.text,
-                  consumption: 0,
-                  charging: 0,
-                  items: [],
-                );
-
                 String? userId =
                     Provider.of<Auth>(context, listen: false).getUserId;
 
                 if (userId != null) {
-                  addSystem(userId, system);
+                  addSystem(userId, _enteredName.text, _enteredConnection.text);
                 } else {
                   Navigator.of(context).popAndPushNamed("/");
                 }
