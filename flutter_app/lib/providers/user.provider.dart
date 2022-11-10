@@ -7,6 +7,12 @@ import 'package:provider/provider.dart';
 class User with ChangeNotifier {
   String? email;
   String? userType;
+  String? currentSystemId;
+
+  void setCurrentSystemId(String systemId) {
+    currentSystemId = systemId;
+    notifyListeners();
+  }
 
   Future getUser(String id, context) async {
     try {
