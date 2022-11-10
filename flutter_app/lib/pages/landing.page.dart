@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/modal.sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget systemsBuilder(System system) {
     return InkWell(
       onTap: () {
+        Provider.of<User>(context, listen: false).setCurrentSystemId(system.id);
         Navigator.pushNamed(context, "/main", arguments: system);
       },
       splashColor: Theme.of(context).accentColor,
