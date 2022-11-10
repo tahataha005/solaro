@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
@@ -84,6 +85,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                       ),
                       TextFormField(
                         controller: _enteredIdealConsumption,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           label: Text(
                             "Ideal Consumption",
@@ -101,7 +103,8 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   background: Theme.of(context).primaryColor,
                   text: "ADD",
                   onPressed: () {
-                    createItem("name", 1.0);
+                    createItem(
+                        _enteredName.text, _enteredIdealConsumption.text);
                   },
                 )
               ],
