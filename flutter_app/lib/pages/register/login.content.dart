@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
         await Provider.of<User>(context, listen: false)
             .getUser(userId, context);
 
-        Navigator.of(context).pushNamed("/landing");
+        Navigator.of(context).popAndPushNamed("/landing");
       }
     } on HttpException catch (error) {
       setState(() {
