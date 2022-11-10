@@ -63,35 +63,44 @@ class _CreateItemPageState extends State<CreateItemPage> {
                 SizedBox(
                   height: 20,
                 ),
-                TextField(
-                    decoration: InputDecoration(
-                  label: Text(
-                    "Item Name",
-                    style: Theme.of(context).textTheme.bodyLarge,
+                Form(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          label: Text(
+                            "Item Name",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          label: Text(
+                            "Ideal Consumption",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          label: Text(
+                            "Connection",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                    ],
                   ),
-                )),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                  label: Text(
-                    "Ideal Consumption",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                )),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                  label: Text(
-                    "Connection",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                )),
-                SizedBox(
-                  height: 40,
                 ),
                 CostumedButton(
                   height: 50,
