@@ -6,7 +6,7 @@ class System with ChangeNotifier {
   final String connection;
   double charging;
   double consumption;
-  List<Item> items;
+  List items;
 
   System({
     required this.name,
