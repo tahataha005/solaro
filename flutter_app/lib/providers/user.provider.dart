@@ -8,17 +8,20 @@ class User with ChangeNotifier {
   String? email;
   String? userType;
 
-  Future setSystems() async {
+  Future getUser(String id, context) async {
     try {
-      final response =
-          await sendRequest(route: "/read/63669e05e464e3fb910146c8");
+      final response = await sendRequest(route: "/read/$id", context: context);
 
       if (response["message"] != null) {
         throw HttpException(response["message"]);
       }
 
       email = response["email"];
-      userType = response["userType"];
+      userType = response["user_type"];
+      List systems = response["system"];
+
+      Provider.of<Systems>(context, listen: false).loadSystems(systems);
+      notifyListeners();
     } catch (e) {
       rethrow;
     }
