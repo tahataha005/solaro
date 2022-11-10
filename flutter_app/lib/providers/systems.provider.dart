@@ -10,21 +10,30 @@ class Systems with ChangeNotifier {
     return [...systems];
   }
 
-  Future addSystem(String userId, System system, context) async {
+  Future addSystem(
+      String userId, String name, String connection, context) async {
     try {
       final response = await sendRequest(
           method: "POST",
           route: "/control/system",
           load: {
             "user_id": userId,
-            "system_name": system.name,
-            "connection": system.connection,
+            "system_name": name,
+            "connection": connection,
           },
           context: context);
       if (response["message"] != null) {
         throw HttpException(response["message"]);
       }
-      systems.add(system);
+
+      System newSystem = System(
+        name: name,
+        connection: connection,
+        consumption: 0,
+        charging: 0,
+        items: [],
+      );
+      systems.add(newSystem);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -34,6 +43,7 @@ class Systems with ChangeNotifier {
   Future loadSystems(List fetchedSystems) async {
     for (Map system in fetchedSystems) {
       System newSystem = System(
+        id: system["_id"],
         name: system["name"],
         connection: system["connection"],
         consumption: system["consumption"].toDouble(),
