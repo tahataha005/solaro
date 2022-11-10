@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/auth.provider.dart';
+import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:provider/provider.dart';
 
 class CreateItemPage extends StatefulWidget {
   @override
@@ -7,7 +10,12 @@ class CreateItemPage extends StatefulWidget {
 }
 
 class _CreateItemPageState extends State<CreateItemPage> {
-  Future createItem() async {}
+  Future createItem(name, idealConsumption) async {
+    final userId = Provider.of<Auth>(context, listen: false).getUserId;
+
+    await Provider.of<Items>(context, listen: false)
+        .addItem(userId, name, idealConsumption, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +99,9 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   raduis: 15,
                   background: Theme.of(context).primaryColor,
                   text: "ADD",
-                  onPressed: () {},
+                  onPressed: () {
+                    createItem("name", 1.0);
+                  },
                 )
               ],
             ),
