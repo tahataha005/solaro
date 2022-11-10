@@ -56,6 +56,9 @@ class Items with ChangeNotifier {
         live_consumption: item["live_consumption"].toDouble(),
         status: item["status"],
       );
+
+      _items.add(newItem);
     }
+    notifyListeners();
   }
 }
