@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
@@ -20,8 +21,18 @@ class _CreateItemPageState extends State<CreateItemPage> {
     final systemId =
         Provider.of<User>(context, listen: false).getCurrentSystemId;
 
-    await Provider.of<Items>(context, listen: false)
-        .addItem(userId, name, idealConsumption, systemId, context);
+    try {
+      await Provider.of<Items>(context, listen: false)
+          .addItem(userId, name, idealConsumption, systemId, context);
+    } on HttpException catch (e) {
+      String errMessage = "Sorry, something wrong happened";
+
+      if (e.toString().contains("Unauthorized")) {
+        errMessage = "Unauthorized action, only controllers can add items";
+      }
+
+      return errMessage;
+    }
   }
 
   @override
