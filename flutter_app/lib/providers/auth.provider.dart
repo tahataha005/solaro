@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/config/request.config.dart';
 import 'package:http/http.dart' as http;
 
 import '../tools/request.dart';
@@ -26,7 +27,9 @@ class Auth with ChangeNotifier {
   }
 
   Future login(email, password) async {
-    final url = Uri.http("192.168.1.12:8000", "/auth/login");
+    final baseUrl = RequestConfig.url;
+    final url = Uri.http(baseUrl, "/auth/login");
+
     try {
       final response = await http.post(
         url,
@@ -55,6 +58,9 @@ class Auth with ChangeNotifier {
   }
 
   Future signUp(email, password, userType) async {
+    final baseUrl = RequestConfig.url;
+    final url = Uri.http(baseUrl, "/auth/login");
+
     try {
       final response = await sendRequest(
         method: "POST",
