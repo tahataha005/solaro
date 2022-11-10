@@ -47,4 +47,6 @@ class Items with ChangeNotifier {
 
     notifyListeners();
   }
+
+  void loadItems() {}
 }
