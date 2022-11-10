@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/providers/item.provider.dart';
+import 'package:flutter_app/tools/request.dart';
 
 class Items with ChangeNotifier {
   List<Item> _items = [
@@ -43,15 +44,23 @@ class Items with ChangeNotifier {
     return items.firstWhere((item) => item.item_name == name);
   }
 
-  Future addItem(item) async {
-    Item newItem = Item(
-      item_name: item["name"],
-      ideal_consumption: item["ideal_consumption"],
-      live_consumption: item["live_consumption"],
-      status: item["status"],
-    );
+  Future addItem(userId, name, idealConsumption, context) async {
+    try {
+      final response = await sendRequest(
+          route: "/control/item",
+          method: "POST",
+          load: {
+            "user_id": userId,
+            "system_id": "6366a047cb1d6bcd80ef72f4",
+            "name": name,
+            "ideal_consumption": idealConsumption,
+          },
+          context: context);
+      print(response);
+    } catch (e) {
+      print(e);
+    }
 
-    items.add(newItem);
     notifyListeners();
   }
 }
