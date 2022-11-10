@@ -27,12 +27,14 @@ class Systems with ChangeNotifier {
       }
 
       System newSystem = System(
+        id: response["added"]["_id"],
         name: name,
         connection: connection,
         consumption: 0,
         charging: 0,
         items: [],
       );
+
       systems.add(newSystem);
       notifyListeners();
     } catch (e) {
@@ -50,6 +52,7 @@ class Systems with ChangeNotifier {
         charging: system["charging"].toDouble(),
         items: system["items"],
       );
+      print(system["_id"]);
 
       systems.add(newSystem);
     }
