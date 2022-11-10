@@ -13,8 +13,8 @@ class ItemsPage extends StatefulWidget {
 class _ItemsPageState extends State<ItemsPage> {
   @override
   Widget build(BuildContext context) {
-    final loaded_items = Provider.of<Items>(context);
-    final items = loaded_items.items;
+    final List<Item> items = Provider.of<Items>(context).getItems;
+
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(20),
@@ -47,13 +47,11 @@ class _ItemsPageState extends State<ItemsPage> {
               SizedBox(
                 height: 20,
               ),
-              Consumer<Items>(
-                builder: (context, items, child) => Column(
-                  children: items.items
-                      .map((item) => ItemCard(item_name: item.item_name))
-                      .toList(),
-                ),
-              )
+              Column(
+                children: items
+                    .map((item) => ItemCard(item_name: item.item_name))
+                    .toList(),
+              ),
             ],
           ),
         ),
