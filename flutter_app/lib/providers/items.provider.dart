@@ -48,6 +48,10 @@ class Items with ChangeNotifier {
     notifyListeners();
   }
 
+  void emptyItems() {
+    _items = [];
+  }
+
   void loadItems(List items) {
     for (var item in items) {
       Item newItem = Item(
