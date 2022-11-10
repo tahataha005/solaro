@@ -46,12 +46,14 @@ class _CreateItemPageState extends State<CreateItemPage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            height: MediaQuery.of(context).size.height * 0.8,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.width - 20,
+                  height: MediaQuery.of(context).size.width - 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Theme.of(context).primaryColorLight,
@@ -59,9 +61,6 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   child: SizedBox(
                     child: Icon(Icons.add, size: 200, color: Colors.white),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
                 ),
                 Form(
                   child: Column(
@@ -75,7 +74,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
@@ -84,20 +83,6 @@ class _CreateItemPageState extends State<CreateItemPage> {
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Connection",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 40,
                       ),
                     ],
                   ),
