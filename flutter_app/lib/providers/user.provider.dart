@@ -14,6 +14,10 @@ class User with ChangeNotifier {
     notifyListeners();
   }
 
+  String? get getCurrentSystemId {
+    return currentSystemId;
+  }
+
   Future getUser(String id, context) async {
     try {
       final response = await sendRequest(route: "/read/$id", context: context);
