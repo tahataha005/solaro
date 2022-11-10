@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/models/exception.model.dart';
+import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/tools/request.dart';
+import 'package:provider/provider.dart';
 
 class User with ChangeNotifier {
-  String? id;
   String? email;
   String? userType;
-  List? systems;
 
   Future setSystems() async {
     try {
@@ -17,10 +17,8 @@ class User with ChangeNotifier {
         throw HttpException(response["message"]);
       }
 
-      id = response["user_id"];
       email = response["email"];
       userType = response["userType"];
-      systems = response["system"];
     } catch (e) {
       rethrow;
     }
