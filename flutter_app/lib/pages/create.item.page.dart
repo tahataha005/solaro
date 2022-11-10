@@ -10,6 +10,10 @@ class CreateItemPage extends StatefulWidget {
 }
 
 class _CreateItemPageState extends State<CreateItemPage> {
+  final _enteredName = TextEditingController();
+  final _enteredIdealConsumption = TextEditingController();
+  final _form = GlobalKey<FormState>();
+
   Future createItem(name, idealConsumption) async {
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
 
@@ -63,9 +67,11 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   ),
                 ),
                 Form(
+                  key: _form,
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: _enteredName,
                         decoration: InputDecoration(
                           label: Text(
                             "Item Name",
@@ -77,6 +83,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        controller: _enteredIdealConsumption,
                         decoration: InputDecoration(
                           label: Text(
                             "Ideal Consumption",
