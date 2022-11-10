@@ -7,6 +7,8 @@ class CreateItemPage extends StatefulWidget {
 }
 
 class _CreateItemPageState extends State<CreateItemPage> {
+  Future createItem() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
