@@ -31,5 +31,18 @@ class Systems with ChangeNotifier {
     }
   }
 
-  Future loadSystems() async {}
+  Future loadSystems(List fetchedSystems) async {
+    for (Map system in fetchedSystems) {
+      System newSystem = System(
+        name: system["name"],
+        connection: system["connection"],
+        consumption: system["consumption"].toDouble(),
+        charging: system["charging"].toDouble(),
+        items: system["items"],
+      );
+
+      systems.add(newSystem);
+    }
+    notifyListeners();
+  }
 }
