@@ -44,21 +44,20 @@ class Items with ChangeNotifier {
     return items.firstWhere((item) => item.item_name == name);
   }
 
-  Future addItem(userId, name, idealConsumption, context) async {
+  Future addItem(userId, name, idealConsumption, systemId, context) async {
     try {
       final response = await sendRequest(
           route: "/control/item",
           method: "POST",
           load: {
             "user_id": userId,
-            "system_id": "6366a047cb1d6bcd80ef72f4",
+            "system_id": systemId,
             "name": name,
             "ideal_consumption": idealConsumption,
           },
           context: context);
-      print(response);
     } catch (e) {
-      print(e);
+      rethrow;
     }
 
     notifyListeners();
