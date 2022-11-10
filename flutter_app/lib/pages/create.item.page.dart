@@ -105,8 +105,8 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   background: Theme.of(context).primaryColor,
                   text: "ADD",
                   onPressed: () {
-                    createItem(
-                        _enteredName.text, _enteredIdealConsumption.text);
+                    createItem(_enteredName.text,
+                        double.parse(_enteredIdealConsumption.text));
                   },
                 )
               ],
