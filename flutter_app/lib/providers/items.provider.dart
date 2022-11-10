@@ -4,7 +4,7 @@ import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/tools/request.dart';
 
 class Items with ChangeNotifier {
-  final List<Item> _items = [];
+  List<Item> _items = [];
 
   List<Item> get getItems {
     return [..._items];
@@ -48,5 +48,14 @@ class Items with ChangeNotifier {
     notifyListeners();
   }
 
-  void loadItems() {}
+  void loadItems(List items) {
+    for (var item in items) {
+      Item newItem = Item(
+        item_name: item["name"],
+        ideal_consumption: item["ideal_consumption"].toDouble(),
+        live_consumption: item["live_consumption"].toDouble(),
+        status: item["status"],
+      );
+    }
+  }
 }
