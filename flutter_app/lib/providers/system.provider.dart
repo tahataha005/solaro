@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/providers/item.provider.dart';
 
 class System with ChangeNotifier {
-  final String name;
+  final String? id;
   final String connection;
+  String name;
   double charging;
   double consumption;
   List items;
 
   System({
+    this.id,
     required this.name,
     required this.connection,
     required this.consumption,
