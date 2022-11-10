@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/item.provider.dart';
+import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/widgets/content.card.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
@@ -11,32 +11,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final List items = [
-    Item(
-      item_name: "Refrigerator",
-      ideal_consumption: 3,
-      live_consumption: 2.8,
-      status: true,
-    ),
-    Item(
-      item_name: "Lights",
-      ideal_consumption: 1.5,
-      live_consumption: 1.4,
-      status: true,
-    ),
-    Item(
-      item_name: "TV",
-      ideal_consumption: 100,
-      live_consumption: 101,
-      status: true,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    System system = ModalRoute.of(context)?.settings.arguments as System;
+    final List items = system.items;
+
     double maxConsumption = 7;
-    double system_charging = 5;
-    double system_consumption = 3;
+    double system_charging = system.charging;
+    double system_consumption = system.consumption;
     double currentConsumption = system_consumption / 7;
     double currentCharging = system_charging / 7;
 
@@ -98,13 +80,13 @@ class _MainPageState extends State<MainPage> {
               ContentCard(
                 content: Column(children: [
                   items.length > 0
-                      ? ItemCard(item_name: items[0].item_name)
+                      ? ItemCard(item_name: items[0]["name"])
                       : Container(),
                   items.length > 1
-                      ? ItemCard(item_name: items[1].item_name)
+                      ? ItemCard(item_name: items[1]["name"])
                       : Container(),
                   items.length > 2
-                      ? ItemCard(item_name: items[2].item_name)
+                      ? ItemCard(item_name: items[2]["name"])
                       : Container(),
                   CostumedButton(
                     height: 50,
