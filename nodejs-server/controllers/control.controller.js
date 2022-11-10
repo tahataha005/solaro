@@ -7,7 +7,7 @@ const addSolarSystem = async (req, res) => {
 
     try {
         //Assigning solar system attributes
-        const system = {
+        const newSystem = {
             name: system_name,
             connection: connection,
             charging: 0,
@@ -18,13 +18,13 @@ const addSolarSystem = async (req, res) => {
         const user = await User.findById(user_id);
 
         //Pushing new system to array of systems in user
-        user.system.push(system);
+        user.system.push(newSystem);
 
         //Saving solar system in database
         await user.save();
 
         //Returning created system
-        res.status(200).json({ added: system });
+        res.status(200).json({ added: user.system[user.system.length - 1] });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
