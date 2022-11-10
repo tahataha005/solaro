@@ -80,30 +80,32 @@ class _MainPageState extends State<MainPage> {
                 height: 20,
               ),
               ContentCard(
-                content: Column(children: [
-                  items.length > 0
-                      ? ItemCard(item_name: items[0]["name"])
-                      : Container(),
-                  items.length > 1
-                      ? ItemCard(item_name: items[1]["name"])
-                      : Container(),
-                  items.length > 2
-                      ? ItemCard(item_name: items[2]["name"])
-                      : Container(),
-                  CostumedButton(
-                    height: 50,
-                    width: double.infinity,
-                    raduis: 15,
-                    background: Theme.of(context).accentColor,
-                    text: "ALL",
-                    onPressed: () {
-                      Provider.of<Items>(context, listen: false).emptyItems();
-                      Provider.of<Items>(context, listen: false)
-                          .loadItems(system.items);
-                      Navigator.pushNamed(context, "/items");
-                    },
-                  ),
-                ]),
+                content: Consumer<Items>(
+                  builder: (_, items, __) => Column(children: [
+                    items.getItems.length > 0
+                        ? ItemCard(item_name: items.getItems[0].item_name)
+                        : Container(),
+                    items.getItems.length > 1
+                        ? ItemCard(item_name: items.getItems[1].item_name)
+                        : Container(),
+                    items.getItems.length > 2
+                        ? ItemCard(item_name: items.getItems[2].item_name)
+                        : Container(),
+                    CostumedButton(
+                      height: 50,
+                      width: double.infinity,
+                      raduis: 15,
+                      background: Theme.of(context).accentColor,
+                      text: "ALL",
+                      onPressed: () {
+                        Provider.of<Items>(context, listen: false).emptyItems();
+                        Provider.of<Items>(context, listen: false)
+                            .loadItems(system.items);
+                        Navigator.pushNamed(context, "/items");
+                      },
+                    ),
+                  ]),
+                ),
               ),
               SizedBox(
                 height: 20,
