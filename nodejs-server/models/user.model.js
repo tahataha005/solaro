@@ -27,12 +27,12 @@ const itemSchema = mongoose.Schema({
 
 //Creating a solar system schema
 const solarSystemSchema = mongoose.Schema({
-    // id: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     unique: true,
-    //     index: true,
-    //     auto: true,
-    // },
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        unique: true,
+        index: true,
+        auto: true,
+    },
     name: {
         type: String,
         // required: true,
