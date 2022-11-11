@@ -18,8 +18,9 @@ class _SignUpState extends State<SignUp> {
   final _form = GlobalKey<FormState>();
   String? errMessage;
   String _userType = userTypes["viewer"];
+  bool successful = true;
 
-  Future submit(email, password, userType) async {
+  Future submit(email, password, userType, context) async {
     if (!validated()) {
       return;
     }
@@ -29,7 +30,8 @@ class _SignUpState extends State<SignUp> {
         errMessage = null;
       });
       await Provider.of<Auth>(context, listen: false)
-          .signUp(email, password, userType);
+          .signUp(email, password, userType, context);
+
       Navigator.popAndPushNamed(context, "/landing");
     } on HttpException catch (e) {
       if (e.toString().contains("duplicate")) {
@@ -38,6 +40,7 @@ class _SignUpState extends State<SignUp> {
       errMessage = "Sorry, somethin went wrong";
       setState(() {
         errMessage;
+        successful = true;
       });
     }
   }
@@ -48,121 +51,127 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Form(
-            key: _form,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.3,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextFormField(
-                      controller: _email,
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter email";
-                        }
-                        if (!value.contains("@")) {
-                          return "Not a valid email";
-                        }
-                        return null;
+    return successful
+        ? Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Form(
+                  key: _form,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextFormField(
+                            controller: _email,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter email";
+                              }
+                              if (!value.contains("@")) {
+                                return "Not a valid email";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              label: Text(
+                                "Email",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _password,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter password";
+                              }
+                              if (value.length < 10) {
+                                return "Should be minimum 10 characters";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              label: Text(
+                                "Password",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _confirm,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please confirm password";
+                              }
+                              if (value != _password.text) {
+                                return "Doesn't match password";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              label: Text(
+                                "Confirm Password",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          )
+                        ]),
+                  ),
+                ),
+                if (errMessage != null)
+                  Text(
+                    errMessage!,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                Column(children: [
+                  ListTile(
+                    title: Text("Controller"),
+                    leading: Radio(
+                      value: userTypes["controller"],
+                      groupValue: _userType,
+                      onChanged: (value) {
+                        setState(() {
+                          _userType = value;
+                        });
                       },
-                      decoration: InputDecoration(
-                        label: Text(
-                          "Email",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
                     ),
-                    TextFormField(
-                      controller: _password,
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter password";
-                        }
-                        if (value.length < 10) {
-                          return "Should be minimum 10 characters";
-                        }
-                        return null;
+                  ),
+                  ListTile(
+                    title: Text("Viewer"),
+                    leading: Radio(
+                      value: userTypes["viewer"],
+                      groupValue: _userType,
+                      onChanged: (value) {
+                        setState(() {
+                          _userType = value;
+                        });
                       },
-                      decoration: InputDecoration(
-                        label: Text(
-                          "Password",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
                     ),
-                    TextFormField(
-                      controller: _confirm,
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please confirm password";
-                        }
-                        if (value != _password.text) {
-                          return "Doesn't match password";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        label: Text(
-                          "Confirm Password",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
-                    )
-                  ]),
+                  ),
+                ]),
+                CostumedButton(
+                  height: 60,
+                  width: double.infinity,
+                  raduis: 15,
+                  background: Theme.of(context).primaryColor,
+                  text: "SIGN UP",
+                  onPressed: () {
+                    setState(() {
+                      successful = false;
+                    });
+
+                    submit(_email.text, _password.text, _userType, context);
+                  },
+                ),
+              ],
             ),
-          ),
-          if (errMessage != null)
-            Text(
-              errMessage!,
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-          Column(children: [
-            ListTile(
-              title: Text("Controller"),
-              leading: Radio(
-                value: userTypes["controller"],
-                groupValue: _userType,
-                onChanged: (value) {
-                  setState(() {
-                    _userType = value;
-                  });
-                },
-              ),
-            ),
-            ListTile(
-              title: Text("Viewer"),
-              leading: Radio(
-                value: userTypes["viewer"],
-                groupValue: _userType,
-                onChanged: (value) {
-                  setState(() {
-                    _userType = value;
-                  });
-                },
-              ),
-            ),
-          ]),
-          CostumedButton(
-            height: 60,
-            width: double.infinity,
-            raduis: 15,
-            background: Theme.of(context).primaryColor,
-            text: "SIGN UP",
-            onPressed: () {
-              submit(_email.text, _password.text, _userType);
-            },
-          ),
-        ],
-      ),
-    );
+          )
+        : CircularProgressIndicator();
   }
 }
