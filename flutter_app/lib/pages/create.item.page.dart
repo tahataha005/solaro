@@ -85,11 +85,12 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   child: Column(
                     children: [
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: _enteredName,
                         decoration: InputDecoration(
                           label: Text(
                             "Item Name",
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                       ),
@@ -97,12 +98,13 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: _enteredIdealConsumption,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           label: Text(
                             "Ideal Consumption",
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                       ),
