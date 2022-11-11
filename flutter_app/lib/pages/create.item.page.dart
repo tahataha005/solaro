@@ -15,6 +15,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
   final _enteredName = TextEditingController();
   final _enteredIdealConsumption = TextEditingController();
   final _form = GlobalKey<FormState>();
+  String errMessage = "";
 
   Future createItem(name, idealConsumption) async {
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
@@ -31,7 +32,9 @@ class _CreateItemPageState extends State<CreateItemPage> {
         errMessage = "Unauthorized action, only controllers can add items";
       }
 
-      return errMessage;
+      setState(() {
+        errMessage;
+      });
     }
   }
 
@@ -80,6 +83,11 @@ class _CreateItemPageState extends State<CreateItemPage> {
                     child: Icon(Icons.add, size: 200, color: Colors.white),
                   ),
                 ),
+                if (errMessage != "")
+                  Text(
+                    errMessage,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
                 Form(
                   key: _form,
                   child: Column(
