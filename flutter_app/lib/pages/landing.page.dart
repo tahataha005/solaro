@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
@@ -39,6 +40,8 @@ class _LandingPageState extends State<LandingPage> {
     return InkWell(
       onTap: () {
         Provider.of<User>(context, listen: false).setCurrentSystemId(system.id);
+        Provider.of<Items>(context, listen: false).emptyItems();
+        Provider.of<Items>(context, listen: false).loadItems(system.items);
         Navigator.pushNamed(context, "/main", arguments: system);
       },
       splashColor: Theme.of(context).accentColor,
