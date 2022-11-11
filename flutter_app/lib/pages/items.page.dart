@@ -29,8 +29,13 @@ class _ItemsPageState extends State<ItemsPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                   CostumedButton(
                     height: 50,
