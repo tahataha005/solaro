@@ -18,6 +18,8 @@ class _CreateItemPageState extends State<CreateItemPage> {
   String errMessage = "";
 
   Future createItem(name, idealConsumption) async {
+    if (!validate()) return;
+
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
     final systemId =
         Provider.of<User>(context, listen: false).getCurrentSystemId;
@@ -36,6 +38,10 @@ class _CreateItemPageState extends State<CreateItemPage> {
         errMessage;
       });
     }
+  }
+
+  bool validate() {
+    return _form.currentState!.validate();
   }
 
   @override
