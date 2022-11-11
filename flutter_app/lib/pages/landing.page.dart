@@ -71,21 +71,24 @@ class _LandingPageState extends State<LandingPage> {
                 color: randColor(system.name),
                 borderRadius: BorderRadius.all(Radius.circular(10))),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  system.name,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text(
-                  stringBuilder(system.items),
-                  style: Theme.of(context).textTheme.bodySmall,
-                )
-              ],
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    system.name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Text(
+                    stringBuilder(system.items),
+                    style: Theme.of(context).textTheme.bodySmall,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
+              ),
             ),
           ),
         ]),
