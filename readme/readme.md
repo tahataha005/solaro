@@ -12,4 +12,6 @@
 
 <br><br>
 
+<img src="./assets/titles/title2.svg"/>
+
 <img src="./assets/titles/title3.svg"/>
