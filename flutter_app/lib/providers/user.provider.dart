@@ -18,6 +18,10 @@ class User with ChangeNotifier {
     return currentSystemId;
   }
 
+  String? get getEmail {
+    return email;
+  }
+
   Future getUser(String id, context) async {
     try {
       final response = await sendRequest(route: "/read/$id", context: context);
