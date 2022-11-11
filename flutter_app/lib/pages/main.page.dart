@@ -79,9 +79,9 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 20,
               ),
-              ContentCard(
-                content: Consumer<Items>(
-                  builder: (_, items, __) => Column(children: [
+              Consumer<Items>(
+                builder: (context, items, child) => ContentCard(
+                  content: Column(children: [
                     items.getItems.length > 0
                         ? ItemCard(item_name: items.getItems[0].item_name)
                         : Container(),
@@ -98,9 +98,6 @@ class _MainPageState extends State<MainPage> {
                       background: Theme.of(context).accentColor,
                       text: "ALL",
                       onPressed: () {
-                        Provider.of<Items>(context, listen: false).emptyItems();
-                        Provider.of<Items>(context, listen: false)
-                            .loadItems(system.items);
                         Navigator.pushNamed(context, "/items");
                       },
                     ),
