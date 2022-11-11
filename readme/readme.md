@@ -11,3 +11,5 @@
 </div>
 
 <br><br>
+
+<img src="./assets/titles/title3.svg"/>
