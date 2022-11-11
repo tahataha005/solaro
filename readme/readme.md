@@ -23,6 +23,8 @@
 
 <img src="./assets/titles/title5.svg"/>
 
-| Login                                                                                             | Landing                                                                                              |
-| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| ![Login](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Log-in-page.svg) | ![Landing](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Landing-page.svg) |
+<br><br>
+
+| Login                                                                                             | Landing                                                                                              | Notifications                                                                                                    |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| ![Login](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Log-in-page.svg) | ![Landing](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Landing-page.svg) | ![Notifications](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Notifications-page.svg) |
