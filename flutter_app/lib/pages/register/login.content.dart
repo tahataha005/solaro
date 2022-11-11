@@ -15,6 +15,7 @@ class _LoginState extends State<Login> {
   final enteredPassword = TextEditingController();
   final _form = GlobalKey<FormState>();
   String err = "";
+  bool successful = true;
 
   void validate() => _form.currentState?.validate();
 
@@ -36,89 +37,95 @@ class _LoginState extends State<Login> {
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
+        successful = true;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: Column(
-        children: [
-          Form(
-            key: _form,
+    return successful
+        ? Container(
+            height: MediaQuery.of(context).size.height * 0.6,
             child: Column(
               children: [
-                TextFormField(
-                  controller: enteredEmail,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Please enter field";
-                    }
-                    if (!value.contains("@")) {
-                      return "Please enter a valid email";
-                    }
-                    return null;
-                  },
-                  onFieldSubmitted: (_) {
-                    validate();
-                  },
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Email",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                Form(
+                  key: _form,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: enteredEmail,
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter field";
+                          }
+                          if (!value.contains("@")) {
+                            return "Please enter a valid email";
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (_) {
+                          validate();
+                        },
+                        decoration: InputDecoration(
+                          label: Text(
+                            "Email",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      TextFormField(
+                        controller: enteredPassword,
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter field";
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (_) {
+                          validate();
+                        },
+                        decoration: InputDecoration(
+                          label: Text(
+                            "Password",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
-                  height: 35,
+                  height: 20,
                 ),
-                TextFormField(
-                  controller: enteredPassword,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Please enter field";
-                    }
-                    return null;
+                Text(
+                  err,
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+                SizedBox(
+                  height: 70,
+                ),
+                CostumedButton(
+                  height: 60,
+                  width: double.infinity,
+                  raduis: 15,
+                  background: Theme.of(context).primaryColor,
+                  text: "LOG IN",
+                  onPressed: () {
+                    setState(() {
+                      successful = false;
+                    });
+                    submit(enteredEmail.text, enteredPassword.text);
                   },
-                  onFieldSubmitted: (_) {
-                    validate();
-                  },
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Password",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            err,
-            style: Theme.of(context).textTheme.displayMedium,
-          ),
-          SizedBox(
-            height: 70,
-          ),
-          CostumedButton(
-            height: 60,
-            width: double.infinity,
-            raduis: 15,
-            background: Theme.of(context).primaryColor,
-            text: "LOG IN",
-            onPressed: () {
-              submit(enteredEmail.text, enteredPassword.text);
-            },
-          ),
-        ],
-      ),
-    );
+          )
+        : CircularProgressIndicator();
   }
 }
