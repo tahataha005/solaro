@@ -26,6 +26,9 @@ class _MainPageState extends State<MainPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).accentColor,
+        ),
         toolbarHeight: 100,
         title: Center(
           child: Container(
