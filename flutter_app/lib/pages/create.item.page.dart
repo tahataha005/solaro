@@ -27,6 +27,8 @@ class _CreateItemPageState extends State<CreateItemPage> {
     try {
       await Provider.of<Items>(context, listen: false)
           .addItem(userId, name, idealConsumption, systemId, context);
+
+      Navigator.of(context).pop();
     } on HttpException catch (e) {
       String errMessage = "Sorry, something wrong happened";
 
@@ -61,7 +63,9 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       icon: Icon(Icons.arrow_back),
                     ),
                   ],
