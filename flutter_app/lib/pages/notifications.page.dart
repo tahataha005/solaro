@@ -111,6 +111,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).accentColor,
+        ),
         toolbarHeight: 100,
         title: Container(
           width: 180,
