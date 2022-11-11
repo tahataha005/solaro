@@ -57,20 +57,20 @@ class Auth with ChangeNotifier {
     }
   }
 
-  Future signUp(email, password, userType) async {
+  Future signUp(email, password, userType, context) async {
     final baseUrl = RequestConfig.url;
     final url = Uri.http(baseUrl, "/auth/login");
 
     try {
       final response = await sendRequest(
-        method: "POST",
-        route: "/auth/signup",
-        load: {
-          "email": email,
-          "password": password,
-          "user_type": userType,
-        },
-      );
+          method: "POST",
+          route: "/auth/signup",
+          load: {
+            "email": email,
+            "password": password,
+            "user_type": userType,
+          },
+          context: context);
 
       if (response["message"] != null) {
         throw HttpException(response["message"]);
