@@ -13,5 +13,12 @@
 <br><br>
 
 <img src="./assets/titles/title2.svg"/>
+<div align="center">
+
+> To be edited
 
 <img src="./assets/titles/title3.svg"/>
+
+> To be edited
+
+<img src="./assets/titles/title5.svg"/>
