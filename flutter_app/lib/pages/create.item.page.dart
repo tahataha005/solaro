@@ -101,6 +101,11 @@ class _CreateItemPageState extends State<CreateItemPage> {
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
+                            return "Please enter name";
+                          }
+                        },
                       ),
                       SizedBox(
                         height: 20,
@@ -115,6 +120,13 @@ class _CreateItemPageState extends State<CreateItemPage> {
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
+                        validator: (value) {
+                          try {
+                            double.parse(value!);
+                          } catch (e) {
+                            return "Invalid number";
+                          }
+                        },
                       ),
                     ],
                   ),
