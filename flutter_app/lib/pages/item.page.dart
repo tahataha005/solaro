@@ -77,7 +77,7 @@ class _ItemPageState extends State<ItemPage> {
           Container(
             height: 320,
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Theme.of(context).primaryColorLight,
@@ -95,6 +95,7 @@ class _ItemPageState extends State<ItemPage> {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text("Ideal:"),
                     SizedBox(
@@ -109,15 +110,17 @@ class _ItemPageState extends State<ItemPage> {
                       ),
                       child: Center(
                         child: Text(
-                          loaded_item.ideal_consumption.toString(),
+                          // loaded_item.ideal_consumption.toString(),
+                          "5",
                         ),
                       ),
                     )
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("Ideal:"),
+                    Text("Live:"),
                     SizedBox(
                       width: 20,
                     ),
@@ -129,7 +132,9 @@ class _ItemPageState extends State<ItemPage> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
-                        child: Text(loaded_item.live_consumption.toString()),
+                        child: Text(
+                          loaded_item.live_consumption.toString(),
+                        ),
                       ),
                     )
                   ],
