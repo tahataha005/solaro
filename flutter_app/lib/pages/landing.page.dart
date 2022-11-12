@@ -138,6 +138,7 @@ class _LandingPageState extends State<LandingPage> {
           child: Icon(Icons.add, color: Colors.white),
           onPressed: () {
             showModalBottomSheet(
+              isScrollControlled: true,
               context: context,
               builder: (context) => ModalSheet(),
             );
