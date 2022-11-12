@@ -25,92 +25,104 @@ class _MainPageState extends State<MainPage> {
     double currentCharging = system_charging / 7;
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Theme.of(context).accentColor,
-        ),
-        toolbarHeight: 100,
-        title: Center(
-          child: Container(
-            width: 180,
-            child: Image.asset(
-              "assets/images/Header-Logo.png",
-              fit: BoxFit.cover,
-            ),
+      backgroundColor: Colors.white,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, bool innerBoxIsScrolled) => [],
+        body: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Theme.of(context).primaryColorLight,
           ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: Theme.of(context).primaryColorLight,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              ContentCard(
-                content: Column(
-                  children: [
-                    LabeledProgressBar(
-                      label: "Charging",
-                      progress: currentCharging,
-                      progress_color: Theme.of(context).accentColor,
-                    ),
-                    LabeledProgressBar(
-                      label: "Consumption",
-                      progress: currentConsumption,
-                      progress_color: currentConsumption > currentCharging
-                          ? Colors.red[900]
-                          : Theme.of(context).accentColor,
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ContentCard(
-                content: Text("Bar Graph"),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Consumer<Items>(
-                builder: (context, items, child) => ContentCard(
-                  content: Column(children: [
-                    items.getItems.length > 0
-                        ? ItemCard(item_name: items.getItems[0].item_name)
-                        : Container(),
-                    items.getItems.length > 1
-                        ? ItemCard(item_name: items.getItems[1].item_name)
-                        : Container(),
-                    items.getItems.length > 2
-                        ? ItemCard(item_name: items.getItems[2].item_name)
-                        : Container(),
-                    CostumedButton(
-                      height: 50,
-                      width: double.infinity,
-                      raduis: 15,
-                      background: Theme.of(context).accentColor,
-                      text: "ALL",
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/items");
-                      },
-                    ),
-                  ]),
+                ContentCard(
+                  content: Column(
+                    children: [
+                      Text(
+                        "Statistics",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      LabeledProgressBar(
+                        label: "Charging",
+                        progress: currentCharging,
+                        progress_color: Theme.of(context).accentColor,
+                      ),
+                      LabeledProgressBar(
+                        label: "Consumption",
+                        progress: currentConsumption,
+                        progress_color: currentConsumption > currentCharging
+                            ? Colors.red[900]
+                            : Theme.of(context).accentColor,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                ContentCard(
+                  content: Column(
+                    children: [
+                      Text(
+                        "History",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("Bar Graph"),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Consumer<Items>(
+                  builder: (context, items, child) => ContentCard(
+                    content: Column(children: [
+                      Text(
+                        "Items",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      items.getItems.length > 0
+                          ? ItemCard(item_name: items.getItems[0].item_name)
+                          : Container(),
+                      items.getItems.length > 1
+                          ? ItemCard(item_name: items.getItems[1].item_name)
+                          : Container(),
+                      items.getItems.length > 2
+                          ? ItemCard(item_name: items.getItems[2].item_name)
+                          : Container(),
+                      CostumedButton(
+                        height: 50,
+                        width: double.infinity,
+                        raduis: 15,
+                        background: Theme.of(context).accentColor,
+                        text: "ALL",
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/items");
+                        },
+                      ),
+                    ]),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),
