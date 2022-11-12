@@ -110,9 +110,24 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       splashColor: Theme.of(context).accentColor,
-                      onTap: () {},
+                      onTap: inputImage,
                       child: SizedBox(
-                        child: Icon(Icons.add, size: 200, color: Colors.white),
+                        child: decoded != null
+                            ? Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                    child: Image.memory(
+                                      decoded!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Icon(Icons.add, size: 200, color: Colors.white),
                       ),
                     ),
                   ),
