@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app/models/exception.model.dart';
 import 'package:image_picker/image_picker.dart';
 
 Future imagePicker() async {
@@ -21,5 +21,7 @@ Future imagePicker() async {
     };
 
     return imageInfo;
-  } catch (e) {}
+  } catch (e) {
+    throw HttpException(e.toString());
+  }
 }
