@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/tools/image.picker.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,21 @@ class _CreateItemPageState extends State<CreateItemPage> {
   final _enteredIdealConsumption = TextEditingController();
   final _form = GlobalKey<FormState>();
   String errMessage = "";
+  String encodedImage = "";
+  Uint8List? decoded;
+
+  Future inputImage() async {
+    try {
+      final imageInfo = await imagePicker();
+      encodedImage = imageInfo["encoded"];
+
+      setState(() {
+        decoded = imageInfo["decoded"];
+      });
+    } on HttpException catch (e) {
+      print(e);
+    }
+  }
 
   Future createItem(name, idealConsumption) async {
     if (!validate()) return;
