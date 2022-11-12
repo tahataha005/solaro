@@ -41,91 +41,97 @@ class _ModalSheetState extends State<ModalSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(horizontal: 50),
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            "Add Solar System",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          if (errMessage != null)
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
             Text(
-              errMessage!,
-              style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
+              "Add Solar System",
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-          Form(
-            key: _form,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextFormField(
-                  controller: _enteredName,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value.toString().isEmpty) {
-                      return "Please enter a name";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Name",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: _enteredConnection,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value.toString().isEmpty) {
-                      return "Please enter a name";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Connection",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              child: Text(
-                "ADD SYSTEM",
-                style: Theme.of(context).textTheme.displaySmall,
+            if (errMessage != null)
+              Text(
+                errMessage!,
+                style: Theme.of(context).textTheme.displayMedium,
+                textAlign: TextAlign.center,
               ),
-              onPressed: () {
-                if (!validate()!) {
-                  return;
-                }
-
-                String? userId =
-                    Provider.of<Auth>(context, listen: false).getUserId;
-
-                if (userId != null) {
-                  addSystem(userId, _enteredName.text, _enteredConnection.text);
-                } else {
-                  Navigator.of(context).popAndPushNamed("/");
-                }
-              },
+            Form(
+              key: _form,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextFormField(
+                    controller: _enteredName,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value.toString().isEmpty) {
+                        return "Please enter a name";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Name",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: _enteredConnection,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value.toString().isEmpty) {
+                        return "Please enter a name";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Connection",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
-        ],
+            Container(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                child: Text(
+                  "ADD SYSTEM",
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                onPressed: () {
+                  if (!validate()!) {
+                    return;
+                  }
+
+                  String? userId =
+                      Provider.of<Auth>(context, listen: false).getUserId;
+
+                  if (userId != null) {
+                    addSystem(
+                        userId, _enteredName.text, _enteredConnection.text);
+                  } else {
+                    Navigator.of(context).popAndPushNamed("/");
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
