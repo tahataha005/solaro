@@ -47,7 +47,15 @@ class _MainPageState extends State<MainPage> {
             ),
             floating: true,
             expandedHeight: 150,
-            flexibleSpace: FlexibleSpaceBar(),
+            flexibleSpace: FlexibleSpaceBar(
+              title: Container(
+                padding: const EdgeInsets.only(top: 90),
+                child: Text(
+                  system.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ),
           ),
         ],
         body: Container(
