@@ -71,6 +71,7 @@ class _ModalSheetState extends State<ModalSheet> {
                   TextFormField(
                     controller: _enteredName,
                     textInputAction: TextInputAction.next,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value.toString().isEmpty) {
                         return "Please enter a name";
@@ -89,6 +90,7 @@ class _ModalSheetState extends State<ModalSheet> {
                   ),
                   TextFormField(
                     controller: _enteredConnection,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value.toString().isEmpty) {
