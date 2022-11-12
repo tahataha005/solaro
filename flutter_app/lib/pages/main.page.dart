@@ -33,6 +33,18 @@ class _MainPageState extends State<MainPage> {
               color: Theme.of(context).accentColor,
             ),
             backgroundColor: Colors.white,
+            title: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Center(
+                child: Container(
+                  width: 180,
+                  child: Image.asset(
+                    "assets/images/Header-Logo.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
             floating: true,
             expandedHeight: 150,
             flexibleSpace: FlexibleSpaceBar(),
