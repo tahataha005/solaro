@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
-import '../tools/image.picker.dart';
 
 class CreateItemPage extends StatefulWidget {
   @override
@@ -18,21 +16,6 @@ class _CreateItemPageState extends State<CreateItemPage> {
   final _enteredIdealConsumption = TextEditingController();
   final _form = GlobalKey<FormState>();
   String errMessage = "";
-  String image = "";
-  Uint8List? decoded;
-
-  Future inputImage() async {
-    try {
-      final imageInfo = await imagePicker();
-      image = imageInfo["encoded"];
-
-      setState(() {
-        decoded = imageInfo["decoded"];
-      });
-    } on HttpException catch (e) {
-      print(e);
-    }
-  }
 
   Future createItem(name, idealConsumption) async {
     if (!validate()) return;
@@ -110,24 +93,9 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       splashColor: Theme.of(context).accentColor,
-                      onTap: inputImage,
+                      onTap: () {},
                       child: SizedBox(
-                        child: decoded != null
-                            ? Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(30),
-                                    ),
-                                    child: Image.memory(
-                                      decoded!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Icon(Icons.add, size: 200, color: Colors.white),
+                        child: Icon(Icons.add, size: 200, color: Colors.white),
                       ),
                     ),
                   ),
