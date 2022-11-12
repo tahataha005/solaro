@@ -12,5 +12,14 @@ Future imagePicker() async {
     Uint8List imageBytes = await inputImage.readAsBytes();
     String encoded = base64Url.encode(imageBytes);
     Uint8List decoded = base64.decode(encoded);
+
+    Map imageInfo = {
+      "inputImage": inputImage,
+      "imageBytes": imageBytes,
+      "encoded": encoded,
+      "decoded": decoded,
+    };
+
+    return imageInfo;
   } catch (e) {}
 }
