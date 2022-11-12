@@ -27,7 +27,17 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
-        headerSliverBuilder: (context, bool innerBoxIsScrolled) => [],
+        headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
+          SliverAppBar(
+            iconTheme: IconThemeData(
+              color: Theme.of(context).accentColor,
+            ),
+            backgroundColor: Colors.white,
+            floating: true,
+            expandedHeight: 150,
+            flexibleSpace: FlexibleSpaceBar(),
+          ),
+        ],
         body: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 20),
