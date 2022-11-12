@@ -18,7 +18,7 @@ class LabeledProgressBar extends StatelessWidget {
       children: [
         Text(
           label + ":",
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         Stack(
           children: [
