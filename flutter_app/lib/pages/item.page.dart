@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
 import '../providers/items.provider.dart';
@@ -12,9 +11,9 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
-    final item_name = ModalRoute.of(context)?.settings.arguments as String;
-    final loaded_item = Provider.of<Items>(context).findByName(item_name);
-    bool status = loaded_item.status;
+    final itemName = ModalRoute.of(context)?.settings.arguments as String;
+    final loadedItem = Provider.of<Items>(context).findByName(itemName);
+    bool status = loadedItem.status;
 
     return Scaffold(
       body: Column(
@@ -87,7 +86,7 @@ class _ItemPageState extends State<ItemPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  loaded_item.item_name,
+                  loadedItem.itemName,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
@@ -133,7 +132,7 @@ class _ItemPageState extends State<ItemPage> {
                       ),
                       child: Center(
                         child: Text(
-                          loaded_item.live_consumption.toString(),
+                          loadedItem.liveConsumption.toString(),
                         ),
                       ),
                     )
@@ -149,7 +148,7 @@ class _ItemPageState extends State<ItemPage> {
                   text: status ? "ON" : "OFF",
                   onPressed: () {
                     setState(() {
-                      loaded_item.toggleStatus();
+                      loadedItem.toggleStatus();
                     });
                   },
                 )
