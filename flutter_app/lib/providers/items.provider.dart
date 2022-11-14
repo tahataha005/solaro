@@ -67,4 +67,21 @@ class Items with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future toggleStatus(userId, systemId, itemId, context) async {
+    final item = _items.firstWhere((item) => item.itemId == itemId);
+
+    final response = await sendRequest(
+      route: "/control",
+      method: "PUT",
+      load: {
+        "user_id": userId,
+        "system_id": systemId,
+        "item_id": itemId,
+      },
+      context: context,
+    );
+    item.status = !item.status;
+    notifyListeners();
+  }
 }
