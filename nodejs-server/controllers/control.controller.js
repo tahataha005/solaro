@@ -60,7 +60,7 @@ const addItem = async (req, res) => {
         await user.save();
 
         //Returning created item
-        res.status(200).json({ added: item });
+        res.status(200).json(system.items[system.items.length - 1]);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
