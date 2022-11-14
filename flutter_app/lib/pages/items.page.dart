@@ -54,7 +54,7 @@ class _ItemsPageState extends State<ItemsPage> {
               ),
               Column(
                 children: items
-                    .map((item) => ItemCard(item_name: item.item_name))
+                    .map((item) => ItemCard(item_name: item.itemName))
                     .toList(),
               ),
             ],
