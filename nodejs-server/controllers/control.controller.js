@@ -156,11 +156,9 @@ const editItem = async (req, res) => {
 
 const controlItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_id, item_id, trigger } = req.body;
+    const { user_id, system_id, item_id } = req.body;
 
     //Assigning status according to request
-    let status = true;
-    trigger == "off" ? (status = false) : (status = status);
 
     try {
         //Getting user by id
@@ -180,7 +178,7 @@ const controlItem = async (req, res) => {
         if (!item) return res.status(404).json({ message: "Item not found" });
 
         //Updating item according to obtained attributes
-        item.status = status;
+        item.status = !item.status;
 
         //Saving changes in user
         await user.save();
