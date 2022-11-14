@@ -127,13 +127,13 @@ class _MainPageState extends State<MainPage> {
                         height: 20,
                       ),
                       items.getItems.length > 0
-                          ? ItemCard(item_name: items.getItems[0].item_name)
+                          ? ItemCard(item_name: items.getItems[0].itemName)
                           : Container(),
                       items.getItems.length > 1
-                          ? ItemCard(item_name: items.getItems[1].item_name)
+                          ? ItemCard(item_name: items.getItems[1].itemName)
                           : Container(),
                       items.getItems.length > 2
-                          ? ItemCard(item_name: items.getItems[2].item_name)
+                          ? ItemCard(item_name: items.getItems[2].itemName)
                           : Container(),
                       CostumedButton(
                         height: 50,
