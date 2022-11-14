@@ -21,10 +21,6 @@ class _SignUpState extends State<SignUp> {
   bool successful = true;
 
   Future submit(email, password, userType, context) async {
-    if (!validated()) {
-      return;
-    }
-
     try {
       setState(() {
         errMessage = null;
