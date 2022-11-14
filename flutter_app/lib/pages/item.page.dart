@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/auth.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
 import '../providers/items.provider.dart';
@@ -14,6 +16,17 @@ class _ItemPageState extends State<ItemPage> {
     final itemName = ModalRoute.of(context)?.settings.arguments as String;
     final loadedItem = Provider.of<Items>(context).findByName(itemName);
     bool status = loadedItem.status;
+    Future toggleItem(String itemId) async {
+      final userId = Provider.of<Auth>(context, listen: false).getUserId;
+      final systemId =
+          Provider.of<User>(context, listen: false).getCurrentSystemId;
+
+      final response = await Provider.of<Items>(context, listen: false)
+          .toggleStatus(userId, systemId, itemId, context);
+      setState(() {
+        status;
+      });
+    }
 
     return Scaffold(
       body: Column(
@@ -110,7 +123,7 @@ class _ItemPageState extends State<ItemPage> {
                       child: Center(
                         child: Text(
                           // loaded_item.ideal_consumption.toString(),
-                          "5",
+                          loadedItem.idealConsumption.toString(),
                         ),
                       ),
                     )
@@ -147,9 +160,7 @@ class _ItemPageState extends State<ItemPage> {
                       : Theme.of(context).primaryColor,
                   text: status ? "ON" : "OFF",
                   onPressed: () {
-                    setState(() {
-                      loadedItem.toggleStatus();
-                    });
+                    toggleItem(loadedItem.itemId);
                   },
                 )
               ],
