@@ -11,7 +11,7 @@ class Items with ChangeNotifier {
   }
 
   Item findByName(name) {
-    return _items.firstWhere((item) => item.item_name == name);
+    return _items.firstWhere((item) => item.itemName == name);
   }
 
   Future addItem(userId, name, idealConsumption, systemId, context) async {
@@ -33,9 +33,10 @@ class Items with ChangeNotifier {
       }
 
       Item newItem = Item(
-        item_name: name,
-        ideal_consumption: idealConsumption,
-        live_consumption: 0,
+        itemId: response["_id"],
+        itemName: name,
+        idealConsumption: idealConsumption,
+        liveConsumption: 0,
         status: false,
       );
 
@@ -55,9 +56,10 @@ class Items with ChangeNotifier {
   void loadItems(List items) {
     for (var item in items) {
       Item newItem = Item(
-        item_name: item["name"],
-        ideal_consumption: item["ideal_consumption"].toDouble(),
-        live_consumption: item["live_consumption"].toDouble(),
+        itemId: item["_id"],
+        itemName: item["name"],
+        idealConsumption: item["ideal_consumption"].toDouble(),
+        liveConsumption: item["live_consumption"].toDouble(),
         status: item["status"],
       );
 
