@@ -56,6 +56,7 @@ class _LoginState extends State<Login> {
                       TextFormField(
                         controller: enteredEmail,
                         textInputAction: TextInputAction.next,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Please enter field";
@@ -81,6 +82,7 @@ class _LoginState extends State<Login> {
                       TextFormField(
                         controller: enteredPassword,
                         textInputAction: TextInputAction.next,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Please enter field";
