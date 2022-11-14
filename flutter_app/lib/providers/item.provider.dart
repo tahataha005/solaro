@@ -15,9 +15,4 @@ class Item with ChangeNotifier {
     required this.liveConsumption,
     required this.status,
   });
-
-  void toggleStatus() {
-    status = !status;
-    notifyListeners();
-  }
 }
