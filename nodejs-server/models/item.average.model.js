@@ -14,3 +14,7 @@ const itemAveragesSchema = mongoose.Schema({
         required: "average consumption required",
     },
 });
+
+const ItemAverage = mongoose.model("ItemAverage", itemAveragesSchema);
+
+module.exports = ItemAverage;
