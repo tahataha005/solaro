@@ -56,11 +56,13 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget systemsBuilder(System system) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         Provider.of<User>(context, listen: false).setCurrentSystemId(system.id);
         Provider.of<Items>(context, listen: false).emptyItems();
         Provider.of<Items>(context, listen: false).loadItems(system.items);
-        Navigator.pushNamed(context, "/main", arguments: system);
+        await getweekly(system.id);
+        Navigator.pushNamed(context, "/main",
+            arguments: {"system": system, "stats": stats});
       },
       splashColor: Theme.of(context).accentColor,
       child: Container(
