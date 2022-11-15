@@ -7,11 +7,11 @@ const solarHistorySchema = mongoose.Schema({
         required: "system_id is required",
     },
     charging: {
-        type: String,
+        type: Number,
         required: "charging is required",
     },
     consumption: {
-        type: String,
+        type: Number,
         required: "consumption is required",
     },
     timestamp: {
