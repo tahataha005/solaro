@@ -15,3 +15,7 @@ const itemsHistorySchema = mongoose.Schema({
         default: Date.now,
     },
 });
+
+const ItemHistory = mongoose.model("ItemHistory", itemsHistorySchema);
+
+module.exports = ItemHistory;
