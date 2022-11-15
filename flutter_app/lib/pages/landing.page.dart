@@ -17,7 +17,7 @@ class _LandingPageState extends State<LandingPage> {
 
   Future getweekly(id) async {
     final response = await sendRequest(
-      route: "/data/avg",
+      route: "/data/system/avg",
       context: context,
       method: "POST",
       load: {
@@ -58,9 +58,11 @@ class _LandingPageState extends State<LandingPage> {
     return InkWell(
       onTap: () async {
         Provider.of<User>(context, listen: false).setCurrentSystemId(system.id);
+        final systemId =
+            Provider.of<User>(context, listen: false).getCurrentSystemId;
         Provider.of<Items>(context, listen: false).emptyItems();
         Provider.of<Items>(context, listen: false).loadItems(system.items);
-        await getweekly(system.id);
+        await getweekly(systemId);
         Navigator.pushNamed(context, "/main",
             arguments: {"system": system, "stats": stats});
       },
