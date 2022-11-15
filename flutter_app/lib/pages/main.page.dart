@@ -111,7 +111,18 @@ class _MainPageState extends State<MainPage> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text("Bar Graph"),
+                      Container(
+                        width: 500,
+                        height: 500,
+                        child: ColumnChart(data: stats),
+                      ),
+                      CostumedButton(
+                        height: 60,
+                        width: double.infinity,
+                        raduis: 15,
+                        background: Theme.of(context).accentColor,
+                        text: "Details",
+                      )
                     ],
                   ),
                 ),
