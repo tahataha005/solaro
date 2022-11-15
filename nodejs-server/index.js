@@ -9,12 +9,14 @@ const address = ip.address();
 const app = express();
 app.use(express.json());
 
+require("./config/socket.config")(app, address);
+
 //Listening on server port and logging status
-app.listen(process.env.PORT, address, err => {
+app.listen(process.env.SERVER_PORT, address, err => {
     if (err) console.log(err);
     else
         console.log(
-            `Server is running on PORT ${process.env.PORT} / IP Address ${address}`
+            `Server is running on PORT ${process.env.SERVER_PORT} / IP Address ${address}`
         );
 });
 
