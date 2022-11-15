@@ -11,7 +11,6 @@ const itemsHistorySchema = mongoose.Schema({
     },
     timestamp: {
         type: Date,
-        required: "date is required",
         default: Date.now,
     },
 });
