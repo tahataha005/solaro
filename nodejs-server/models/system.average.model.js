@@ -14,3 +14,7 @@ const systemAveragesSchema = mongoose.Schema({
         required: "average consumption required",
     },
 });
+
+const SystemAverage = mongoose.model("SystemAverage", systemAveragesSchema);
+
+module.exports = SystemAverage;
