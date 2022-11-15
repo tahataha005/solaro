@@ -70,10 +70,10 @@ const insertSystemData = async (req, res) => {
 const getSystemData = async (req, res) => {
     try {
         //Destructuring req data
-        const { item_id } = req.params;
+        const { system_id } = req.params;
 
         //Getting documents accoring to item id
-        const retrieved = await ItemHistory.find({ item_id });
+        const retrieved = await ItemHistory.find({ system_id });
 
         //Returning retrieved data
         res.status(200).json(retrieved);
