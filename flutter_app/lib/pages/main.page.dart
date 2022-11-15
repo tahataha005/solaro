@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
+import 'package:flutter_app/widgets/column.chart.dart';
 import 'package:flutter_app/widgets/content.card.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
@@ -15,15 +16,16 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    System system = ModalRoute.of(context)?.settings.arguments as System;
-    final List items = system.items;
+    final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    System system = arguments["system"] as System;
+    List stats = arguments["stats"];
 
     double maxConsumption = 7;
+    final List items = system.items;
     double system_charging = system.charging;
     double system_consumption = system.consumption;
     double currentConsumption = system_consumption / 7;
     double currentCharging = system_charging / 7;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
