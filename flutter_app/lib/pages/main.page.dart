@@ -112,17 +112,10 @@ class _MainPageState extends State<MainPage> {
                         height: 20,
                       ),
                       Container(
-                        width: 500,
-                        height: 500,
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.8,
                         child: ColumnChart(data: stats),
                       ),
-                      CostumedButton(
-                        height: 60,
-                        width: double.infinity,
-                        raduis: 15,
-                        background: Theme.of(context).accentColor,
-                        text: "Details",
-                      )
                     ],
                   ),
                 ),
