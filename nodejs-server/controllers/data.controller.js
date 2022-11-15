@@ -13,7 +13,6 @@ const insertItemData = async (req, res) => {
         //Assigning document data
         record.item_id = item_id;
         record.consumption = consumption;
-        record.timestamp = time;
 
         //Saving new document
         record.save();
@@ -54,7 +53,6 @@ const insertSystemData = async (req, res) => {
         record.system_id = system_id;
         record.charging = charging;
         record.consumption = consumption;
-        record.timestamp = time;
 
         //Saving new document
         record.save();
@@ -73,7 +71,7 @@ const getSystemData = async (req, res) => {
         const { system_id } = req.params;
 
         //Getting documents accoring to item id
-        const retrieved = await ItemHistory.find({ system_id });
+        const retrieved = await SolarHistory.find({ system_id });
 
         //Returning retrieved data
         res.status(200).json(retrieved);
