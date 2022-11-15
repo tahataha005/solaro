@@ -136,7 +136,7 @@ const solarDailyAvg = async (req, res) => {
             },
         ]).exec();
 
-        //Assigning day
+        //Assigning week day
         const day = weekday[currentDate.getDay()];
 
         //Creating a new record
@@ -189,6 +189,32 @@ const itemDailyAvg = async (req, res) => {
 
     //Destructuring req parameters
     const { item_id } = req.params;
+
+    try {
+        //Getting data and calculating average automatically
+        const data = await ItemHistory.aggregate([
+            {
+                //Conditions
+                $match: {
+                    timestamp: { $gte: previousDate, $lte: currentDate },
+                },
+            },
+            {
+                //Calculating average consumption automatically
+                $group: {
+                    _id: {
+                        item_id: item_id,
+                    },
+                    avg: { $avg: "$consumption" },
+                },
+            },
+        ]).exec();
+
+        //Assigning week day
+        const day = weekday[currentDate.getDay()];
+    } catch (error) {
+        res.status(400).json(error);
+    }
 };
 
 module.exports = {
