@@ -3,6 +3,7 @@ import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/tools/request.dart';
 import 'package:flutter_app/widgets/modal.sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,17 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  Future getweekly(id) async {
+    final response = await sendRequest(
+      route: "/data/avg",
+      context: context,
+      method: "POST",
+      load: {
+        "system_id": id,
+      },
+    );
+  }
+
   String stringBuilder(List items) {
     if (items.isEmpty) {
       return "No items yet";
