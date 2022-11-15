@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//Creating a schema for solar history collection
 const solarHistorySchema = mongoose.Schema({
     system_id: {
         type: String,
@@ -19,3 +20,8 @@ const solarHistorySchema = mongoose.Schema({
         default: Date.now,
     },
 });
+
+//Creating solar history model using schema
+const solarHistory = mongoose.model("solarHistory", solarHistorySchema);
+
+module.exports = solarHistory;
