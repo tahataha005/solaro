@@ -1,0 +1,21 @@
+const mongoose = require("mongoose");
+
+const solarHistorySchema = mongoose.Schema({
+    system_id: {
+        type: String,
+        required: "system_id is required",
+    },
+    charging: {
+        type: String,
+        required: "charging is required",
+    },
+    consumption: {
+        type: String,
+        required: "consumption is required",
+    },
+    timestamp: {
+        type: Date,
+        required: "time is required",
+        default: Date.now,
+    },
+});
