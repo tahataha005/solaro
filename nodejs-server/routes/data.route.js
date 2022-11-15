@@ -4,9 +4,10 @@ const Router = require("express");
 const router = Router();
 
 //Importing functions from controllers
-const { insertData } = require("../controllers/data.controller");
+const { insertData, getData } = require("../controllers/data.controller");
 
 //Creating routes
 router.post("/", insertData);
+router.get("/:item_id", getData);
 
 module.exports = router;
