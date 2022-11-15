@@ -5,15 +5,15 @@ const SolarHistory = require("../models/solar.history.model.js");
 const insertItemData = async (req, res) => {
     try {
         //Destructuring req data
-        const { item_id } = req.body;
+        const { item_id, consumption, time } = req.body;
 
         //Creating a new document
         const record = new ItemHistory();
 
         //Assigning document data
         record.item_id = item_id;
-        record.consumption = 5;
-        record.timestamp = "12-8-2022";
+        record.consumption = consumption;
+        record.timestamp = time;
 
         //Saving new document
         record.save();
