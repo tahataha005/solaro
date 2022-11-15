@@ -13,6 +13,8 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  List stats = [];
+
   Future getweekly(id) async {
     final response = await sendRequest(
       route: "/data/avg",
@@ -22,6 +24,10 @@ class _LandingPageState extends State<LandingPage> {
         "system_id": id,
       },
     );
+
+    setState(() {
+      stats = response;
+    });
   }
 
   String stringBuilder(List items) {
