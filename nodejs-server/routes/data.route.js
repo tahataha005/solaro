@@ -9,11 +9,12 @@ const {
     insertSystemData,
     getItemData,
     getSystemData,
+    getItemAvg,
 } = require("../controllers/data.controller");
 
 //Creating routes
 router.post("/item", insertItemData);
-router.post("/system", insertSystemData);
+router.post("/item/avg", getItemAvg);
 router.get("/item/:item_id", getItemData);
 router.get("/system/:system_id", getSystemData);
 
