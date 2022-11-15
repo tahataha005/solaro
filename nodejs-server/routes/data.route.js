@@ -15,6 +15,6 @@ const {
 router.post("/item", insertItemData);
 router.post("/system", insertSystemData);
 router.get("/item/:item_id", getItemData);
-router.get("/system/:system_id", getItemData);
+router.get("/system/:system_id", getSystemData);
 
 module.exports = router;
