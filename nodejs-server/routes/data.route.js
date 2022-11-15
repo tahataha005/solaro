@@ -9,6 +9,7 @@ const {
     insertSystemData,
     getItemData,
     getSystemData,
+    itemDailyAvg,
     getItemAvg,
 } = require("../controllers/data.controller");
 
@@ -16,6 +17,7 @@ const {
 router.post("/item", insertItemData);
 router.post("/item/avg", getItemAvg);
 router.get("/item/:item_id", getItemData);
+router.get("/item/avg/:item_id", itemDailyAvg);
 router.get("/system/:system_id", getSystemData);
 
 module.exports = router;
