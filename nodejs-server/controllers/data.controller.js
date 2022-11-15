@@ -115,6 +115,33 @@ const solarDailyAvg = async (req, res) => {
 
     //Destructuring req parameters
     const { system_id } = req.params;
+
+    try {
+        //Getting data and calculating average automatically
+        const data = await SolarHistory.aggregate([
+            {
+                //Conditions
+                $match: {
+                    timestamp: { $gte: previousDate, $lte: currentDate },
+                },
+            },
+            {
+                //Calculating average
+                $group: {
+                    _id: {
+                        system_id: system_id,
+                    },
+                    avg: { $avg: "$consumption" },
+                },
+            },
+        ]).exec();
+
+        const day = weekday[currentDate.getDay()];
+
+        const record = new SolarAverage();
+    } catch (error) {
+        res.status(400).json(error);
+    }
 };
 
 module.exports = {
