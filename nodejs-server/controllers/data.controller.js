@@ -41,4 +41,28 @@ const getItemData = async (req, res) => {
     }
 };
 
+const insertSystemData = async (req, res) => {
+    //Destructuring req data
+    const { system_id, charging, consumption, time } = req.body;
+
+    try {
+        //Creating a new document
+        const record = new SolarHistory();
+
+        //Assigning document data
+        record.system_id = system_id;
+        record.charging = charging;
+        record.consumption = consumption;
+        record.timestamp = time;
+
+        //Saving new document
+        record.save();
+
+        //Returning saved record
+        res.status(200).json(record);
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+};
+
 module.exports = { insertItemData, getItemData };
