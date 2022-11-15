@@ -1,7 +1,8 @@
-const ItemHistory = require("../models/items.history.model");
+const ItemHistory = require("../models/items.history.model.js");
+const SolarHistory = require("../models/solar.history.model.js");
 
 //Insert data
-const insertData = async (req, res) => {
+const insertItemData = async (req, res) => {
     try {
         //Destructuring req data
         const { item_id } = req.body;
@@ -25,7 +26,7 @@ const insertData = async (req, res) => {
 };
 
 //Get history according to data
-const getData = async (req, res) => {
+const getItemData = async (req, res) => {
     try {
         //Destructuring req data
         const { item_id } = req.params;
@@ -40,4 +41,4 @@ const getData = async (req, res) => {
     }
 };
 
-module.exports = { insertData, getData };
+module.exports = { insertItemData, getItemData };
