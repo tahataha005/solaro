@@ -20,9 +20,13 @@ class ColumnChart extends StatelessWidget {
           tooltipBehavior: TooltipBehavior(enable: true),
           series: [
             ColumnSeries(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5), topRight: Radius.circular(5)),
               dataSource: data,
               xValueMapper: (data, index) => data["day"]["day"],
               yValueMapper: (data, index) => data["avg_consumption"],
+              name: 'Consumption',
+              color: Theme.of(context).primaryColor,
             )
           ],
         ),
