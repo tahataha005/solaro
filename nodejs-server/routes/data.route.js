@@ -6,11 +6,13 @@ const router = Router();
 //Importing functions from controllers
 const {
     insertItemData,
+    insertSystemData,
     getItemData,
 } = require("../controllers/data.controller");
 
 //Creating routes
-router.post("/", insertItemData);
-router.get("/:item_id", getItemData);
+router.post("/item", insertItemData);
+router.post("/system", insertSystemData);
+router.get("/item/:item_id", getItemData);
 
 module.exports = router;
