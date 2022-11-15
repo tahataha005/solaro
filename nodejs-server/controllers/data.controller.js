@@ -103,7 +103,7 @@ const getSolarAvg = async (req, res) => {
     }
 };
 
-//Calculating average of past day
+//Calculating system average consumption of past day
 const solarDailyAvg = async (req, res) => {
     //Array of week days to assign later
     const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -180,6 +180,17 @@ const getItemAvg = async (req, res) => {
     }
 };
 
+//Calculating item average consumption of past day
+const itemDailyAvg = async (req, res) => {
+    //Setting range to calculate average on
+    const currentDate = new Date();
+    const previousDate = new Date(currentDate.getTime());
+    previousDate.setDate(currentDate.getDate() - 1);
+
+    //Destructuring req parameters
+    const { item_id } = req.params;
+};
+
 module.exports = {
     insertItemData,
     getItemData,
@@ -187,4 +198,6 @@ module.exports = {
     getSystemData,
     getSolarAvg,
     solarDailyAvg,
+    getItemAvg,
+    itemDailyAvg,
 };
