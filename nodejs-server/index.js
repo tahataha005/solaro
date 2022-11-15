@@ -33,3 +33,6 @@ app.use("/read", authMiddleware, readRoutes);
 
 const controlRoutes = require("./routes/control.route.js");
 app.use("/control", authMiddleware, controllerMiddleware, controlRoutes);
+
+const dataRoutes = require("./routes/data.route.js");
+app.use("/data", authMiddleware, dataRoutes);
