@@ -157,10 +157,34 @@ const solarDailyAvg = async (req, res) => {
     }
 };
 
+//Get item average last week
+const getItemAvg = async (req, res) => {
+    // const end = new Date();
+    // const start = new Date(end.getTime());
+    // start.setDate(end.getDate() - 7);
+
+    //Destructuring req body
+    const { item_id } = req.body;
+
+    try {
+        //Getting data by item id and date
+        const data = await ItemAverage.find({
+            // day: { day: "wed" },
+            item_id: item_id,
+        });
+
+        //Returning data
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 module.exports = {
     insertItemData,
     getItemData,
     insertSystemData,
     getSystemData,
     getSolarAvg,
+    solarDailyAvg,
 };
