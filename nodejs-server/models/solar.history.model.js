@@ -22,6 +22,6 @@ const solarHistorySchema = mongoose.Schema({
 });
 
 //Creating solar history model using schema
-const solarHistory = mongoose.model("solarHistory", solarHistorySchema);
+const SolarHistory = mongoose.model("solarHistory", solarHistorySchema);
 
-module.exports = solarHistory;
+module.exports = SolarHistory;
