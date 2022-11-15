@@ -126,7 +126,7 @@ const solarDailyAvg = async (req, res) => {
                 },
             },
             {
-                //Calculating average
+                //Calculating average consumption
                 $group: {
                     _id: {
                         system_id: system_id,
@@ -136,9 +136,22 @@ const solarDailyAvg = async (req, res) => {
             },
         ]).exec();
 
+        //Assigning day
         const day = weekday[currentDate.getDay()];
 
+        //Creating a new record
         const record = new SolarAverage();
+
+        //Assigning record values
+        record.system_id = system_id;
+        record.day = { day, date: currentDate };
+        record.avg_consumption = data[0].avg;
+
+        //Saving new record
+        record.save();
+
+        //Returning created record
+        res.status(200).json(record);
     } catch (error) {
         res.status(400).json(error);
     }
