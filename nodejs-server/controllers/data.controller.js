@@ -212,6 +212,20 @@ const itemDailyAvg = async (req, res) => {
 
         //Assigning week day
         const day = weekday[currentDate.getDay()];
+
+        //Creating a new record
+        const record = new ItemAverage();
+
+        //Assigning record values
+        record.item_id = item_id;
+        record.day = { day, date: currentDate };
+        record.avg_consumption = data[0].avg;
+
+        //Saving new record
+        record.save();
+
+        //Returing created record
+        res.status(200).json(record);
     } catch (error) {
         res.status(400).json(error);
     }
