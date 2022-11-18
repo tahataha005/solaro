@@ -6,4 +6,14 @@ const SolarHistory = require("../models/solar.history.model");
 
 const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-cron.schedule("0 0 0 * * *", () => {});
+const solarAvg = async () => {
+    const ids = await SolarHistory.find().distinct("system_id");
+
+    const currentDate = new Date();
+    const previousDate = new Date(currentDate.getTime());
+    previousDate.setDate(currentDate.getDate() - 1);
+};
+
+cron.schedule("0 0 0 * * *", () => {
+    itemAvg();
+});
