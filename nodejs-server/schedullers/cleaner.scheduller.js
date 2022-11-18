@@ -26,4 +26,11 @@ const cleanSolarData = async () => {
     }
 };
 
+const cleanItemData = async () => {
+    try {
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 cron.schedule("0 0 0 * * *", () => {});
