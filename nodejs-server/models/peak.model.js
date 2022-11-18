@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const peakSchema = mongoose.Schema({
     item: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Item",
+        required: true,
     },
     peak: {
         type: Number,
