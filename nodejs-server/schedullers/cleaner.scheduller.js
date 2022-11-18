@@ -16,6 +16,11 @@ const cleanSolarData = async () => {
                 },
             },
         ]).exec();
+
+        //Deleting retriveed records
+        data.forEach(async record => {
+            await SolarHistory.findByIdAndDelete(record._id);
+        });
     } catch (error) {
         console.log(error);
     }
