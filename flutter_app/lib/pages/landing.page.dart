@@ -125,6 +125,18 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     List<System> systems = Provider.of<Systems>(context).getSystems;
+    Future refresh() async {
+      final id = Provider.of<Auth>(context, listen: false).getUserId;
+      final response = await sendRequest(route: "/read/$id", context: context);
+      print("response");
+      print(response["system"]);
+      await Provider.of<Systems>(context, listen: false)
+          .loadSystems(response["system"]);
+      setState(() {
+        systems = Provider.of<Systems>(context, listen: false).getSystems;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
