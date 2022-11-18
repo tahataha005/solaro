@@ -47,4 +47,8 @@ const cleanItemData = async () => {
     }
 };
 
-cron.schedule("0 0 0 * * *", () => {});
+//Scheduller at midnight
+cron.schedule("0 0 0 * * *", () => {
+    cleanSolarData();
+    cleanItemData();
+});
