@@ -36,16 +36,28 @@ const solarAvg = async () => {
                     },
                 },
             ]).exec();
+
+            //Assigning week day
+            const day = weekday[currentDate.getDay()];
+
+            //Creating a new record
+            const record = new SolarAverage();
+
+            //Assigning record values
+            record.system_id = system_id;
+            record.day = { day, date: currentDate };
+            record.avg_consumption = data[0].avg;
+
+            //Saving new record
+            record.save();
+
+            console.log(record);
         } catch (error) {
             console.log(error);
         }
     });
 };
-const itemAvg = async () => {
-    const ids = await ItemHistory.find().distinct("item_id");
-    console.log(ids[0]);
-};
 
 cron.schedule("0 0 0 * * *", () => {
-    itemAvg();
+    solarAvg();
 });
