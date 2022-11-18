@@ -14,6 +14,11 @@ const socketInit = (app, address) => {
             console.log(message);
         });
 
+        socket.on("reading 6377459e06feadc2139ddc2c", reading => {
+            console.log(reading);
+            io.emit(`live ${reading.item_id}`, reading);
+        });
+
         //Reading system live consumption
         socket.on("reading 6377458a06feadc2139ddc23", message => {
             console.log(message);
