@@ -1,6 +1,9 @@
 const express = require("express");
 require("dotenv").config();
 require("./config/db.config.js");
+require("./schedullers/average.scheduller");
+require("./schedullers/cleaner.scheduller");
+require("./schedullers/save.data.scheduller");
 
 const ip = require("ip");
 const address = ip.address();
