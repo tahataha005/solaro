@@ -7,12 +7,14 @@ const SolarHistory = require("../models/solar.history.model");
 const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const solarAvg = async () => {
+    //Getting distinct ids from solar history
     const ids = await SolarHistory.find().distinct("system_id");
 
     const currentDate = new Date();
     const previousDate = new Date(currentDate.getTime());
     previousDate.setDate(currentDate.getDate() - 1);
 
+    //Mapping on each id
     ids.forEach(async id => {
         //Assigning system_id
         const system_id = id;
@@ -59,14 +61,16 @@ const solarAvg = async () => {
 };
 
 const itemAvg = async () => {
+    //Getting distinct ids from solar history
     const ids = await ItemHistory.find().distinct("item_id");
-    console.log(ids[0]);
 
     const currentDate = new Date();
     const previousDate = new Date(currentDate.getTime());
     previousDate.setDate(currentDate.getDate() - 1);
 
+    //Mapping on each id
     ids.forEach(async id => {
+        //Assigning item id
         const item_id = id;
 
         try {
@@ -88,7 +92,20 @@ const itemAvg = async () => {
                     },
                 },
             ]).exec();
-            console.log(data);
+
+            //Assigning week day
+            const day = weekday[currentDate.getDay()];
+
+            //Creating a new record
+            const record = new ItemAverage();
+
+            //Assigning record values
+            record.item_id = item_id;
+            record.day = { day, date: currentDate };
+            record.avg_consumption = data[0].avg;
+
+            //Saving record
+            record.save();
         } catch (error) {
             console.log(error);
         }
