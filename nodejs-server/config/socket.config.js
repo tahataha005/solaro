@@ -7,6 +7,11 @@ const socketInit = (app, address) => {
         console.log("user server started");
         socket.emit("message", "connected to server");
 
+        //Acknowledging flutter connection
+        socket.on("flutter", message => {
+            console.log(message);
+        });
+
         //On socket disconnect
         socket.on("disconnect", function () {
             console.log("user disconnected");
