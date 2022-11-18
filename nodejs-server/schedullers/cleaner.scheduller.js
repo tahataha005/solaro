@@ -7,7 +7,7 @@ start.setDate(start.getDate() - 7);
 
 const cleanSolarData = async () => {
     try {
-        //Getting data and calculating average automatically
+        //Getting data before one week
         const data = await SolarHistory.aggregate([
             {
                 //Conditions
@@ -28,7 +28,7 @@ const cleanSolarData = async () => {
 
 const cleanItemData = async () => {
     try {
-        //Getting data before one week
+        //Getting data and calculating average automatically
         const data = await ItemHistory.aggregate([
             {
                 //Conditions
@@ -37,6 +37,11 @@ const cleanItemData = async () => {
                 },
             },
         ]).exec();
+
+        //Deleting retriveed records
+        data.forEach(async record => {
+            await ItemHistory.findByIdAndDelete(record._id);
+        });
     } catch (error) {
         console.log(error);
     }
