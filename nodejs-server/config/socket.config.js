@@ -1,3 +1,5 @@
+const { saveDataScheduller } = require("../schedullers/save.data.scheduller");
+
 const socketInit = (app, address) => {
     const http = require("http").Server(app);
     const io = require("socket.io")(http);
@@ -10,6 +12,12 @@ const socketInit = (app, address) => {
         //Acknowledging flutter connection
         socket.on("flutter", message => {
             console.log(message);
+        });
+
+        //Reading system live consumption
+        socket.on("reading 6377458a06feadc2139ddc23", message => {
+            console.log(message);
+            io.emit(`live ${message.system_id}`, message);
         });
 
         //On socket disconnect
