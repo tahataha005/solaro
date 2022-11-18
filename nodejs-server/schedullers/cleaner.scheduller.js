@@ -28,6 +28,15 @@ const cleanSolarData = async () => {
 
 const cleanItemData = async () => {
     try {
+        //Getting data before one week
+        const data = await ItemHistory.aggregate([
+            {
+                //Conditions
+                $match: {
+                    timestamp: { $lt: start },
+                },
+            },
+        ]).exec();
     } catch (error) {
         console.log(error);
     }
