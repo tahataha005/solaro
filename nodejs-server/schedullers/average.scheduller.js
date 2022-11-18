@@ -6,13 +6,13 @@ const SolarHistory = require("../models/solar.history.model");
 
 const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+const currentDate = new Date();
+const previousDate = new Date(currentDate.getTime());
+previousDate.setDate(currentDate.getDate() - 1);
+
 const solarAvg = async () => {
     //Getting distinct ids from solar history
     const ids = await SolarHistory.find().distinct("system_id");
-
-    const currentDate = new Date();
-    const previousDate = new Date(currentDate.getTime());
-    previousDate.setDate(currentDate.getDate() - 1);
 
     //Mapping on each id
     ids.forEach(async id => {
@@ -64,10 +64,6 @@ const itemAvg = async () => {
     //Getting distinct ids from solar history
     const ids = await ItemHistory.find().distinct("item_id");
 
-    const currentDate = new Date();
-    const previousDate = new Date(currentDate.getTime());
-    previousDate.setDate(currentDate.getDate() - 1);
-
     //Mapping on each id
     ids.forEach(async id => {
         //Assigning item id
@@ -110,9 +106,9 @@ const itemAvg = async () => {
             console.log(error);
         }
     });
-    //Destructuring
 };
 
 cron.schedule("0 0 0 * * *", () => {
     solarAvg();
+    itemAvg();
 });
