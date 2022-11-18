@@ -58,6 +58,15 @@ const solarAvg = async () => {
     });
 };
 
+const itemAvg = async () => {
+    const ids = await ItemHistory.find().distinct("item_id");
+    console.log(ids[0]);
+
+    const currentDate = new Date();
+    const previousDate = new Date(currentDate.getTime());
+    previousDate.setDate(currentDate.getDate() - 1);
+};
+
 cron.schedule("0 0 0 * * *", () => {
     solarAvg();
 });
