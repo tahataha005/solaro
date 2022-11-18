@@ -65,6 +65,35 @@ const itemAvg = async () => {
     const currentDate = new Date();
     const previousDate = new Date(currentDate.getTime());
     previousDate.setDate(currentDate.getDate() - 1);
+
+    ids.forEach(async id => {
+        const item_id = id;
+
+        try {
+            //Getting data and calculating average automatically
+            const data = await ItemHistory.aggregate([
+                {
+                    //Conditions
+                    $match: {
+                        timestamp: { $gte: previousDate, $lte: currentDate },
+                    },
+                },
+                {
+                    //Calculating average consumption
+                    $group: {
+                        _id: {
+                            system_id: item_id,
+                        },
+                        avg: { $avg: "$consumption" },
+                    },
+                },
+            ]).exec();
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    });
+    //Destructuring
 };
 
 cron.schedule("0 0 0 * * *", () => {
