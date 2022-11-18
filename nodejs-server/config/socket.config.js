@@ -17,6 +17,7 @@ const socketInit = (app, address) => {
         socket.on("reading 6377459e06feadc2139ddc2c", reading => {
             console.log(reading);
             io.emit(`live ${reading.item_id}`, reading);
+            saveDataScheduller(reading);
         });
 
         //Reading system live consumption
