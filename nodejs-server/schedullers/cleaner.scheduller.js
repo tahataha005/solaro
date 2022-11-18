@@ -7,6 +7,15 @@ start.setDate(start.getDate() - 7);
 
 const cleanSolarData = async () => {
     try {
+        //Getting data and calculating average automatically
+        const data = await SolarHistory.aggregate([
+            {
+                //Conditions
+                $match: {
+                    timestamp: { $lt: start },
+                },
+            },
+        ]).exec();
     } catch (error) {
         console.log(error);
     }
