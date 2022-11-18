@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
@@ -167,10 +168,20 @@ class _LandingPageState extends State<LandingPage> {
           },
         ),
       ),
-      body: ListView(
-        children: systems.map((system) {
-          return systemsBuilder(system);
-        }).toList(),
+      body: RefreshIndicator(
+        child: ListView(
+          physics: AlwaysScrollableScrollPhysics(),
+          children: systems.map((system) {
+            return systemsBuilder(system);
+          }).toList(),
+        ),
+        onRefresh: () {
+          return Future.delayed(Duration(seconds: 1), () {
+            setState(() {
+              refresh();
+            });
+          });
+        },
       ),
     );
   }
