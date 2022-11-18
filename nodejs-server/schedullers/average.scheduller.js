@@ -12,6 +12,38 @@ const solarAvg = async () => {
     const currentDate = new Date();
     const previousDate = new Date(currentDate.getTime());
     previousDate.setDate(currentDate.getDate() - 1);
+
+    ids.forEach(async id => {
+        //Assigning system_id
+        const system_id = id;
+
+        try {
+            //Getting data and calculating average automatically
+            const data = await SolarHistory.aggregate([
+                {
+                    //Conditions
+                    $match: {
+                        timestamp: { $gte: previousDate, $lte: currentDate },
+                    },
+                },
+                {
+                    //Calculating average consumption
+                    $group: {
+                        _id: {
+                            system_id: system_id,
+                        },
+                        avg: { $avg: "$consumption" },
+                    },
+                },
+            ]).exec();
+        } catch (error) {
+            console.log(error);
+        }
+    });
+};
+const itemAvg = async () => {
+    const ids = await ItemHistory.find().distinct("item_id");
+    console.log(ids[0]);
 };
 
 cron.schedule("0 0 0 * * *", () => {
