@@ -30,9 +30,11 @@ class ItemCard extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Image.asset(
-                "assets/images/Logo.png",
-                fit: BoxFit.cover,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "http://192.168.44.106:8000/static/${item_name}.png"))),
               ),
             ),
           ),
@@ -49,7 +51,7 @@ class ItemCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   CostumedButton(
-                    height: 50,
+                    height: 40,
                     width: double.infinity,
                     raduis: 15,
                     background: Theme.of(context).primaryColor,
