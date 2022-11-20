@@ -44,7 +44,7 @@
 
 | Main                                                                                           | View Item                                                                                                |
 | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| ![Main](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Home-page.svg) | ![View Item](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/View-item-page.svg) |
+| ![Main](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Home-page.svg) | ![View Item](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Item-view-page.svg) |
 
 <img src="./assets/titles/title5.svg"/>
 
