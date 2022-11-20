@@ -35,6 +35,12 @@ class _MainPageState extends State<MainPage> {
     double currentConsumption = system.consumption / 10;
     double currentCharging = system.charging / 10;
 
+    @override
+    void dispose() {
+      print("object111");
+      Socket.socket.off("live ${system.id}");
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
@@ -137,6 +143,7 @@ class _MainPageState extends State<MainPage> {
                         onPressed: () {
                           Navigator.of(context).pushNamed("/details");
                           Socket.socket.off("live ${system.id}");
+                          dispose();
                         },
                       )
                     ],
