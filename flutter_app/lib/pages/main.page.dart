@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import '../config/socket.config.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/widgets/column.chart.dart';
@@ -24,34 +24,17 @@ class _MainPageState extends State<MainPage> {
     double maxConsumption = 7;
     final List items = system.items;
 
-    void connect() {
-      IO.Socket socket = IO.io("http://192.168.44.106:3000", {
-        "transports": ["websocket"],
-        "autoConnect": true,
+    Socket.socket.on("live ${system.id}", (reading) {
+      print(reading);
+      setState(() {
+        system.consumption = reading["consumption"];
+        system.charging = reading["charging"];
       });
-
-      void connect() {
-        socket.onConnect(
-          (_) => print("Successful"),
-        );
-      }
-
-      socket.on("live ${system.id}", (reading) {
-        print(reading);
-        setState(() {
-          system.consumption = reading["consumption"];
-          system.charging = reading["charging"];
-        });
-      });
-
-      void disconnect() {
-        socket.disconnect();
-      }
-    }
+    });
 
     double currentConsumption = system.consumption / 10;
     double currentCharging = system.charging / 10;
-    connect();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
@@ -146,7 +129,7 @@ class _MainPageState extends State<MainPage> {
                         height: 20,
                       ),
                       CostumedButton(
-                        height: 60,
+                        height: 50,
                         width: double.infinity,
                         raduis: 15,
                         background: Theme.of(context).accentColor,
