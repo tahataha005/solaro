@@ -50,6 +50,18 @@
 
 <img src="./assets/titles/title4.svg"/>
 
+Here's a brief high-level overview of the tech stack the Well app uses:
+
+-   This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
+
+-   For trusted database foundation, the app uses the [MongoDB Atlas](https://www.mongodb.com/atlas/database) that enables you to work with data the way you want – easily and effortlessly.
+
+-   To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
+
+-   The app uses the font ["Inter"](https://fonts.google.com/specimen/Inter) as its main font, and the design of the app adheres to the material design guidelines.
+
+<br><br>
+
 <img src="./assets/titles/title5.svg"/>
 
 <br><br>
