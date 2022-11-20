@@ -27,5 +27,13 @@ class LocalNotificationService {
         priority: Priority.high,
       ),
     );
+
+    await _notificationsPlugin.show(
+      id,
+      message.notification!.title,
+      message.notification!.body,
+      notificationDetails,
+      payload: message.data['_id'],
+    );
   }
 }
