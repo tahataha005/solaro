@@ -81,4 +81,41 @@ Here's a brief high-level overview of the tech stack the Well app uses:
     ```
 -   ESP8266 (Hardware)
 
+### Installation
+
+1. Clone the repo
+
+    ```sh
+    git clone https://github.com/tahataha005/solaro.git
+    ```
+
+2. Install [Node.js](https://nodejs.org/en/)
+
+3. Go to nodejs-server directory
+    ```sh
+    cd nodejs-server
+    ```
+4. Install npm packages
+    ```sh
+    npm install
+    ```
+5. Run the server
+    ```sh
+    nodemon .
+    ```
+6. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
+
+7. Go to flutter_app directory
+    ```sh
+    cd flutter_app
+    ```
+8. Install pub packages
+    ```sh
+    flutter pub get
+    ```
+9. Run flutter_app
+    ```sh
+    flutter run
+    ```
+
 <br><br>
