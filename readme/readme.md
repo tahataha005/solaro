@@ -13,7 +13,11 @@
 <img src="./assets/titles/title2.svg"/>
 <div align="center">
 
-> To be edited
+> Solaro is an IOT app that tracks solar systems charging, energy usage of individual connected items, and overall consumption.
+>
+> The app can control the items using arduino, and interact with the user when something wrong happens such as consumption peaks.
+
+<br><br>
 
 <img src="./assets/titles/title3.svg"/>
 
