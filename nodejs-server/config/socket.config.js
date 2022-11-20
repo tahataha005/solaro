@@ -14,14 +14,14 @@ const socketInit = (app, address) => {
             console.log(message);
         });
 
-        socket.on("reading 6377459e06feadc2139ddc2c", reading => {
+        socket.on("reading 6377f0f17d0cd3470f3435a4", reading => {
             console.log(reading);
             io.emit(`live ${reading.item_id}`, reading);
             saveDataScheduller(reading);
         });
 
         //Reading system live consumption
-        socket.on("reading 6377458a06feadc2139ddc23", message => {
+        socket.on(`reading 6377f0bb7d0cd3470f34359b`, message => {
             console.log(message);
             io.emit(`live ${message.system_id}`, message);
         });
