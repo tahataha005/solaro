@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
+import '../config/socket.config.dart';
 import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/costumed.button.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ class _ItemPageState extends State<ItemPage> {
 
       final response = await Provider.of<Items>(context, listen: false)
           .toggleStatus(userId, systemId, itemId, context);
+
       setState(() {
         status;
       });
@@ -69,15 +71,17 @@ class _ItemPageState extends State<ItemPage> {
                     ],
                   ),
                   child: Stack(
-                    fit: StackFit.expand,
+                    fit: StackFit.loose,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        ),
-                        child: Image.asset(
-                          "assets/images/Item 1.png",
-                          fit: BoxFit.cover,
+                      Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                          child: Image.asset(
+                            "assets/images/Item 2.png",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ],
@@ -145,7 +149,7 @@ class _ItemPageState extends State<ItemPage> {
                       ),
                       child: Center(
                         child: Text(
-                          loadedItem.liveConsumption.toString(),
+                          status ? loadedItem.liveConsumption.toString() : "0",
                         ),
                       ),
                     )
