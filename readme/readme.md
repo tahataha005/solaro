@@ -17,6 +17,14 @@
 >
 > The app can control the items using arduino, and interact with the user when something wrong happens such as consumption peaks.
 
+### User Stories
+
+-   As a user, I want to view charging and energy usage of my solar system
+
+-   As a user, I want to view items consumption which are connected to my solar system
+
+-   As a user, I want to be informed about anything wrong in my system
+
 <br><br>
 
 <img src="./assets/titles/title3.svg"/>
