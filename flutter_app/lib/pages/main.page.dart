@@ -134,8 +134,10 @@ class _MainPageState extends State<MainPage> {
                         raduis: 15,
                         background: Theme.of(context).accentColor,
                         text: "Details",
-                        onPressed: () =>
-                            Navigator.of(context).pushNamed("/details"),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/details");
+                          Socket.socket.off("live ${system.id}");
+                        },
                       )
                     ],
                   ),
