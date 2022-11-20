@@ -133,3 +133,25 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 -   Configuration
 
 ...
+
+### Hardware Simulation
+
+1. Go to simulator directory in arduino
+
+    ```sh
+    cd simulator
+    ```
+
+2. Change solar and item ids constants in index.js
+
+    ```sh
+    const system_id = "_Insert id here_"
+    const item_id = "_Insert id here_"
+    ```
+
+3. Run server
+    ```sh
+    nodemon .
+    ```
+
+When applied successfully, fake data will be sent to flutter app.
