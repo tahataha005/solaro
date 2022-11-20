@@ -67,3 +67,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 > Using the above mentioned tech stacks and the wireframes built with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
 <br><br>
+
+<img src="./assets/titles/title6.svg"/>
+
+<br><br>
