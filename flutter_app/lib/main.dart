@@ -18,10 +18,17 @@ import './pages/register/register.page.dart';
 import './pages/landing.page.dart';
 import './pages/notifications.page.dart';
 
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification!.title);
+  LocalNotificationService.createanddisplaynotification(message);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  LocalNotificationService.initialize();
   runApp(MyApp());
 }
 
