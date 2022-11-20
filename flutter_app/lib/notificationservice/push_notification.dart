@@ -10,6 +10,9 @@ class PushNotification {
           print("FirebaseMessaging.instance.getInitialMessage");
           if (message != null) {
             print("New Notification");
+            if (message.data['_id'] != null) {
+              Navigator.of(context).pushNamed("/notifications");
+            }
           }
         },
       );
