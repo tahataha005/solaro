@@ -5,4 +5,14 @@ class Socket {
     "transports": ["websocket"],
     "autoConnect": true,
   });
+
+  static void connect() {
+    socket.onConnect(
+      (_) => print("Successful"),
+    );
+  }
+
+  static void disconnect() {
+    socket.disconnect();
+  }
 }
