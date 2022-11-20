@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/notificationservice/notification.dart';
 import 'package:flutter_app/notificationservice/push_notification.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
@@ -147,7 +148,7 @@ class _LandingPageState extends State<LandingPage> {
     }
 
     Socket.connect();
-
+    MyNotification.getToken();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
