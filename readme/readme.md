@@ -19,8 +19,6 @@
 
 > To be edited
 
-<img src="./assets/titles/title5.svg"/>
-
 <br><br>
 
 | Login                                                                                             | Landing                                                                                              | Notifications                                                                                                    | Main                                                                                                   |
@@ -30,3 +28,7 @@
 | Add Item                                                                                       |
 | ---------------------------------------------------------------------------------------------- |
 | ![Main](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Home-page.svg) |
+
+<img src="./assets/titles/title5.svg"/>
+
+<br><br>
