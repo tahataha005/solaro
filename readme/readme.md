@@ -129,3 +129,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 3. Upload the code found in arduino directory
 
 <br><br>
+
+-   Configuration
+
+...
