@@ -66,135 +66,137 @@ class _CreateItemPageState extends State<CreateItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(20),
-            width: double.infinity,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).padding.top,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(Icons.arrow_back),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.width - 80,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Theme.of(context).primaryColorLight,
-                    child: InkWell(
-                      customBorder: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      splashColor: Theme.of(context).accentColor,
-                      onTap: inputImage,
-                      child: SizedBox(
-                        child: decoded != null
-                            ? Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(30),
-                                    ),
-                                    child: Image.memory(
-                                      decoded!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Icon(Icons.add, size: 200, color: Colors.white),
-                      ),
-                    ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(20),
+              width: double.infinity,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).padding.top,
                   ),
-                ),
-                if (errMessage != "")
-                  Text(
-                    errMessage,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                Form(
-                  key: _form,
-                  child: Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: _enteredName,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Item Name",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.toString().isEmpty) {
-                            return "Please enter name";
-                          }
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
                         },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: _enteredIdealConsumption,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Ideal Consumption",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                        validator: (value) {
-                          try {
-                            double.parse(value!);
-                          } catch (e) {
-                            return "Invalid number";
-                          }
-                        },
+                        icon: Icon(Icons.arrow_back),
                       ),
                     ],
                   ),
-                ),
-                CostumedButton(
-                  height: 50,
-                  width: double.infinity,
-                  raduis: 15,
-                  background: Theme.of(context).primaryColor,
-                  text: "ADD",
-                  onPressed: () {
-                    createItem(_enteredName.text,
-                        double.parse(_enteredIdealConsumption.text));
-                  },
-                )
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.width - 80,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Theme.of(context).primaryColorLight,
+                      child: InkWell(
+                        customBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        splashColor: Theme.of(context).accentColor,
+                        onTap: inputImage,
+                        child: SizedBox(
+                          child: decoded != null
+                              ? Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
+                                      child: Image.memory(
+                                        decoded!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Icon(Icons.add, size: 200, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (errMessage != "")
+                    Text(
+                      errMessage,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                  Form(
+                    key: _form,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _enteredName,
+                          decoration: InputDecoration(
+                            label: Text(
+                              "Item Name",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value.toString().isEmpty) {
+                              return "Please enter name";
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _enteredIdealConsumption,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            label: Text(
+                              "Ideal Consumption",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ),
+                          validator: (value) {
+                            try {
+                              double.parse(value!);
+                            } catch (e) {
+                              return "Invalid number";
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  CostumedButton(
+                    height: 50,
+                    width: double.infinity,
+                    raduis: 15,
+                    background: Theme.of(context).primaryColor,
+                    text: "ADD",
+                    onPressed: () {
+                      createItem(_enteredName.text,
+                          double.parse(_enteredIdealConsumption.text));
+                    },
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
