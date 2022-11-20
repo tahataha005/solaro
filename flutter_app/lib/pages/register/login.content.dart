@@ -83,6 +83,7 @@ class _LoginState extends State<Login> {
                         controller: enteredPassword,
                         textInputAction: TextInputAction.next,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
+                        obscureText: true,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Please enter field";
