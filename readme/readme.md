@@ -73,4 +73,12 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 > This is an example of how you may give instructions on setting up your project locally.
 > To get a local copy up and running follow these simple example steps.
 
+### Prerequisites
+
+-   npm
+    ```sh
+    npm install npm@latest -g
+    ```
+-   ESP8266 (Hardware)
+
 <br><br>
