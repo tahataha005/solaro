@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/notificationservice/push_notification.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
@@ -15,6 +16,13 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    PushNotification.pushNotification(context);
+  }
+
   List stats = [];
 
   Future getweekly(id) async {
