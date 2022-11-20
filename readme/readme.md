@@ -25,6 +25,12 @@
 
 -   As a user, I want to be informed about anything wrong in my system
 
+### Controller Stories
+
+-   As a controller, I want to add and drop items to and from my system
+
+-   As a controller, I want to be able to control items connected to my solar system
+
 <br><br>
 
 <img src="./assets/titles/title3.svg"/>
