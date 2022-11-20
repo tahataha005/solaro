@@ -29,5 +29,17 @@ class PushNotification {
         }
       },
     );
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data22 ${message.data['_id']}");
+          Navigator.of(context).pushNamed("/notifications");
+        }
+      },
+    );
   }
 }
