@@ -16,4 +16,16 @@ class LocalNotificationService {
       initializationSettings,
     );
   }
+
+  static void createanddisplaynotification(RemoteMessage message) async {
+    final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    const NotificationDetails notificationDetails = NotificationDetails(
+      android: AndroidNotificationDetails(
+        "pushnotificationapp",
+        "pushnotificationappchannel",
+        importance: Importance.max,
+        priority: Priority.high,
+      ),
+    );
+  }
 }
