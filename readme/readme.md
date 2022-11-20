@@ -118,4 +118,14 @@ Here's a brief high-level overview of the tech stack the Well app uses:
     flutter run
     ```
 
+### Hardware Setup (Go to sumulation section to simulate hardware functionality)
+
+-   Uploading code
+
+1. Plug your arduino to your laptop/mac
+
+2. Install [Arduino IDE](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing)(You can use alternative aurduino IDE's)
+
+3. Upload the code found in arduino directory
+
 <br><br>
