@@ -30,6 +30,13 @@ class _ItemPageState extends State<ItemPage> {
       });
     }
 
+    Socket.connect();
+    Socket.socket.on("live ${loadedItem.itemId}", (message) {
+      print(message);
+      setState(() {
+        loadedItem.liveConsumption = message["consumption"];
+      });
+    });
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
