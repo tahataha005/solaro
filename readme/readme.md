@@ -11,7 +11,7 @@
 <br><br>
 
 <img src="./assets/titles/title2.svg"/>
-<div align="center">
+<div align="left">
 
 > Solaro is an IOT app that tracks solar systems charging, energy usage of individual connected items, and overall consumption.
 >
@@ -35,9 +35,8 @@
 
 <img src="./assets/titles/title3.svg"/>
 
-> To be edited
-
-<br><br>
+> This design was planned before on [excalidraw](https://excalidraw.com/), then moved to Figma app for the fine details and animations.
+> Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
 | Login                                                                                             | Landing                                                                                              | Notifications                                                                                                    | Main                                                                                                   |
 | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
