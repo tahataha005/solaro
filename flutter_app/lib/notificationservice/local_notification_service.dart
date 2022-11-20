@@ -18,22 +18,26 @@ class LocalNotificationService {
   }
 
   static void createanddisplaynotification(RemoteMessage message) async {
-    final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    const NotificationDetails notificationDetails = NotificationDetails(
-      android: AndroidNotificationDetails(
-        "pushnotificationapp",
-        "pushnotificationappchannel",
-        importance: Importance.max,
-        priority: Priority.high,
-      ),
-    );
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      const NotificationDetails notificationDetails = NotificationDetails(
+        android: AndroidNotificationDetails(
+          "pushnotificationapp",
+          "pushnotificationappchannel",
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      );
 
-    await _notificationsPlugin.show(
-      id,
-      message.notification!.title,
-      message.notification!.body,
-      notificationDetails,
-      payload: message.data['_id'],
-    );
+      await _notificationsPlugin.show(
+        id,
+        message.notification!.title,
+        message.notification!.body,
+        notificationDetails,
+        payload: message.data['_id'],
+      );
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 }
