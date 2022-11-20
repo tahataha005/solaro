@@ -38,13 +38,13 @@
 > This design was planned before on [excalidraw](https://excalidraw.com/), then moved to Figma app for the fine details and animations.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Login                                                                                             | Landing                                                                                              | Notifications                                                                                                    | Main                                                                                                   |
+| Login                                                                                             | Landing                                                                                              | Notifications                                                                                                    | Add Item                                                                                               |
 | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | ![Login](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Log-in-page.svg) | ![Landing](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Landing-page.svg) | ![Notifications](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Notifications-page.svg) | ![Add Item](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Add-Item-page.svg) |
 
-| Add Item                                                                                       |
-| ---------------------------------------------------------------------------------------------- |
-| ![Main](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Home-page.svg) |
+| Main                                                                                           | View Item                                                                                                |
+| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| ![Main](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Home-page.svg) | ![View Item](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/View-item-page.svg) |
 
 <img src="./assets/titles/title5.svg"/>
 
