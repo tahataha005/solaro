@@ -7,6 +7,7 @@ import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/tools/request.dart';
 import 'package:flutter_app/widgets/modal.sheet.dart';
 import 'package:provider/provider.dart';
+import '../config/socket.config.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -136,6 +137,8 @@ class _LandingPageState extends State<LandingPage> {
         systems = Provider.of<Systems>(context, listen: false).getSystems;
       });
     }
+
+    Socket.connect();
 
     return Scaffold(
       appBar: AppBar(
