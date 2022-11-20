@@ -46,6 +46,10 @@
 | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | ![Main](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Home-page.svg) | ![View Item](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Item-view-page.svg) | ![Add Item](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/Add-Item-page.svg) | ![All Items](https://github.com/tahataha005/solaro/blob/readme/readme/assets/mockups/All-Items-page.svg) |
 
+<br><br>
+
+<img src="./assets/titles/title4.svg"/>
+
 <img src="./assets/titles/title5.svg"/>
 
 <br><br>
