@@ -129,6 +129,11 @@ class _LoginState extends State<Login> {
               ],
             ),
           )
-        : CircularProgressIndicator();
+        : Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
   }
 }
