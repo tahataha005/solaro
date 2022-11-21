@@ -1,6 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/notificationservice/local_notification_service.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:provider/provider.dart';
 
 class PushNotification {
   static void pushNotification(context) {
@@ -23,8 +25,18 @@ class PushNotification {
         print("FirebaseMessaging.onMessage.listen");
         if (message.notification != null) {
           print(message.notification!.title);
+          final title = message.notification!.title;
           print(message.notification!.body);
+          final body = message.notification!.body;
           print("message.data11 ${message.data}");
+          final data = message.data;
+          final hour = message.sentTime!.hour;
+          final minute = message.sentTime!.minute;
+          final time = "$hour:$minute";
+
+          Provider.of<Notifications>(context, listen: false)
+              .addNotification(title, body, data, time);
+
           LocalNotificationService.createanddisplaynotification(message);
         }
       },

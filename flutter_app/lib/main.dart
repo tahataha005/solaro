@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/notificationservice/local_notification_service.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: User(),
         ),
+        ChangeNotifierProvider.value(
+          value: Notifications(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
