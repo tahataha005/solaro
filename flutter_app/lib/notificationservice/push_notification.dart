@@ -23,8 +23,15 @@ class PushNotification {
         print("FirebaseMessaging.onMessage.listen");
         if (message.notification != null) {
           print(message.notification!.title);
+          final title = message.notification!.title;
           print(message.notification!.body);
+          final body = message.notification!.body;
           print("message.data11 ${message.data}");
+          final data = message.data;
+          final hour = message.sentTime!.hour;
+          final minute = message.sentTime!.minute;
+          final time = "$hour:$minute";
+
           LocalNotificationService.createanddisplaynotification(message);
         }
       },
