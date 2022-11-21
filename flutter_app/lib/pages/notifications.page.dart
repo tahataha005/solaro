@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/notifications.model.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:provider/provider.dart';
 
 class NotificationsPage extends StatefulWidget {
   @override
@@ -7,24 +8,6 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-  final List notifications = [
-    Notifications(
-        system_name: "Home",
-        title: "Warning !!!",
-        content: "Concumption too high today",
-        time: "12:08"),
-    Notifications(
-        system_name: "Work",
-        title: "Peak Detected",
-        content: "Detected a peak from Refrigerator",
-        time: "17:41"),
-    Notifications(
-        system_name: "Work",
-        title: "Warning !!!",
-        content: "Concumption too high today",
-        time: "19:11"),
-  ];
-
   Color randColor(String name) {
     int countName = name.length;
     while (countName >= 3) {
@@ -109,6 +92,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final List notifications =
+        Provider.of<Notifications>(context).getNotifications;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
