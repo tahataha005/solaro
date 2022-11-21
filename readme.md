@@ -1,4 +1,4 @@
-<img src="./assets/titles/title1.svg"/>
+<img src="./readme/assets/titles/title1.svg"/>
 
 <div align="center">
 
@@ -10,7 +10,7 @@
 
 <br><br>
 
-<img src="./assets/titles/title2.svg"/>
+<img src="./readme/assets/titles/title2.svg"/>
 <div align="left">
 
 > Solaro is an IOT app that tracks solar systems charging, energy usage of individual connected items, and overall consumption.
@@ -33,7 +33,7 @@
 
 <br><br>
 
-<img src="./assets/titles/title3.svg"/>
+<img src="./readme/assets/titles/title3.svg"/>
 
 > This design was planned before on [excalidraw](https://excalidraw.com/), then moved to Figma app for the fine details and animations.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
@@ -48,7 +48,7 @@
 
 <br><br>
 
-<img src="./assets/titles/title4.svg"/>
+<img src="./readme/assets/titles/title4.svg"/>
 
 Here's a brief high-level overview of the tech stack the Well app uses:
 
@@ -62,13 +62,13 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 <br><br>
 
-<img src="./assets/titles/title5.svg"/>
+<img src="./readme/assets/titles/title5.svg"/>
 
 > Using the above mentioned tech stacks and the wireframes built with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
 <br><br>
 
-<img src="./assets/titles/title6.svg"/>
+<img src="./readme/assets/titles/title6.svg"/>
 
 > This is an example of how you may give instructions on setting up your project locally.
 > To get a local copy up and running follow these simple example steps.
