@@ -1,6 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/notificationservice/local_notification_service.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:provider/provider.dart';
 
 class PushNotification {
   static void pushNotification(context) {
@@ -31,6 +33,9 @@ class PushNotification {
           final hour = message.sentTime!.hour;
           final minute = message.sentTime!.minute;
           final time = "$hour:$minute";
+
+          Provider.of<Notifications>(context, listen: false)
+              .addNotification(title, body, data, time);
 
           LocalNotificationService.createanddisplaynotification(message);
         }
