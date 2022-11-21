@@ -112,7 +112,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         elevation: 0.5,
       ),
       body: Column(
-        children: notifications.map((notification) {
+        children: notifications.reversed.map((notification) {
           return notificationBuilder(notification);
         }).toList(),
       ),
