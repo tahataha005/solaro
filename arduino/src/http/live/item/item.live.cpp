@@ -31,4 +31,20 @@ void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
     } else {
         doc["peak"] = false;
     }
+
+    //Creating JSON string
+    serializeJson(doc,result);
+    Serial.println(result);
+
+    //Setting headers
+    http.addHeader("Content-Type","application/json");
+    //Sending data
+    int httpResponseCode = http.POST(result);
+
+    //Catching response
+    String response = http.getString();
+
+    //Displaying response
+    Serial.println(httpResponseCode);
+    Serial.println(response);
 }
