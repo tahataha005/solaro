@@ -30,6 +30,13 @@ void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
         http.begin(wifiClient,"http://192.168.43.70:8000/arduino/item/save");
     } else {
         doc["peak"] = false;
+
+        //Check if data should be saved
+        if (save) {
+            http.begin(wifiClient,"http://192.168.43.70:8000/arduino/item/save");
+        } else {
+            http.begin(wifiClient,"http://192.168.43.70:8000/arduino/item");
+        }
     }
 
     //Creating JSON string
