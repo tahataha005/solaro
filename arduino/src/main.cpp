@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include "./wifi/wifi.h"
 #include "./http/live/item/item.live.h"
+#include "./http/live/solarsystem/system.live.h"
 
 //Setting itital settings
 const char* itemId = "6373547b22e7818efe58ac6d";
 double idealConsumption = 2;
+const char* systemId = "636917790949a1f60765e231";
 int counter = 0;
 
 //Main Setup function (Executed once)
@@ -32,14 +34,14 @@ void loop() {
 
   //Reading item and system statistics and display on screen
   liveItem(D0,itemId,idealConsumption,false);
-
+  liveSystem(D0,D1,systemId,false);
 
   if (counter == 10) {
     counter = 0;
 
     //Saving item and system statistics to database every 1 second
     liveItem(D0,itemId,idealConsumption,true);
- 
+    liveSystem(D0,D1,systemId,true);
   }
   
   counter++;
