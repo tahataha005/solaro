@@ -240,6 +240,17 @@ const itemDailyAvg = async (req, res) => {
     }
 };
 
+//Emitting live item data to frontend
+const liveItem = async (req, res) => {
+    const record = req.body;
+    try {
+        //send socket
+        io.emit("live", record);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
 module.exports = {
     insertItemData,
     getItemData,
