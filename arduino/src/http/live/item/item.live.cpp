@@ -17,4 +17,11 @@ void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
     if (err){
         Serial.println(err.c_str());
     }
+    
+    //Reading consumption data
+    double consumption = digitalRead(pin);
+    doc["item_id"] = id;
+    doc["consumption"] = consumption;
+
+    
 }
