@@ -23,5 +23,12 @@ void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
     doc["item_id"] = id;
     doc["consumption"] = consumption;
 
-    
+    //Peak detection
+    if (consumption > idealConsumption) {
+        doc["peak"] = true;
+
+        http.begin(wifiClient,"http://192.168.43.70:8000/arduino/item/save");
+    } else {
+        doc["peak"] = false;
+    }
 }
