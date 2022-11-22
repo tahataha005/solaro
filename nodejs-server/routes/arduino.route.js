@@ -11,4 +11,10 @@ const {
     insertSystemData,
 } = require("../controllers/data.controller.js");
 
+//Creating routes
+router.post("/item", liveItem);
+router.post("/item/save", insertItemData);
+router.post("/solar", liveSystem);
+router.post("/solar/save", insertSystemData);
+
 module.exports = router;
