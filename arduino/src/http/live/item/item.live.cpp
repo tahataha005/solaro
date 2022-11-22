@@ -10,4 +10,11 @@ void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
     const char* data = "{}";
     String result;
 
+    //Initializing JSON object
+    DeserializationError err = deserializeJson(doc,data);
+
+    //Check if JSON object is created
+    if (err){
+        Serial.println(err.c_str());
+    }
 }
