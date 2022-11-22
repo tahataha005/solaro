@@ -36,4 +36,15 @@ void liveSystem(uint8_t consumptionPin, uint8_t chargingPin, const char* id,bool
         http.begin(wifiClient,"http://192.168.43.70:8000/arduino/solar");
     };
 
+    //Setting headers
+    http.addHeader("Content-Type","application/json");
+    //Sending data
+    int httpResponseCode = http.POST(result);
+    
+    //Catching response
+    String response = http.getString();
+
+    //Displaying response
+    Serial.println(httpResponseCode);
+    Serial.println(response);
 }
