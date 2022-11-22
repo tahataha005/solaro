@@ -28,4 +28,12 @@ void liveSystem(uint8_t consumptionPin, uint8_t chargingPin, const char* id,bool
     //Creating JSON string
     serializeJson(doc,result);
     Serial.println(result);
+
+    //Check if data should be saved
+    if (save) {
+        http.begin(wifiClient,"http://192.168.43.70:8000/arduino/solar/save");
+    } else {
+        http.begin(wifiClient,"http://192.168.43.70:8000/arduino/solar");
+    };
+
 }
