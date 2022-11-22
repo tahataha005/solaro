@@ -1,12 +1,13 @@
 const ItemHistory = require("../models/items.history.model.js");
 const SolarHistory = require("../models/solar.history.model.js");
 const SolarAverage = require("../models/system.average.model.js");
+const Peak = require("../models/peak.model.js");
 
 //Insert item history data
 const insertItemData = async (req, res) => {
     try {
         //Destructuring req data
-        const { item_id, consumption, time } = req.body;
+        const { item_id, consumption, peak } = req.body;
 
         //Creating a new document
         const record = new ItemHistory();
@@ -17,6 +18,14 @@ const insertItemData = async (req, res) => {
 
         //Saving new document
         record.save();
+
+        if (peak) {
+            const peakRecord = new Peak();
+            peakRecord.item_id = item_id;
+            peakRecord.peak = peak;
+            peakRecord.timestamp = record.timestamp;
+            peakRecord.save();
+        }
 
         //Returning saved record
         res.status(200).json(record);
@@ -240,4 +249,6 @@ module.exports = {
     solarDailyAvg,
     getItemAvg,
     itemDailyAvg,
+    liveItem,
+    liveSystem,
 };
