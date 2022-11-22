@@ -14,6 +14,18 @@ const sendNotification = async (req, res) => {
             token: registrationToken,
         };
 
+        //Sending message
+        admin
+            .messaging()
+            .send(message)
+            .then(response => {
+                // Response is a message ID string.
+                console.log("Successfully sent message:", response);
+            })
+            .catch(error => {
+                console.log("Error sending message:", error);
+            });
+
         //Returning success message
         res.status(200).json("Notification sent");
     } catch (error) {
