@@ -11,7 +11,7 @@ const peakSchema = mongoose.Schema({
         required: "peak is required",
     },
     timestamp: {
-        type: date,
+        type: Date,
         required: "date is required",
     },
 });
