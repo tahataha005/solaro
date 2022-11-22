@@ -251,6 +251,17 @@ const liveItem = async (req, res) => {
     }
 };
 
+//Emitting live system data to frontend
+const liveSystem = async (req, res) => {
+    const record = req.body;
+    try {
+        //send socket
+        io.emit("liveSystem", record);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
 module.exports = {
     insertItemData,
     getItemData,
