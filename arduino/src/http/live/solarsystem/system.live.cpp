@@ -17,4 +17,15 @@ void liveSystem(uint8_t consumptionPin, uint8_t chargingPin, const char* id,bool
     if (err){
         Serial.println(err.c_str());
     }
+    
+    //Reading consumption and charging data
+    double consumption = digitalRead(consumptionPin);
+    double charging = digitalRead(chargingPin);
+    doc["system_id"] = id;
+    doc["consumption"] = consumption;
+    doc["charging"] = charging;
+
+    //Creating JSON string
+    serializeJson(doc,result);
+    Serial.println(result);
 }
