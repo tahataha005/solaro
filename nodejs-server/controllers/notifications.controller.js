@@ -1,10 +1,16 @@
 const { admin } = require("../config/notifications/notification.config.js");
 
-const sendNotification = async (req, res) => {
-    try {
-        //Destructuring req data
-        const { registrationToken, title, body } = req.body;
+const sendNotification = ({
+    registrationToken,
+    systemName,
+    itemName,
+    consumption,
+}) => {
+    //Setting up notification structure
+    const title = `${systemName}: Peak detected`;
+    const body = `Detected a peak of ${consumption}W in ${itemName}`;
 
+    try {
         //Creating a message
         const message = {
             notification: {
@@ -27,9 +33,8 @@ const sendNotification = async (req, res) => {
             });
 
         //Returning success message
-        res.status(200).json("Notification sent");
     } catch (error) {
-        res.status(400).json(error.message);
+        console.log(error.message);
     }
 };
 
