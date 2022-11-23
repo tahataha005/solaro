@@ -52,6 +52,14 @@ const insertItemData = async (req, res) => {
             peakRecord.peak = consumption;
             peakRecord.timestamp = record.timestamp;
             peakRecord.save();
+
+            user.notifications.push({
+                title: `${system.name}: Peak detected`,
+                body: `Detected a peak of ${consumption}A in ${item.name}`,
+                time: `${record.timestamp.getHours()}:${record.timestamp.getMinutes()}`,
+            });
+
+            user.save();
         }
 
         //Returning saved record
