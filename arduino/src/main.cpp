@@ -3,11 +3,14 @@
 #include "./http/live/item/item.live.h"
 #include "./http/live/solarsystem/system.live.h"
 
-//Setting itital settings
-const char* itemId = "6373547b22e7818efe58ac6d";
-double idealConsumption = 2;
-const char* systemId = "636917790949a1f60765e231";
+//Setting initial settings
+const char* userId = "63669e05e464e3fb910146c8";
 int counter = 0;
+
+const char* systemId = "6366a047cb1d6bcd80ef72f4";
+
+const char* itemId = "6366a207bab84acdd79f23a5";
+double idealConsumption = 2;
 
 //Main Setup function (Executed once)
 void setup() {
