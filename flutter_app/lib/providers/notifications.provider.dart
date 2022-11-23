@@ -8,7 +8,7 @@ class Notifications with ChangeNotifier {
     return notifications;
   }
 
-  void addNotification(title, body, data, time) {
+  void addNotification(title, body, time) {
     final newNotification = Notification(
       system_name: title.split(":")[0],
       title: title.split(":")[1],
@@ -19,4 +19,6 @@ class Notifications with ChangeNotifier {
 
     notifyListeners();
   }
+
+  void loadNotifications(notifications) {}
 }
