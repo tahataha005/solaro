@@ -2,6 +2,8 @@ const ItemHistory = require("../models/items.history.model.js");
 const SolarHistory = require("../models/solar.history.model.js");
 const SolarAverage = require("../models/system.average.model.js");
 const Peak = require("../models/peak.model.js");
+const { sendNotification } = require("./notifications.controller");
+const User = require("../models/user.model.js");
 
 //Insert item history data
 const insertItemData = async (req, res) => {
