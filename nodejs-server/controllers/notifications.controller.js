@@ -8,7 +8,7 @@ const sendNotification = ({
 }) => {
     //Setting up notification structure
     const title = `${systemName}: Peak detected`;
-    const body = `Detected a peak of ${consumption}W in ${itemName}`;
+    const body = `Detected a peak of ${consumption}A in ${itemName}`;
 
     try {
         //Creating a message
