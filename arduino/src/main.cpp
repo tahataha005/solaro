@@ -2,6 +2,7 @@
 #include "./wifi/wifi.h"
 #include "./http/live/item/item.live.h"
 #include "./http/live/solarsystem/system.live.h"
+#include "./http/control/control.h"
 
 //Setting initial settings
 const char* userId = "63669e05e464e3fb910146c8";
@@ -38,6 +39,7 @@ void loop() {
   //Reading item and system statistics and display on screen
   liveItem(D0,itemId,idealConsumption,false);
   liveSystem(D0,D1,systemId,false);
+  controlItem(D0,userId,systemId,itemId);
 
   if (counter == 10) {
     counter = 0;
