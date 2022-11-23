@@ -9,7 +9,8 @@ const User = require("../models/user.model.js");
 const insertItemData = async (req, res) => {
     try {
         //Destructuring req data
-        const { item_id, consumption, peak } = req.body;
+        const { user_id, system_id, item_id, consumption, peak } = req.body;
+        const registrationToken = req.headers.registrationtoken;
 
         //Creating a new document
         const record = new ItemHistory();
