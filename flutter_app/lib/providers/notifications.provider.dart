@@ -20,5 +20,11 @@ class Notifications with ChangeNotifier {
     notifyListeners();
   }
 
-  void loadNotifications(notifications) {}
+  void loadNotifications(notifications) {
+    for (var notification in notifications) {
+      addNotification(
+          notification["title"], notification["body"], notification["time"]);
+      print(notification);
+    }
+  }
 }
