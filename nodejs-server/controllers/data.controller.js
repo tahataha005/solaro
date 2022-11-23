@@ -33,6 +33,13 @@ const insertItemData = async (req, res) => {
                 return item.id == item_id;
             })[0];
 
+            sendNotification({
+                systemName: system.name,
+                itemName: item.name,
+                consumption,
+                registrationToken,
+            });
+
             //if item not found return not found
             if (!item)
                 return res.status(404).json({ message: "Item not found" });
