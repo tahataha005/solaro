@@ -90,6 +90,12 @@ const readItem = async (req, res) => {
         const item = system.items.filter(item => {
             return item.id == item_id;
         })[0];
+
+        //if item not found return not found
+        if (!item) return res.status(404).json({ message: "Item not found" });
+
+        //Returning updated item
+        res.status(200).json(item);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
