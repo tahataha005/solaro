@@ -18,6 +18,11 @@ void controlItem(uint8_t pin, const char* userId, const char* systemId, const ch
     http.addHeader("Content-Type", "application/json");
     http.POST(json);
 
+    //Reading response
+    String payload = http.getString();
+    
+    //Parsing response
+    deserializeJson(doc, payload);
 
 }
 
