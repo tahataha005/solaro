@@ -35,7 +35,7 @@ class PushNotification {
           final time = "$hour:$minute";
 
           Provider.of<Notifications>(context, listen: false)
-              .addNotification(title, body, data, time);
+              .addNotification(title, body, time);
 
           LocalNotificationService.createanddisplaynotification(message);
         }
