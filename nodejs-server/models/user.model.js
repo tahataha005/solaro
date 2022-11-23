@@ -85,7 +85,6 @@ const userSchema = mongoose.Schema({
         unique: true,
         trim: true,
     },
-
     password: {
         type: String,
         required: "password is required",
@@ -96,6 +95,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    notifications: [notificationSchema],
     system: [solarSystemSchema],
 });
 
