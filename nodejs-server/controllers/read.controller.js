@@ -73,4 +73,15 @@ const getAllItems = async (req, res) => {
     }
 };
 
-module.exports = { getSolarStats, getAllItems, getUser };
+const readItem = async (req, res) => {
+    //Destructuring req data
+    const { user_id, system_id, item_id } = req.body;
+
+    //Assigning status according to request
+    try {
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+module.exports = { getSolarStats, getAllItems, getUser, readItem };
