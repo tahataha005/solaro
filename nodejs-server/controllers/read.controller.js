@@ -77,8 +77,19 @@ const readItem = async (req, res) => {
     //Destructuring req data
     const { user_id, system_id, item_id } = req.body;
 
-    //Assigning status according to request
     try {
+        //Getting user by id
+        const user = await User.findById(user_id);
+
+        //Filtering array of solar systems
+        const system = user.system.filter(system => {
+            return system.id == system_id;
+        })[0];
+
+        //Filtering items to get desired item
+        const item = system.items.filter(item => {
+            return item.id == item_id;
+        })[0];
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
