@@ -20,9 +20,26 @@ const insertItemData = async (req, res) => {
         record.save();
 
         if (peak) {
+            //Getting user by id
+            const user = await User.findById(user_id);
+
+            //Filtering array of solar systems
+            const system = user.system.filter(system => {
+                return system.id == system_id;
+            })[0];
+
+            //Filtering items to get desired item
+            const item = system.items.filter(item => {
+                return item.id == item_id;
+            })[0];
+
+            //if item not found return not found
+            if (!item)
+                return res.status(404).json({ message: "Item not found" });
+
             const peakRecord = new Peak();
-            peakRecord.item_id = item_id;
-            peakRecord.peak = peak;
+            peakRecord.item = item_id;
+            peakRecord.peak = consumption;
             peakRecord.timestamp = record.timestamp;
             peakRecord.save();
         }
