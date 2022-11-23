@@ -24,5 +24,7 @@ void controlItem(uint8_t pin, const char* userId, const char* systemId, const ch
     //Parsing response
     deserializeJson(doc, payload);
 
+    //Setting pin to output
+    bool status = doc["status"];
+    digitalWrite(pin, status);
 }
-
