@@ -7,6 +7,7 @@ class CostumedButton extends StatelessWidget {
   final Color background;
   final String text;
   final onPressed;
+  final textStyle;
 
   CostumedButton({
     required this.height,
@@ -15,6 +16,7 @@ class CostumedButton extends StatelessWidget {
     required this.background,
     required this.text,
     this.onPressed = null,
+    this.textStyle = null,
   });
 
   @override
@@ -34,7 +36,9 @@ class CostumedButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: textStyle != null
+              ? textStyle
+              : Theme.of(context).textTheme.labelLarge,
         ),
       ),
     );
