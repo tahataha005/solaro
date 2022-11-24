@@ -58,4 +58,9 @@ class Systems with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void emptySystems() {
+    systems = [];
+    notifyListeners();
+  }
 }
