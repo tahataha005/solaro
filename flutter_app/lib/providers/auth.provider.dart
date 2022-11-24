@@ -89,4 +89,12 @@ class Auth with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    userId = null;
+    token = null;
+    notifyListeners();
+  }
 }
