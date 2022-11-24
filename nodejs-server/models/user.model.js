@@ -52,6 +52,31 @@ const solarSystemSchema = mongoose.Schema({
     items: [itemSchema],
 });
 
+//Creating a notification schema
+const notificationSchema = mongoose.Schema({
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        unique: true,
+        index: true,
+        auto: true,
+    },
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    body: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    time: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+});
+
 //Creating a user schema
 const userSchema = mongoose.Schema({
     email: {
@@ -60,7 +85,6 @@ const userSchema = mongoose.Schema({
         unique: true,
         trim: true,
     },
-
     password: {
         type: String,
         required: "password is required",
@@ -71,6 +95,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    notifications: [notificationSchema],
     system: [solarSystemSchema],
 });
 

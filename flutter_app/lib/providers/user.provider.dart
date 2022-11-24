@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/models/exception.model.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/tools/request.dart';
 import 'package:provider/provider.dart';
@@ -33,8 +34,11 @@ class User with ChangeNotifier {
       email = response["email"];
       userType = response["user_type"];
       List systems = response["system"];
+      List notifications = response["notifications"];
 
       Provider.of<Systems>(context, listen: false).loadSystems(systems);
+      Provider.of<Notifications>(context, listen: false)
+          .loadNotifications(notifications);
       notifyListeners();
     } catch (e) {
       rethrow;

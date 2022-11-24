@@ -1,12 +1,16 @@
 const ItemHistory = require("../models/items.history.model.js");
 const SolarHistory = require("../models/solar.history.model.js");
 const SolarAverage = require("../models/system.average.model.js");
+const Peak = require("../models/peak.model.js");
+const { sendNotification } = require("./notifications.controller");
+const User = require("../models/user.model.js");
 
 //Insert item history data
 const insertItemData = async (req, res) => {
     try {
         //Destructuring req data
-        const { item_id, consumption, time } = req.body;
+        const { user_id, system_id, item_id, consumption, peak } = req.body;
+        const registrationToken = req.headers.registrationtoken;
 
         //Creating a new document
         const record = new ItemHistory();
@@ -17,6 +21,46 @@ const insertItemData = async (req, res) => {
 
         //Saving new document
         record.save();
+
+        if (peak) {
+            //Getting user by id
+            const user = await User.findById(user_id);
+
+            //Filtering array of solar systems
+            const system = user.system.filter(system => {
+                return system.id == system_id;
+            })[0];
+
+            //Filtering items to get desired item
+            const item = system.items.filter(item => {
+                return item.id == item_id;
+            })[0];
+
+            sendNotification({
+                systemName: system.name,
+                itemName: item.name,
+                consumption,
+                registrationToken,
+            });
+
+            //if item not found return not found
+            if (!item)
+                return res.status(404).json({ message: "Item not found" });
+
+            const peakRecord = new Peak();
+            peakRecord.item = item_id;
+            peakRecord.peak = consumption;
+            peakRecord.timestamp = record.timestamp;
+            peakRecord.save();
+
+            user.notifications.push({
+                title: `${system.name}: Peak detected`,
+                body: `Detected a peak of ${consumption}A in ${item.name}`,
+                time: `${record.timestamp.getHours()}:${record.timestamp.getMinutes()}`,
+            });
+
+            user.save();
+        }
 
         //Returning saved record
         res.status(200).json(record);
@@ -231,6 +275,28 @@ const itemDailyAvg = async (req, res) => {
     }
 };
 
+//Emitting live item data to frontend
+const liveItem = async (req, res) => {
+    const record = req.body;
+    try {
+        //send socket
+        io.emit("live", record);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
+//Emitting live system data to frontend
+const liveSystem = async (req, res) => {
+    const record = req.body;
+    try {
+        //send socket
+        io.emit("liveSystem", record);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
 module.exports = {
     insertItemData,
     getItemData,
@@ -240,4 +306,6 @@ module.exports = {
     solarDailyAvg,
     getItemAvg,
     itemDailyAvg,
+    liveItem,
+    liveSystem,
 };

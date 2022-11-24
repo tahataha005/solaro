@@ -44,4 +44,10 @@ const controlRoutes = require("./routes/control.route.js");
 app.use("/control", authMiddleware, controllerMiddleware, controlRoutes);
 
 const dataRoutes = require("./routes/data.route.js");
-app.use("/data", authMiddleware, dataRoutes);
+app.use("/data", dataRoutes);
+
+const arduinoRoutes = require("./routes/arduino.route.js");
+app.use("/arduino", arduinoRoutes);
+
+const notificationsRoutes = require("./routes/notifications.route.js");
+app.use("/notifications", notificationsRoutes);

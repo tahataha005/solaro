@@ -73,4 +73,32 @@ const getAllItems = async (req, res) => {
     }
 };
 
-module.exports = { getSolarStats, getAllItems, getUser };
+const readItem = async (req, res) => {
+    //Destructuring req data
+    const { user_id, system_id, item_id } = req.body;
+
+    try {
+        //Getting user by id
+        const user = await User.findById(user_id);
+
+        //Filtering array of solar systems
+        const system = user.system.filter(system => {
+            return system.id == system_id;
+        })[0];
+
+        //Filtering items to get desired item
+        const item = system.items.filter(item => {
+            return item.id == item_id;
+        })[0];
+
+        //if item not found return not found
+        if (!item) return res.status(404).json({ message: "Item not found" });
+
+        //Returning updated item
+        res.status(200).json(item);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+module.exports = { getSolarStats, getAllItems, getUser, readItem };
