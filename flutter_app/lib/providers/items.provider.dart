@@ -14,7 +14,8 @@ class Items with ChangeNotifier {
     return _items.firstWhere((item) => item.itemName == name);
   }
 
-  Future addItem(userId, name, idealConsumption, systemId, context) async {
+  Future addItem(
+      userId, name, idealConsumption, systemId, encoded, context) async {
     try {
       final response = await sendRequest(
         route: "/control/item",
@@ -24,6 +25,7 @@ class Items with ChangeNotifier {
           "system_id": systemId,
           "name": name,
           "ideal_consumption": idealConsumption,
+          "picture": encoded,
         },
         context: context,
       );
@@ -51,6 +53,7 @@ class Items with ChangeNotifier {
 
   void emptyItems() {
     _items = [];
+    notifyListeners();
   }
 
   void loadItems(List items) {
