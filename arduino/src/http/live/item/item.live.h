@@ -4,6 +4,6 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-void liveItem(uint8_t pin, const char* id, double idealConsumption,bool save);
+void liveItem(uint8_t pin, const char* userId, const char* systemId, const char* itemId, double idealConsumption, bool save);
 
 #endif

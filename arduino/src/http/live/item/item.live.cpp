@@ -1,7 +1,7 @@
 #include "item.live.h"
 
 //Setup live item data reading
-void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
+void liveItem(u_int8_t pin, const char* userId, const char* systemId, const char* itemId, double idealConsumption, bool save) {
 
     //Initialize variables
     WiFiClient wifiClient;
@@ -20,7 +20,9 @@ void liveItem(u_int8_t pin, const char* id,double idealConsumption, bool save) {
     
     //Reading consumption data
     double consumption = digitalRead(pin);
-    doc["item_id"] = id;
+    doc["item_id"] = itemId;
+    doc["system_id"] = systemId;
+    doc["user_id"] = userId;
     doc["consumption"] = consumption;
 
     //Peak detection

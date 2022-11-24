@@ -41,7 +41,7 @@ void loop() {
   delay(100);
 
   //Reading item and system statistics and display on screen
-  liveItem(itemConsumptionPin, itemId, idealConsumption, false);
+  liveItem(itemConsumptionPin,userId,systemId, itemId, idealConsumption, false);
   liveSystem(systemConsumptionPin, systemConsumptionPin, systemId, false);
   controlItem(itemControlPin, userId, systemId, itemId);
 
@@ -49,7 +49,7 @@ void loop() {
     counter = 0;
 
     //Saving item and system statistics to database every 1 second
-    liveItem(itemConsumptionPin, itemId, idealConsumption ,true);
+    liveItem(itemConsumptionPin,userId,systemId, itemId, idealConsumption, true);
     liveSystem(systemConsumptionPin, systemConsumptionPin, systemId, true);
   }
   
