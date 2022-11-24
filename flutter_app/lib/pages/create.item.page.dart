@@ -5,7 +5,7 @@ import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/tools/image.picker.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:provider/provider.dart';
 
 class CreateItemPage extends StatefulWidget {
@@ -42,8 +42,8 @@ class _CreateItemPageState extends State<CreateItemPage> {
         Provider.of<User>(context, listen: false).getCurrentSystemId;
 
     try {
-      await Provider.of<Items>(context, listen: false)
-          .addItem(userId, name, idealConsumption, systemId, context);
+      await Provider.of<Items>(context, listen: false).addItem(
+          userId, name, idealConsumption, systemId, encodedImage, context);
 
       Navigator.of(context).pop();
     } on HttpException catch (e) {
