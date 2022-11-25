@@ -116,7 +116,7 @@ class _LandingPageState extends State<LandingPage> {
           },
         ),
       ),
-      drawer: MainDrawer(),
+      drawer: MainDrawer(title: "home"),
       body: RefreshIndicator(
         child: ListView(
           physics: AlwaysScrollableScrollPhysics(),
