@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:flutter_app/widgets/main.drawer.dart';
 import 'package:flutter_app/widgets/notifications.card.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         backgroundColor: Colors.white,
         elevation: 0.5,
       ),
+      drawer: MainDrawer(),
       body: Column(
         children: notifications.reversed.map((notification) {
           return NotificationCard(notification: notification);
