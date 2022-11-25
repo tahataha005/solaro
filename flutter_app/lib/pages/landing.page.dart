@@ -53,8 +53,13 @@ class _LandingPageState extends State<LandingPage> {
     List<System> systems = Provider.of<Systems>(context).getSystems;
 
     Future refresh() async {
+      final prefs = await SharedPreferences.getInstance();
+      final String? userID = prefs.getString("user_id");
+
       final id = Provider.of<Auth>(context, listen: false).getUserId;
       final response = await sendRequest(route: "/read/$id", context: context);
+
+      Provider.of<Systems>(context).emptySystems();
       await Provider.of<Systems>(context, listen: false)
           .loadSystems(response["system"]);
       setState(() {
