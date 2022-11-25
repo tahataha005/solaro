@@ -54,11 +54,12 @@ class _LandingPageState extends State<LandingPage> {
 
     Future refresh() async {
       final prefs = await SharedPreferences.getInstance();
+
       final String? userID = prefs.getString("user_id");
+      print("here is prefs: $userID");
 
       final id = Provider.of<Auth>(context, listen: false).getUserId;
       final response = await sendRequest(route: "/read/$id", context: context);
-
       Provider.of<Systems>(context).emptySystems();
       await Provider.of<Systems>(context, listen: false)
           .loadSystems(response["system"]);
@@ -72,12 +73,14 @@ class _LandingPageState extends State<LandingPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
         toolbarHeight: 100,
-        title: Container(
-          width: 180,
-          child: Image.asset(
-            "assets/images/Header-Logo.png",
-            fit: BoxFit.cover,
+        title: Center(
+          child: Text(
+            "Home",
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
         backgroundColor: Colors.white,
@@ -87,10 +90,10 @@ class _LandingPageState extends State<LandingPage> {
             width: 100,
             child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/notifications");
+                Navigator.pushNamed(context, "/settings");
               },
               icon: Icon(
-                Icons.notifications_active_outlined,
+                Icons.settings,
                 color: Theme.of(context).primaryColor,
                 size: 30,
               ),
@@ -113,6 +116,7 @@ class _LandingPageState extends State<LandingPage> {
           },
         ),
       ),
+      drawer: MainDrawer(),
       body: RefreshIndicator(
         child: ListView(
           physics: AlwaysScrollableScrollPhysics(),
