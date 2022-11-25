@@ -13,7 +13,12 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               children: [
@@ -26,15 +31,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Text(
                   "Settings",
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ],
             ),
             Container(
+              height: MediaQuery.of(context).size.height * 0.2,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ListTile(
                     title: Text(
                       "Dark Mode",
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     trailing: Switch(
                       value: darkMode,
@@ -43,6 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ListTile(
                     title: Text(
                       "Notifications",
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     trailing: Switch(
                       value: notifications,
