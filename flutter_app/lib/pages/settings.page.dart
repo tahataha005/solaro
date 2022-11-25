@@ -13,7 +13,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(title: "settings"),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
         height: MediaQuery.of(context).size.height,
