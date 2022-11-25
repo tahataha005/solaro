@@ -79,12 +79,12 @@ class _MainPageState extends State<MainPage> {
         controller: _scrollController,
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
           SliverAppBar(
-            iconTheme: IconThemeData(
-              color: Theme.of(context).accentColor,
-            ),
+            iconTheme:
+                IconThemeData(color: Theme.of(context).primaryColor, size: 30),
             backgroundColor: Colors.white,
             pinned: true,
             expandedHeight: 250,
+            collapsedHeight: 70,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               title: _isShrink
@@ -148,30 +148,30 @@ class _MainPageState extends State<MainPage> {
             ),
             actions: _isShrink
                 ? [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 12),
+                    Container(
+                      margin: EdgeInsets.only(right: 30, top: 15),
                       child: Row(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: randColor(system.name, context),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
                               child: Center(
                                 child: Text(
                                   system.name[0],
                                   style: TextStyle(
                                     fontFamily: "Kanit",
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 40,
+                                    fontSize: 30,
                                     color: Colors.white,
                                   ),
-                                ),
-                              ),
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              width: MediaQuery.of(context).size.height * 0.05,
-                              decoration: BoxDecoration(
-                                color: randColor(system.name, context),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
                                 ),
                               ),
                             ),
