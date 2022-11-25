@@ -33,18 +33,20 @@ class MainDrawer extends StatelessWidget {
                 DrawerButton(
                   text: "Home",
                   selected: title == "home",
-                  onPressed: () => Navigator.of(context).pushNamed("/landing"),
+                  onPressed: () =>
+                      Navigator.of(context).pushReplacementNamed("/landing"),
                 ),
                 DrawerButton(
                   text: "Notifications",
                   selected: title == "notifications",
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed("/notifications"),
+                  onPressed: () => Navigator.of(context)
+                      .pushReplacementNamed("/notifications"),
                 ),
                 DrawerButton(
                   text: "Settings",
                   selected: title == "settings",
-                  onPressed: () => Navigator.of(context).pushNamed("/settings"),
+                  onPressed: () =>
+                      Navigator.of(context).pushReplacementNamed("/settings"),
                 ),
               ],
             ),
@@ -61,7 +63,7 @@ class MainDrawer extends StatelessWidget {
                 Provider.of<Notifications>(context, listen: false)
                     .emptyNotifications();
 
-                Navigator.of(context).pushNamed("/first");
+                Navigator.of(context).pushReplacementNamed("/first");
               },
             ),
           ),
