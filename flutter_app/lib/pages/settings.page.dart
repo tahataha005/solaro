@@ -24,7 +24,9 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 IconButton(
                   icon: Icon(Icons.arrow_back),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
                 SizedBox(
                   width: 20,
@@ -47,6 +49,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     trailing: Switch(
                       value: darkMode,
+                      onChanged: (value) {
+                        print(value);
+                        setState(() {
+                          darkMode = value;
+                        });
+                      },
                     ),
                   ),
                   ListTile(
@@ -56,6 +64,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     trailing: Switch(
                       value: notifications,
+                      onChanged: (value) {
+                        print(value);
+                        setState(() {
+                          notifications = value;
+                        });
+                      },
                     ),
                   ),
                 ],
