@@ -14,68 +14,40 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  "Settings",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ],
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ListTile(
-                    title: Text(
-                      "Dark Mode",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    trailing: Switch(
-                      value: darkMode,
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          darkMode = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Notifications",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    trailing: Switch(
-                      value: notifications,
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          notifications = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
+            ListTile(
+              title: Text(
+                "Dark Mode",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            )
+              trailing: Switch(
+                value: darkMode,
+                onChanged: (value) {
+                  print(value);
+                  setState(() {
+                    darkMode = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Notifications",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              trailing: Switch(
+                value: notifications,
+                onChanged: (value) {
+                  print(value);
+                  setState(() {
+                    notifications = value;
+                  });
+                },
+              ),
+            ),
           ],
         ),
       ),
