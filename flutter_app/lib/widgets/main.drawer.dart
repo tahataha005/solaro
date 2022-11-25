@@ -80,7 +80,15 @@ class _MainDrawerState extends State<MainDrawer> {
             child: DrawerButton(
               text: "Log Out",
               selected: false,
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<Auth>(context, listen: false).logout();
+                Provider.of<Systems>(context, listen: false).emptySystems();
+                Provider.of<Items>(context, listen: false).emptyItems();
+                Provider.of<Notifications>(context, listen: false)
+                    .emptyNotifications();
+
+                Navigator.of(context).pushNamed("/first");
+              },
             ),
           ),
         ],
