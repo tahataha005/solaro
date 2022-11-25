@@ -83,6 +83,15 @@ class _MainPageState extends State<MainPage> {
                 IconThemeData(color: Theme.of(context).primaryColor, size: 30),
             backgroundColor: Colors.white,
             pinned: true,
+            leading: Container(
+              margin: EdgeInsets.only(left: 10, top: 15),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
             expandedHeight: 250,
             collapsedHeight: 70,
             flexibleSpace: FlexibleSpaceBar(
