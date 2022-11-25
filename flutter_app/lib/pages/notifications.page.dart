@@ -44,7 +44,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         backgroundColor: Colors.white,
         elevation: 0.5,
       ),
-      drawer: MainDrawer(),
+      drawer: MainDrawer(title: "notifications"),
       body: Column(
         children: notifications.reversed.map((notification) {
           return NotificationCard(notification: notification);
