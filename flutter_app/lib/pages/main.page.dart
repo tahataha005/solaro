@@ -76,35 +76,13 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
+        controller: _scrollController,
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
           SliverAppBar(
             iconTheme: IconThemeData(
               color: Theme.of(context).accentColor,
             ),
             backgroundColor: Colors.white,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Center(
-                child: Container(
-                  width: 180,
-                  child: Image.asset(
-                    "assets/images/Header-Logo.png",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            floating: true,
-            expandedHeight: 150,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Container(
-                padding: const EdgeInsets.only(top: 90),
-                child: Text(
-                  system.name,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
           ),
         ],
         body: Container(
