@@ -90,20 +90,35 @@ class _MainPageState extends State<MainPage> {
               title: _isShrink
                   ? Text(
                       "Main",
+                      style: Theme.of(context).textTheme.titleLarge,
                     )
                   : null,
               background: SafeArea(
                 child: Column(
                   children: [
                     Padding(
+                      padding: const EdgeInsets.only(top: 45),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 25),
                           child: Center(
                             child: Text(
                               system.name[0],
+                              style: TextStyle(
+                                fontFamily: "Kanit",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 50,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
+                          height: MediaQuery.of(context).size.height * 0.08,
+                          width: MediaQuery.of(context).size.height * 0.08,
+                          decoration: BoxDecoration(
+                              color: randColor(system.name, context),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                         ),
                       ),
                     ),
@@ -112,12 +127,17 @@ class _MainPageState extends State<MainPage> {
                     ),
                     Text(
                       system.name,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(
                       height: 8,
                     ),
                     Text(
                       "Currently tracking: ${system.items.length} items",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
                     ),
                     SizedBox(
                       height: 8,
@@ -138,6 +158,20 @@ class _MainPageState extends State<MainPage> {
                               child: Center(
                                 child: Text(
                                   system.name[0],
+                                  style: TextStyle(
+                                    fontFamily: "Kanit",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.height * 0.05,
+                              decoration: BoxDecoration(
+                                color: randColor(system.name, context),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
                                 ),
                               ),
                             ),
@@ -145,12 +179,22 @@ class _MainPageState extends State<MainPage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   system.name,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 Text(
                                   "${system.items.length} items",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ],
                             ),
