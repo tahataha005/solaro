@@ -40,6 +40,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       value: darkMode,
                     ),
                   ),
+                  ListTile(
+                    title: Text(
+                      "Notifications",
+                    ),
+                    trailing: Switch(
+                      value: notifications,
+                    ),
+                  ),
                 ],
               ),
             )
