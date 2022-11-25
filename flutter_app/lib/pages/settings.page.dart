@@ -11,6 +11,32 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {},
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "Settings",
+                ),
+              ],
+            ),
+            Container(
+              child: Column(
+                children: [],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
