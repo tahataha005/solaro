@@ -4,7 +4,7 @@ import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/widgets/column.chart.dart';
 import 'package:flutter_app/widgets/content.card.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 import 'package:flutter_app/widgets/labeled.progress.bar.dart';
 import 'package:provider/provider.dart';
@@ -163,13 +163,22 @@ class _MainPageState extends State<MainPage> {
                         height: 20,
                       ),
                       items.getItems.length > 0
-                          ? ItemCard(item_name: items.getItems[0].itemName)
+                          ? ItemCard(
+                              item_name: items.getItems[0].itemName,
+                              item_id: items.getItems[0].itemId,
+                            )
                           : Container(),
                       items.getItems.length > 1
-                          ? ItemCard(item_name: items.getItems[1].itemName)
+                          ? ItemCard(
+                              item_name: items.getItems[1].itemName,
+                              item_id: items.getItems[1].itemId,
+                            )
                           : Container(),
                       items.getItems.length > 2
-                          ? ItemCard(item_name: items.getItems[2].itemName)
+                          ? ItemCard(
+                              item_name: items.getItems[2].itemName,
+                              item_id: items.getItems[2].itemId,
+                            )
                           : Container(),
                       CostumedButton(
                         height: 50,
