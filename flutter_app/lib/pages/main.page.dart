@@ -41,6 +41,13 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void dispose() {
+    _scrollController?.removeListener(_scrollListener);
+    _scrollController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
     System system = arguments["system"] as System;
