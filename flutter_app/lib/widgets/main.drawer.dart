@@ -40,17 +40,37 @@ class _MainDrawerState extends State<MainDrawer> {
                 DrawerButton(
                   text: "Home",
                   selected: selections["home"],
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      selections["home"] = true;
+                      selections["notifications"] = false;
+                      selections["settings"] = false;
+                    });
+                    Navigator.of(context).pushNamed("/landing");
+                  },
                 ),
                 DrawerButton(
                   text: "Notifications",
                   selected: selections["notifications"],
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      selections["home"] = false;
+                      selections["notifications"] = true;
+                      selections["settings"] = false;
+                    });
+                    Navigator.of(context).pushNamed("/notifications");
+                  },
                 ),
                 DrawerButton(
                   text: "Settings",
                   selected: selections["settings"],
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      selections["home"] = false;
+                      selections["notifications"] = false;
+                      selections["settings"] = true;
+                    });
+                  },
                 ),
               ],
             ),
