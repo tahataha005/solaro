@@ -5,4 +5,12 @@ class SettingsPage extends StatefulWidget {
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {}
+class _SettingsPageState extends State<SettingsPage> {
+  bool darkMode = false;
+  bool notifications = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
+}
