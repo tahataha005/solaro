@@ -31,7 +31,16 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             Container(
               child: Column(
-                children: [],
+                children: [
+                  ListTile(
+                    title: Text(
+                      "Dark Mode",
+                    ),
+                    trailing: Switch(
+                      value: darkMode,
+                    ),
+                  ),
+                ],
               ),
             )
           ],
