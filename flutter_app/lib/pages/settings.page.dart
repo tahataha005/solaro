@@ -13,6 +13,19 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
+        toolbarHeight: 100,
+        title: Text(
+          "Settings",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0.5,
+      ),
+      drawer: MainDrawer(title: "settings"),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
