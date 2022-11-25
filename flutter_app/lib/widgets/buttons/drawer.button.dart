@@ -13,6 +13,15 @@ class DrawerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return SizedBox(
+      height: 50,
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+        ),
+      ),
+    );
   }
 }
