@@ -32,38 +32,19 @@ class MainDrawer extends StatelessWidget {
                 ),
                 DrawerButton(
                   text: "Home",
-                  selected: selections["home"],
-                  onPressed: () {
-                    setState(() {
-                      selections["home"] = true;
-                      selections["notifications"] = false;
-                      selections["settings"] = false;
-                    });
-                    Navigator.of(context).pushNamed("/landing");
-                  },
+                  selected: title == "home",
+                  onPressed: () => Navigator.of(context).pushNamed("/landing"),
                 ),
                 DrawerButton(
                   text: "Notifications",
-                  selected: selections["notifications"],
-                  onPressed: () {
-                    setState(() {
-                      selections["home"] = false;
-                      selections["notifications"] = true;
-                      selections["settings"] = false;
-                    });
-                    Navigator.of(context).pushNamed("/notifications");
-                  },
+                  selected: title == "notifications",
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed("/notifications"),
                 ),
                 DrawerButton(
                   text: "Settings",
-                  selected: selections["settings"],
-                  onPressed: () {
-                    setState(() {
-                      selections["home"] = false;
-                      selections["notifications"] = false;
-                      selections["settings"] = true;
-                    });
-                  },
+                  selected: title == "settings",
+                  onPressed: () => Navigator.of(context).pushNamed("/settings"),
                 ),
               ],
             ),
