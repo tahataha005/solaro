@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +54,10 @@ class _ItemsPageState extends State<ItemsPage> {
               ),
               Column(
                 children: items
-                    .map((item) => ItemCard(item_name: item.itemName))
+                    .map((item) => ItemCard(
+                          item_name: item.itemName,
+                          item_id: item.itemId,
+                        ))
                     .toList(),
               ),
             ],

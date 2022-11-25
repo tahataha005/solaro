@@ -1,4 +1,5 @@
 const User = require("../models/user.model.js");
+const fs = require("fs");
 
 //Adding a new solar system
 const addSolarSystem = async (req, res) => {
@@ -33,8 +34,9 @@ const addSolarSystem = async (req, res) => {
 //Adding w new item to solar system
 const addItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_id, name, ideal_consumption } = req.body;
+    const { user_id, system_id, name, ideal_consumption, picture } = req.body;
 
+    console.log(req.body);
     try {
         //Getting user by id
         const user = await User.findById(user_id);
@@ -59,6 +61,15 @@ const addItem = async (req, res) => {
         //Saving user
         await user.save();
 
+        const item_id = system.items[system.items.length - 1]._id;
+
+        const new_image = Buffer.from(picture, "base64");
+        fs.writeFile(
+            __dirname.replace("controllers", "public/images/") +
+                item_id +
+                ".png",
+            new_image
+        );
         //Returning created item
         res.status(200).json(system.items[system.items.length - 1]);
     } catch (err) {

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/notificationservice/local_notification_service.dart';
+import 'package:flutter_app/pages/settings.page.dart';
 import 'package:flutter_app/providers/notifications.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
                   fontFamily: "Inter",
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(56, 56, 56, 1),
                 ),
                 titleMedium: const TextStyle(
                   fontFamily: "Inter",
@@ -116,7 +118,8 @@ class MyApp extends StatelessWidget {
           "/details": (context) => DetailsPage(),
           "/item": (context) => ItemPage(),
           "/items": (context) => ItemsPage(),
-          "/create": (context) => CreateItemPage()
+          "/create": (context) => CreateItemPage(),
+          "/settings": (context) => SettingsPage(),
         },
       ),
     );

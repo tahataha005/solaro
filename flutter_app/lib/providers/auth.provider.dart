@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/config/request.config.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../tools/request.dart';
 import '../models/exception.model.dart';
@@ -49,6 +50,11 @@ class Auth with ChangeNotifier {
         throw HttpException(data["message"]);
       }
 
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString("user_id", data["user_id"]);
+      await prefs.setString("token", data["token"]);
+
       userId = data["user_id"];
       token = data["token"];
       notifyListeners();
@@ -82,5 +88,13 @@ class Auth with ChangeNotifier {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    userId = null;
+    token = null;
+    notifyListeners();
   }
 }

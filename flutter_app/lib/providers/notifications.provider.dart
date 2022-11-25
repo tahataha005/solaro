@@ -27,4 +27,9 @@ class Notifications with ChangeNotifier {
       print(notification);
     }
   }
+
+  void emptyNotifications() {
+    notifications = [];
+    notifyListeners();
+  }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/item.provider.dart';
 import 'package:flutter_app/widgets/content.card.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
-import 'package:flutter_app/widgets/item.card.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 
 class DetailsPage extends StatefulWidget {
   @override

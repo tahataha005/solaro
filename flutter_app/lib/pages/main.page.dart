@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/tools/random.color.dart';
 import '../config/socket.config.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/widgets/column.chart.dart';
 import 'package:flutter_app/widgets/content.card.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:flutter_app/widgets/item.card.dart';
 import 'package:flutter_app/widgets/labeled.progress.bar.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,37 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  ScrollController? _scrollController;
+  bool lastStatus = true;
+  double height = 200;
+
+  void _scrollListener() {
+    if (_isShrink != lastStatus) {
+      setState(() {
+        lastStatus = _isShrink;
+      });
+    }
+  }
+
+  bool get _isShrink {
+    return _scrollController != null &&
+        _scrollController!.hasClients &&
+        _scrollController!.offset > (height - kToolbarHeight);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()..addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController?.removeListener(_scrollListener);
+    _scrollController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
@@ -44,35 +76,134 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
+        controller: _scrollController,
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
           SliverAppBar(
             iconTheme: IconThemeData(
               color: Theme.of(context).accentColor,
             ),
             backgroundColor: Colors.white,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Center(
-                child: Container(
-                  width: 180,
-                  child: Image.asset(
-                    "assets/images/Header-Logo.png",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            floating: true,
-            expandedHeight: 150,
+            pinned: true,
+            expandedHeight: 250,
             flexibleSpace: FlexibleSpaceBar(
-              title: Container(
-                padding: const EdgeInsets.only(top: 90),
-                child: Text(
-                  system.name,
-                  style: Theme.of(context).textTheme.titleLarge,
+              collapseMode: CollapseMode.parallax,
+              title: _isShrink
+                  ? Text(
+                      "Main",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    )
+                  : null,
+              background: SafeArea(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 45),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 25),
+                          child: Center(
+                            child: Text(
+                              system.name[0],
+                              style: TextStyle(
+                                fontFamily: "Kanit",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          height: MediaQuery.of(context).size.height * 0.08,
+                          width: MediaQuery.of(context).size.height * 0.08,
+                          decoration: BoxDecoration(
+                              color: randColor(system.name, context),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      system.name,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      "Currently tracking: ${system.items.length} items",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                  ],
                 ),
               ),
             ),
+            actions: _isShrink
+                ? [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 12),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  system.name[0],
+                                  style: TextStyle(
+                                    fontFamily: "Kanit",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.height * 0.05,
+                              decoration: BoxDecoration(
+                                color: randColor(system.name, context),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  system.name,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "${system.items.length} items",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]
+                : null,
           ),
         ],
         body: Container(
@@ -163,13 +294,22 @@ class _MainPageState extends State<MainPage> {
                         height: 20,
                       ),
                       items.getItems.length > 0
-                          ? ItemCard(item_name: items.getItems[0].itemName)
+                          ? ItemCard(
+                              item_name: items.getItems[0].itemName,
+                              item_id: items.getItems[0].itemId,
+                            )
                           : Container(),
                       items.getItems.length > 1
-                          ? ItemCard(item_name: items.getItems[1].itemName)
+                          ? ItemCard(
+                              item_name: items.getItems[1].itemName,
+                              item_id: items.getItems[1].itemId,
+                            )
                           : Container(),
                       items.getItems.length > 2
-                          ? ItemCard(item_name: items.getItems[2].itemName)
+                          ? ItemCard(
+                              item_name: items.getItems[2].itemName,
+                              item_id: items.getItems[2].itemId,
+                            )
                           : Container(),
                       CostumedButton(
                         height: 50,

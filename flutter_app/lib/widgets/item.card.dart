@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/config/request.config.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 
 class ItemCard extends StatelessWidget {
   final String item_name;
+  final String item_id;
 
   ItemCard({
     required this.item_name,
+    required this.item_id,
   });
 
   @override
@@ -34,7 +37,7 @@ class ItemCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            "http://192.168.44.106:8000/static/${item_name}.png"))),
+                            "http://${RequestConfig.url}/images/${item_id}.png"))),
               ),
             ),
           ),

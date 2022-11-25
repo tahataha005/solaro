@@ -18,7 +18,7 @@ app.use(express.json());
 require("./config/socket.config")(app, address);
 
 //Assigning rouet for public folder
-app.use("/static", express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, "./public")));
 
 //Listening on server port and logging status
 app.listen(process.env.SERVER_PORT, address, err => {

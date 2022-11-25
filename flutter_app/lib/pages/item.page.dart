@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import '../config/socket.config.dart';
 import 'package:flutter_app/providers/user.provider.dart';
-import 'package:flutter_app/widgets/costumed.button.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:provider/provider.dart';
 import '../providers/items.provider.dart';
 
