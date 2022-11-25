@@ -83,6 +83,83 @@ class _MainPageState extends State<MainPage> {
               color: Theme.of(context).accentColor,
             ),
             backgroundColor: Colors.white,
+            pinned: true,
+            expandedHeight: 250,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              title: _isShrink
+                  ? Text(
+                      "Main",
+                    )
+                  : null,
+              background: SafeArea(
+                child: Column(
+                  children: [
+                    Padding(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              system.name[0],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      system.name,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      "Currently tracking: ${system.items.length} items",
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            actions: _isShrink
+                ? [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 12),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  system.name[0],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Column(
+                              children: [
+                                Text(
+                                  system.name,
+                                ),
+                                Text(
+                                  "${system.items.length} items",
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]
+                : null,
           ),
         ],
         body: Container(
