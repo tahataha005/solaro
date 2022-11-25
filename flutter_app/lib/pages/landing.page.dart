@@ -77,11 +77,9 @@ class _LandingPageState extends State<LandingPage> {
           color: Theme.of(context).primaryColor,
         ),
         toolbarHeight: 100,
-        title: Center(
-          child: Text(
-            "Home",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+        title: Text(
+          "Home",
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         backgroundColor: Colors.white,
         elevation: 0.5,
