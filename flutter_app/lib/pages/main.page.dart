@@ -20,6 +20,14 @@ class _MainPageState extends State<MainPage> {
   bool lastStatus = true;
   double height = 200;
 
+  void _scrollListener() {
+    if (_isShrink != lastStatus) {
+      setState(() {
+        lastStatus = _isShrink;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
