@@ -6,17 +6,10 @@ import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/widgets/buttons/drawer.button.dart';
 import 'package:provider/provider.dart';
 
-class MainDrawer extends StatefulWidget {
-  @override
-  State<MainDrawer> createState() => _MainDrawerState();
-}
+class MainDrawer extends StatelessWidget {
+  String title;
 
-class _MainDrawerState extends State<MainDrawer> {
-  Map selections = {
-    "home": false,
-    "notifications": false,
-    "settings": false,
-  };
+  MainDrawer({required this.title});
 
   @override
   Widget build(BuildContext context) {
