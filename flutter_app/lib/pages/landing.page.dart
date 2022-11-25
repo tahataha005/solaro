@@ -6,9 +6,16 @@ import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/tools/random.color.dart';
 import 'package:flutter_app/tools/request.dart';
+import 'package:flutter_app/tools/string.builder.dart';
+import 'package:flutter_app/widgets/buttons/costumed.button.dart';
+import 'package:flutter_app/widgets/buttons/drawer.button.dart';
+import 'package:flutter_app/widgets/main.drawer.dart';
 import 'package:flutter_app/widgets/modal.sheet.dart';
+import 'package:flutter_app/widgets/system.card.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../config/socket.config.dart';
 
 class LandingPage extends StatefulWidget {
@@ -23,8 +30,6 @@ class _LandingPageState extends State<LandingPage> {
 
     PushNotification.pushNotification(context);
   }
-
-  List stats = [];
 
   Future getweekly(id) async {
     final response = await sendRequest(
@@ -41,105 +46,21 @@ class _LandingPageState extends State<LandingPage> {
     });
   }
 
-  String stringBuilder(List items) {
-    if (items.isEmpty) {
-      return "No items yet";
-    }
-    String itemsString = "";
-    for (var i = 0; i < items.length; i++) {
-      itemsString = itemsString + items[i]["name"] + ", ";
-    }
-    return itemsString;
-  }
-
-  Color randColor(String name) {
-    int countName = name.length;
-    while (countName >= 3) {
-      countName = countName % 3;
-    }
-    List colors = [
-      Theme.of(context).primaryColor,
-      Theme.of(context).accentColor,
-      Colors.blueGrey,
-    ];
-    return colors[countName];
-  }
-
-  Widget systemsBuilder(System system) {
-    return InkWell(
-      onTap: () async {
-        Provider.of<User>(context, listen: false).setCurrentSystemId(system.id);
-        final systemId =
-            Provider.of<User>(context, listen: false).getCurrentSystemId;
-        Provider.of<Items>(context, listen: false).emptyItems();
-        Provider.of<Items>(context, listen: false).loadItems(system.items);
-        await getweekly(systemId);
-        Navigator.pushNamed(context, "/main",
-            arguments: {"system": system, "stats": stats});
-      },
-      splashColor: Theme.of(context).accentColor,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: Color.fromARGB(255, 223, 223, 223),
-            ),
-          ),
-        ),
-        height: MediaQuery.of(context).size.height * 0.15,
-        child: Row(children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 25),
-            child: Center(
-              child: Text(
-                system.name[0],
-                style: TextStyle(
-                  fontFamily: "Kanit",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 50,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            height: MediaQuery.of(context).size.height * 0.08,
-            width: MediaQuery.of(context).size.height * 0.08,
-            decoration: BoxDecoration(
-                color: randColor(system.name),
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-          ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    system.name,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  Text(
-                    stringBuilder(system.items),
-                    style: Theme.of(context).textTheme.bodySmall,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ]),
-      ),
-    );
-  }
+  List stats = [];
 
   @override
   Widget build(BuildContext context) {
     List<System> systems = Provider.of<Systems>(context).getSystems;
+
     Future refresh() async {
+      final prefs = await SharedPreferences.getInstance();
+
+      final String? userID = prefs.getString("user_id");
+      print("here is prefs: $userID");
+
       final id = Provider.of<Auth>(context, listen: false).getUserId;
       final response = await sendRequest(route: "/read/$id", context: context);
-      print("response");
-      print(response["system"]);
+      Provider.of<Systems>(context).emptySystems();
       await Provider.of<Systems>(context, listen: false)
           .loadSystems(response["system"]);
       setState(() {
@@ -149,14 +70,17 @@ class _LandingPageState extends State<LandingPage> {
 
     Socket.connect();
     MyNotification.getToken();
+
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
         toolbarHeight: 100,
-        title: Container(
-          width: 180,
-          child: Image.asset(
-            "assets/images/Header-Logo.png",
-            fit: BoxFit.cover,
+        title: Center(
+          child: Text(
+            "Home",
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
         backgroundColor: Colors.white,
@@ -166,10 +90,10 @@ class _LandingPageState extends State<LandingPage> {
             width: 100,
             child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/notifications");
+                Navigator.pushNamed(context, "/settings");
               },
               icon: Icon(
-                Icons.notifications_active_outlined,
+                Icons.settings,
                 color: Theme.of(context).primaryColor,
                 size: 30,
               ),
@@ -192,11 +116,25 @@ class _LandingPageState extends State<LandingPage> {
           },
         ),
       ),
+      drawer: MainDrawer(),
       body: RefreshIndicator(
         child: ListView(
           physics: AlwaysScrollableScrollPhysics(),
           children: systems.map((system) {
-            return systemsBuilder(system);
+            return SystemCard(
+              system: system,
+              items: stringBuilder(system.items),
+              leadingColor: randColor(system.name, context),
+              onTap: () async {
+                await getweekly(system.id);
+                Provider.of<Items>(context, listen: false)
+                    .loadItems(system.items);
+                Provider.of<User>(context, listen: false)
+                    .setCurrentSystemId(system.id);
+                Navigator.pushNamed(context, "/main",
+                    arguments: {"system": system, "stats": stats});
+              },
+            );
           }).toList(),
         ),
         onRefresh: () {
