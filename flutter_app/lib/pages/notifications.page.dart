@@ -34,12 +34,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
           color: Theme.of(context).accentColor,
         ),
         toolbarHeight: 100,
-        title: Container(
-          width: 180,
-          child: Image.asset(
-            "assets/images/Header-Logo.png",
-            fit: BoxFit.cover,
-          ),
+        title: Text(
+          "Notifications",
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         backgroundColor: Colors.white,
         elevation: 0.5,
