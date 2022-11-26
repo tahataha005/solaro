@@ -24,9 +24,15 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  List systems = [];
+
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      systems = Provider.of<Systems>(context, listen: false).systems;
+    });
 
     PushNotification.pushNotification(context);
   }
@@ -50,8 +56,6 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<System> systems = Provider.of<Systems>(context).getSystems;
-
     Future refresh() async {
       final prefs = await SharedPreferences.getInstance();
 
