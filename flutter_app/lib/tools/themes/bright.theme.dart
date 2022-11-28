@@ -66,6 +66,25 @@ class BrightTheme {
             fontFamily: "Inter",
             fontSize: 16,
           ),
+          displaySmall: const TextStyle(
+            // modal sheet add
+            color: Color.fromRGBO(0, 114, 187, 1),
+            fontFamily: "Inter",
+            fontSize: 20,
+          ),
+          displayMedium: const TextStyle(
+            // errors
+            color: Color.fromARGB(255, 183, 28, 28),
+            fontFamily: "Inter",
+            fontSize: 16,
+          ),
+          displayLarge: const TextStyle(
+            // drawer log in as
+            color: Colors.grey,
+            fontFamily: "Inter",
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
   );
 
