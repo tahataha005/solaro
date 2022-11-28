@@ -156,7 +156,26 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 -   Configuration
 
-...
+1. Connect the arduino to the solar panel and the battery
+
+2. Connect the arduino to the computer
+
+3. In arduino/src/main.cpp, change the following variables to match your setup
+
+    ```c
+    const char* userId = "your_user_id";
+
+    const char* systemId =  "your_system_id";
+    uint8_t systemConsumptionPin = "pin_number";
+    uint8_t systemChargingPin = "pin_number";
+
+    const char* itemId =    "your_item_id";
+    double idealConsumption = "#";
+    uint8_t itemConsumptionPin = "pin_number";
+    uint8_t itemControlPin = "pin_number";
+    ```
+
+4. Upload the code to the arduino
 
 ### Hardware Simulation
 
