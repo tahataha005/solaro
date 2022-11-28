@@ -39,6 +39,11 @@ class DarkTheme {
             fontWeight: FontWeight.bold,
             color: Color.fromRGBO(255, 186, 73, 1),
           ),
+          labelSmall: const TextStyle(
+            // /cards sections
+            fontSize: 20,
+            color: Colors.white,
+          ),
           labelMedium: const TextStyle(
             // /cards sections
             fontSize: 32,
