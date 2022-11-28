@@ -11,18 +11,32 @@ class ModalSheet extends StatefulWidget {
 
 class _ModalSheetState extends State<ModalSheet> {
   final _enteredName = TextEditingController();
-  final _enteredConnection = TextEditingController();
+  final _enteredCapacitance = TextEditingController();
+  final _enteredChargingPin = TextEditingController();
+  final _enteredConsumptionPin = TextEditingController();
   final _form = GlobalKey<FormState>();
   String? errMessage;
 
   Future addSystem(
-      String userId, String systemName, String systemConnection) async {
+    userId,
+    systemName,
+    capacitance,
+    chargingPin,
+    consumptionPin,
+    context,
+  ) async {
     try {
       setState(() {
         errMessage = null;
       });
-      await Provider.of<Systems>(context, listen: false)
-          .addSystem(userId, systemName, systemConnection, context);
+      await Provider.of<Systems>(context, listen: false).addSystem(
+        userId,
+        systemName,
+        capacitance,
+        chargingPin,
+        consumptionPin,
+        context,
+      );
       Navigator.of(context).pop();
     } on HttpException catch (e) {
       print(e);
@@ -49,13 +63,13 @@ class _ModalSheetState extends State<ModalSheet> {
         width: double.infinity,
         height: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(horizontal: 50),
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               "Add Solar System",
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
             if (errMessage != null)
               Text(
@@ -184,7 +198,13 @@ class _ModalSheetState extends State<ModalSheet> {
 
                   if (userId != null) {
                     addSystem(
-                        userId, _enteredName.text, _enteredConnection.text);
+                      userId,
+                      _enteredName.text,
+                      double.parse(_enteredCapacitance.text),
+                      _enteredChargingPin.text,
+                      _enteredConsumptionPin.text,
+                      context,
+                    );
                   } else {
                     Navigator.of(context).popAndPushNamed("/");
                   }
