@@ -142,20 +142,35 @@ class _MainPageState extends State<MainPage> {
                     ),
                     Text(
                       system.name,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(
                       height: 8,
                     ),
                     Text(
                       "Currently tracking: ${system.items.length} items",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     SizedBox(
                       height: 8,
+                    ),
+                    Text(
+                      "Capacitance: ${system.capacitance}A",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      "Charging Pin: ${system.chargingPin}",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      "Consumption Pin: ${system.consumptionPin}",
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -288,7 +303,6 @@ class _MainPageState extends State<MainPage> {
                         text: "Details",
                         onPressed: () {
                           Navigator.of(context).pushNamed("/details");
-                          Socket.socket.off("live ${system.id}");
                           dispose();
                         },
                       )
