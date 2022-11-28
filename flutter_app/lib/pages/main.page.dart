@@ -81,6 +81,7 @@ class _MainPageState extends State<MainPage> {
     double currentCharging = system.charging / system.capacitance;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       body: NestedScrollView(
         controller: _scrollController,
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
@@ -90,11 +91,14 @@ class _MainPageState extends State<MainPage> {
               child: IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pop();
                 },
               ),
             ),
-            expandedHeight: 250,
+            iconTheme:
+                IconThemeData(color: Theme.of(context).primaryColor, size: 30),
+            pinned: true,
+            expandedHeight: 270,
             collapsedHeight: 70,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
