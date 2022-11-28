@@ -160,23 +160,78 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: _enteredIdealConsumption,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            label: Text(
-                              "Ideal Consumption",
-                              style: Theme.of(context).textTheme.bodyMedium,
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: _enteredIdealConsumption,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Ideal Consumption",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  try {
+                                    double.parse(value!);
+                                  } catch (e) {
+                                    return "Invalid number";
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                          validator: (value) {
-                            try {
-                              double.parse(value!);
-                            } catch (e) {
-                              return "Invalid number";
-                            }
-                          },
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: _enteredConsumptionPin,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Consumption Pin",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.toString().isEmpty) {
+                                    return "Please enter name";
+                                  }
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: _enteredControlPin,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Control Pin",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.toString().isEmpty) {
+                                    return "Please enter name";
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
