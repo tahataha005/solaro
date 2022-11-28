@@ -69,18 +69,24 @@ class Auth with ChangeNotifier {
 
     try {
       final response = await sendRequest(
-          method: "POST",
-          route: "/auth/signup",
-          load: {
-            "email": email,
-            "password": password,
-            "user_type": userType,
-          },
-          context: context);
+        method: "POST",
+        route: "/auth/signup",
+        load: {
+          "email": email,
+          "password": password,
+          "user_type": userType,
+        },
+        context: context,
+      );
 
       if (response["message"] != null) {
         throw HttpException(response["message"]);
       }
+
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString("user_id", response["user_id"]);
+      await prefs.setString("token", response["token"]);
 
       userId = response["user_id"];
       token = response["token"];
