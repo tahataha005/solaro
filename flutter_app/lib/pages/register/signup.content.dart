@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/exception.model.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,9 @@ class _SignUpState extends State<SignUp> {
       });
       await Provider.of<Auth>(context, listen: false)
           .signUp(email, password, userType, context);
+
+      final userId = Provider.of<Auth>(context, listen: false).getUserId;
+      Provider.of<User>(context, listen: false).getUser(userId!, context);
 
       Navigator.popAndPushNamed(context, "/landing");
     } on HttpException catch (e) {
@@ -67,6 +71,7 @@ class _SignUpState extends State<SignUp> {
                           TextFormField(
                             controller: _email,
                             textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter email";
@@ -86,6 +91,7 @@ class _SignUpState extends State<SignUp> {
                           TextFormField(
                             controller: _password,
                             textInputAction: TextInputAction.next,
+                            obscureText: true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter password";
@@ -105,6 +111,7 @@ class _SignUpState extends State<SignUp> {
                           TextFormField(
                             controller: _confirm,
                             textInputAction: TextInputAction.next,
+                            obscureText: true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please confirm password";
