@@ -39,6 +39,19 @@ class DarkTheme {
             fontWeight: FontWeight.bold,
             color: Color.fromRGBO(255, 186, 73, 1),
           ),
+          labelMedium: const TextStyle(
+            // /cards sections
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          labelLarge: const TextStyle(
+            //buttons
+            fontFamily: "Inter",
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
   );
 
