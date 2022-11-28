@@ -9,6 +9,28 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      width: double.infinity,
+      child: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Image.asset(
+                    "assets/images/Logo-Only.png",
+                  ),
+                ),
+                Text(
+                  text,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
