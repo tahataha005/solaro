@@ -32,11 +32,12 @@ class _LandingPageState extends State<LandingPage> {
   void initState() {
     super.initState();
 
-    setState(() {
-      systems = Provider.of<Systems>(context, listen: false).systems;
-    });
+    final showNotifications =
+        Provider.of<Notifications>(context, listen: false).getShowNotifications;
 
-    PushNotification.pushNotification(context);
+    if (showNotifications) {
+      PushNotification.pushNotification(context);
+    }
   }
 
   Future getweekly(id) async {
