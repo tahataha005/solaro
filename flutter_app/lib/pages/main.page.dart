@@ -20,6 +20,17 @@ class _MainPageState extends State<MainPage> {
   ScrollController? _scrollController;
   bool lastStatus = true;
   double height = 200;
+  System system = System(
+    id: "1",
+    name: "not found",
+    chargingPin: "not found",
+    consumptionPin: "not found",
+    capacitance: 1,
+    consumption: 0,
+    charging: 0,
+    items: [],
+  );
+  List stats = [];
 
   void _scrollListener() {
     if (_isShrink != lastStatus) {
