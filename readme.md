@@ -86,6 +86,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | ![Dark Mode](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Set-darkMode.gif) | ![Main Page -dark ](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Main-dark.gif) | ![Landing Page - dark](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Landing-view.gif) | ![Notifications -dark](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Landing-dark.gif) |
 
+| All Items                                                                                                | Flexibility                                                                                             | Validation                                                                                                 |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| ![All Items](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/All-items.gif) | ![Flexibility](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/AppBar.gif) | ![Validation](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Validation.gif) |
+
 <br><br>
 
 <img src="./readme/assets/titles/title6.svg"/>
