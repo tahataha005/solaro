@@ -34,11 +34,13 @@ class User with ChangeNotifier {
       email = response["email"];
       userType = response["user_type"];
       List systems = response["system"];
-      List notifications = response["notifications"];
+      List notifications = response["notifications"]?.toList() ?? [];
 
       Provider.of<Systems>(context, listen: false).loadSystems(systems);
-      Provider.of<Notifications>(context, listen: false)
-          .loadNotifications(notifications);
+      notifications.length != 0
+          ? Provider.of<Notifications>(context, listen: false)
+              .loadNotifications(notifications)
+          : print("No notifications");
       notifyListeners();
     } catch (e) {
       rethrow;
