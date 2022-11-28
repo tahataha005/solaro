@@ -4,15 +4,17 @@ const fs = require("fs");
 //Adding a new solar system
 const addSolarSystem = async (req, res) => {
     //Destructuring req data
-    const { user_id, connection, system_name } = req.body;
+    const { user_id, system_name, chargingPin, consumptionPin, capacity } =
+        req.body;
 
     try {
         //Assigning solar system attributes
         const newSystem = {
             name: system_name,
-            connection: connection,
-            charging: 0,
-            consumption: 0,
+            chargingPin: chargingPin,
+            consumptionPin: consumptionPin,
+            capacity: capacity,
+            items: [],
         };
 
         //Getting user to add solar system
