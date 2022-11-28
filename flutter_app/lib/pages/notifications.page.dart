@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:flutter_app/widgets/empty.state.dart';
 import 'package:flutter_app/widgets/main.drawer.dart';
 import 'package:flutter_app/widgets/notifications.card.dart';
 import 'package:provider/provider.dart';
@@ -30,23 +31,22 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Theme.of(context).accentColor,
-        ),
         toolbarHeight: 100,
         title: Text(
           "Notifications",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        backgroundColor: Colors.white,
         elevation: 0.5,
       ),
       drawer: MainDrawer(title: "notifications"),
-      body: Column(
-        children: notifications.reversed.map((notification) {
-          return NotificationCard(notification: notification);
-        }).toList(),
-      ),
+      body: notifications.isNotEmpty
+          ? ListView(
+              physics: AlwaysScrollableScrollPhysics(),
+              children: notifications.reversed.map((notification) {
+                return NotificationCard(notification: notification);
+              }).toList(),
+            )
+          : EmptyState(text: "Empty Box"),
     );
   }
 }
