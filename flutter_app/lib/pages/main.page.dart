@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/tools/random.color.dart';
+import 'package:flutter_app/widgets/empty.state.dart';
 import '../config/socket.config.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/system.provider.dart';
@@ -44,17 +45,19 @@ class _MainPageState extends State<MainPage> {
   void dispose() {
     _scrollController?.removeListener(_scrollListener);
     _scrollController?.dispose();
+    Socket.socket.off("live ${system.id}");
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
-    System system = arguments["system"] as System;
-    List stats = arguments["stats"];
 
-    double maxConsumption = 7;
-    final List items = system.items;
+    setState(() {
+      system = arguments["system"] as System;
+      stats = arguments["stats"];
+    });
 
     Socket.socket.on("live ${system.id}", (reading) {
       print(reading);
@@ -64,25 +67,12 @@ class _MainPageState extends State<MainPage> {
       });
     });
 
-    double currentConsumption = system.consumption / 10;
-    double currentCharging = system.charging / 10;
-
-    @override
-    void dispose() {
-      print("object111");
-      Socket.socket.off("live ${system.id}");
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
         controller: _scrollController,
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
           SliverAppBar(
-            iconTheme:
-                IconThemeData(color: Theme.of(context).primaryColor, size: 30),
-            backgroundColor: Colors.white,
-            pinned: true,
             leading: Container(
               margin: EdgeInsets.only(left: 10, top: 15),
               child: IconButton(
@@ -299,27 +289,31 @@ class _MainPageState extends State<MainPage> {
                         "Items",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
-                        height: 20,
+                      Container(
+                        width: double.infinity,
+                        height: 580,
+                        child: items.getItems.isNotEmpty
+                            ? Container(
+                                width: double.infinity,
+                                height: 580,
+                                child: ListView.builder(
+                                  itemCount: items.getItems.length < 3
+                                      ? items.getItems.length
+                                      : items.getItems.length > 3
+                                          ? 3
+                                          : items.getItems.length,
+                                  itemBuilder: (context, index) {
+                                    return ItemCard(
+                                      item_id: items.getItems[index].itemId,
+                                      item_name: items.getItems[index].itemName,
+                                    );
+                                  },
+                                ),
+                              )
+                            : EmptyState(
+                                text: "No items found",
+                              ),
                       ),
-                      items.getItems.length > 0
-                          ? ItemCard(
-                              item_name: items.getItems[0].itemName,
-                              item_id: items.getItems[0].itemId,
-                            )
-                          : Container(),
-                      items.getItems.length > 1
-                          ? ItemCard(
-                              item_name: items.getItems[1].itemName,
-                              item_id: items.getItems[1].itemId,
-                            )
-                          : Container(),
-                      items.getItems.length > 2
-                          ? ItemCard(
-                              item_name: items.getItems[2].itemName,
-                              item_id: items.getItems[2].itemId,
-                            )
-                          : Container(),
                       CostumedButton(
                         height: 50,
                         width: double.infinity,
