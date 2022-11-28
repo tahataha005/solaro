@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 class System with ChangeNotifier {
   final String id;
-  final String connection;
+  final String chargingPin;
+  final String consumptionPin;
+  final double capacitance;
   String name;
   double charging;
   double consumption;
@@ -11,7 +13,9 @@ class System with ChangeNotifier {
   System({
     required this.id,
     required this.name,
-    required this.connection,
+    required this.chargingPin,
+    required this.consumptionPin,
+    required this.capacitance,
     required this.consumption,
     required this.charging,
     required this.items,
