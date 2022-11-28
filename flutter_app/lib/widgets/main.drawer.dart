@@ -3,6 +3,7 @@ import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/notifications.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/buttons/drawer.button.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +30,25 @@ class MainDrawer extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   padding: EdgeInsets.only(top: 50),
-                  child: Image.asset("assets/images/Header-Logo.png"),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset("assets/images/Header-Logo.png"),
+                      Text(
+                        "Logged in as",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.grey,
+                            ),
+                      ),
+                      Text(
+                        Provider.of<User>(context)
+                            .getEmail
+                            .toString()
+                            .split("@")[0],
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
+                    ],
+                  ),
                 ),
                 DrawerButton(
                   text: "Home",
@@ -45,8 +65,7 @@ class MainDrawer extends StatelessWidget {
                 DrawerButton(
                   text: "Settings",
                   selected: title == "settings",
-                  onPressed: () =>
-                      Navigator.of(context).pushReplacementNamed("/settings"),
+                  onPressed: () => Navigator.of(context).pushNamed("/settings"),
                 ),
               ],
             ),
@@ -63,7 +82,7 @@ class MainDrawer extends StatelessWidget {
                 Provider.of<Notifications>(context, listen: false)
                     .emptyNotifications();
 
-                Navigator.of(context).pushReplacementNamed("/first");
+                Navigator.of(context).pushNamed("/first");
               },
             ),
           ),

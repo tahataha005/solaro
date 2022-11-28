@@ -67,7 +67,6 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             ContentCard(
               content: Text("Graph"),
-              color: Theme.of(context).primaryColorLight,
             ),
             SizedBox(
               height: 20,
