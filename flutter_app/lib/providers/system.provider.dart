@@ -20,4 +20,9 @@ class System with ChangeNotifier {
     required this.charging,
     required this.items,
   });
+
+  void setConsumption(double value) {
+    consumption = value;
+    notifyListeners();
+  }
 }
