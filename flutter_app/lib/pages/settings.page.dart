@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:flutter_app/providers/theme.provider.dart';
 import 'package:flutter_app/widgets/main.drawer.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -7,25 +11,21 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool darkMode = false;
-  bool notifications = false;
-
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Provider.of<Themes>(context, listen: false).darkMode;
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Theme.of(context).primaryColor,
-        ),
         toolbarHeight: 100,
         title: Text(
           "Settings",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        backgroundColor: Colors.white,
         elevation: 0.5,
       ),
-      drawer: MainDrawer(title: "settings"),
+      drawer: MainDrawer(
+        title: "settings",
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
@@ -38,11 +38,11 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               trailing: Switch(
                 value: darkMode,
-                onChanged: (value) {
+                onChanged: (value) async {
+                  final prefs = await SharedPreferences.getInstance();
                   print(value);
-                  setState(() {
-                    darkMode = value;
-                  });
+                  Provider.of<Themes>(context, listen: false)
+                      .setDarkMode(value);
                 },
               ),
             ),
