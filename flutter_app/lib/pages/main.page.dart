@@ -213,18 +213,11 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 Text(
                                   system.name,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                                 Text(
                                   "${system.items.length} items",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ],
                             ),
@@ -290,7 +283,7 @@ class _MainPageState extends State<MainPage> {
                       Container(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.8,
-                        child: ColumnChart(data: stats),
+                        child: ColumnChart(data: []),
                       ),
                       SizedBox(
                         height: 20,
