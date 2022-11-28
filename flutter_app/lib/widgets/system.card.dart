@@ -22,7 +22,7 @@ class SystemCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: Color.fromARGB(255, 223, 223, 223),
+              color: Theme.of(context).dividerColor,
             ),
           ),
         ),

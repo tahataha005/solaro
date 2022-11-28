@@ -15,7 +15,15 @@ class Items with ChangeNotifier {
   }
 
   Future addItem(
-      userId, name, idealConsumption, systemId, encoded, context) async {
+    userId,
+    name,
+    idealConsumption,
+    systemId,
+    consumptionPin,
+    controlPin,
+    encoded,
+    context,
+  ) async {
     try {
       final response = await sendRequest(
         route: "/control/item",
@@ -24,6 +32,8 @@ class Items with ChangeNotifier {
           "user_id": userId,
           "system_id": systemId,
           "name": name,
+          "consumptionPin": consumptionPin,
+          "controlPin": controlPin,
           "ideal_consumption": idealConsumption,
           "picture": encoded,
         },
@@ -37,6 +47,8 @@ class Items with ChangeNotifier {
       Item newItem = Item(
         itemId: response["_id"],
         itemName: name,
+        consumptionPin: consumptionPin,
+        controlPin: controlPin,
         idealConsumption: idealConsumption,
         liveConsumption: 0,
         status: false,
@@ -61,8 +73,10 @@ class Items with ChangeNotifier {
       Item newItem = Item(
         itemId: item["_id"],
         itemName: item["name"],
+        consumptionPin: item["consumptionPin"],
+        controlPin: item["controlPin"],
         idealConsumption: item["ideal_consumption"].toDouble(),
-        liveConsumption: item["live_consumption"].toDouble(),
+        liveConsumption: 0,
         status: item["status"],
       );
 

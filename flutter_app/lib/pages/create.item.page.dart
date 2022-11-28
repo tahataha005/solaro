@@ -16,6 +16,8 @@ class CreateItemPage extends StatefulWidget {
 class _CreateItemPageState extends State<CreateItemPage> {
   final _enteredName = TextEditingController();
   final _enteredIdealConsumption = TextEditingController();
+  final _enteredConsumptionPin = TextEditingController();
+  final _enteredControlPin = TextEditingController();
   final _form = GlobalKey<FormState>();
   String errMessage = "";
   String encodedImage = "";
@@ -34,7 +36,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
     }
   }
 
-  Future createItem(name, idealConsumption) async {
+  Future createItem(name, idealConsumption, consumptionPin, controlPin) async {
     if (!validate()) return;
 
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
@@ -42,8 +44,16 @@ class _CreateItemPageState extends State<CreateItemPage> {
         Provider.of<User>(context, listen: false).getCurrentSystemId;
 
     try {
-      await Provider.of<Items>(context, listen: false).addItem(
-          userId, name, idealConsumption, systemId, encodedImage, context);
+      final response = await Provider.of<Items>(context, listen: false).addItem(
+        userId,
+        name,
+        idealConsumption,
+        systemId,
+        consumptionPin,
+        controlPin,
+        encodedImage,
+        context,
+      );
 
       Navigator.of(context).pop();
     } on HttpException catch (e) {
@@ -160,23 +170,78 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: _enteredIdealConsumption,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            label: Text(
-                              "Ideal Consumption",
-                              style: Theme.of(context).textTheme.bodyMedium,
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: _enteredIdealConsumption,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Ideal Consumption",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  try {
+                                    double.parse(value!);
+                                  } catch (e) {
+                                    return "Invalid number";
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                          validator: (value) {
-                            try {
-                              double.parse(value!);
-                            } catch (e) {
-                              return "Invalid number";
-                            }
-                          },
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: _enteredConsumptionPin,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Consumption Pin",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.toString().isEmpty) {
+                                    return "Please enter name";
+                                  }
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: _enteredControlPin,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Control Pin",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.toString().isEmpty) {
+                                    return "Please enter name";
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -188,8 +253,12 @@ class _CreateItemPageState extends State<CreateItemPage> {
                     background: Theme.of(context).primaryColor,
                     text: "ADD",
                     onPressed: () {
-                      createItem(_enteredName.text,
-                          double.parse(_enteredIdealConsumption.text));
+                      createItem(
+                        _enteredName.text,
+                        double.parse(_enteredIdealConsumption.text),
+                        _enteredConsumptionPin.text,
+                        _enteredControlPin.text,
+                      );
                     },
                   )
                 ],

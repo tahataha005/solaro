@@ -11,18 +11,32 @@ class ModalSheet extends StatefulWidget {
 
 class _ModalSheetState extends State<ModalSheet> {
   final _enteredName = TextEditingController();
-  final _enteredConnection = TextEditingController();
+  final _enteredCapacitance = TextEditingController();
+  final _enteredChargingPin = TextEditingController();
+  final _enteredConsumptionPin = TextEditingController();
   final _form = GlobalKey<FormState>();
   String? errMessage;
 
   Future addSystem(
-      String userId, String systemName, String systemConnection) async {
+    userId,
+    systemName,
+    capacitance,
+    chargingPin,
+    consumptionPin,
+    context,
+  ) async {
     try {
       setState(() {
         errMessage = null;
       });
-      await Provider.of<Systems>(context, listen: false)
-          .addSystem(userId, systemName, systemConnection, context);
+      await Provider.of<Systems>(context, listen: false).addSystem(
+        userId,
+        systemName,
+        capacitance,
+        chargingPin,
+        consumptionPin,
+        context,
+      );
       Navigator.of(context).pop();
     } on HttpException catch (e) {
       print(e);
@@ -49,13 +63,13 @@ class _ModalSheetState extends State<ModalSheet> {
         width: double.infinity,
         height: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(horizontal: 50),
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               "Add Solar System",
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
             if (errMessage != null)
               Text(
@@ -88,22 +102,81 @@ class _ModalSheetState extends State<ModalSheet> {
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    controller: _enteredConnection,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value.toString().isEmpty) {
-                        return "Please enter a name";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      label: Text(
-                        "Connection",
-                        style: Theme.of(context).textTheme.bodyMedium,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: TextFormField(
+                          controller: _enteredCapacitance,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          validator: (value) {
+                            if (value.toString().isEmpty) {
+                              return "Required";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            label: Text(
+                              "Capacity",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: TextFormField(
+                          controller: _enteredChargingPin,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          validator: (value) {
+                            if (value.toString().isEmpty) {
+                              return "Required";
+                            }
+                            if (value.toString().length > 3) {
+                              return "Invalid";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            label: Text(
+                              "Charging Pin",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: TextFormField(
+                          controller: _enteredConsumptionPin,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          validator: (value) {
+                            if (value.toString().isEmpty) {
+                              return "Required";
+                            }
+                            if (value.toString().length > 3) {
+                              return "Invalid";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            label: Text(
+                              "Consumption Pin",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -125,7 +198,13 @@ class _ModalSheetState extends State<ModalSheet> {
 
                   if (userId != null) {
                     addSystem(
-                        userId, _enteredName.text, _enteredConnection.text);
+                      userId,
+                      _enteredName.text,
+                      double.parse(_enteredCapacitance.text),
+                      _enteredChargingPin.text,
+                      _enteredConsumptionPin.text,
+                      context,
+                    );
                   } else {
                     Navigator.of(context).popAndPushNamed("/");
                   }

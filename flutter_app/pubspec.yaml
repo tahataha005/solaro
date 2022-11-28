@@ -37,6 +37,7 @@ dependencies:
     socket_io_client: ^2.0.0
     syncfusion_flutter_charts: ^20.3.56
     shared_preferences: ^2.0.15
+    animated_splash_screen: ^1.3.0
 
     # The following adds the Cupertino Icons font to your application.
     # Use with the CupertinoIcons class for iOS style icons.
@@ -70,11 +71,7 @@ flutter:
     assets:
         - assets/images/Logo.png
         - assets/images/Header-Logo.png
-        - assets/images/Item 1.png
-        - assets/images/Item 2.png
-        - assets/images/Item 3.png
-        - assets/images/Item 4.png
-        - assets/images/Item 5.png
+        - assets/images/Logo-Only.png
 
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware

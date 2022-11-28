@@ -18,7 +18,7 @@ class ItemCard extends StatelessWidget {
       padding: EdgeInsets.all(20),
       height: 150,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColorLight,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -33,11 +33,16 @@ class ItemCard extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            "http://${RequestConfig.url}/images/${item_id}.png"))),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "http://${RequestConfig.url}/images/${item_id}.png"))),
+                ),
               ),
             ),
           ),

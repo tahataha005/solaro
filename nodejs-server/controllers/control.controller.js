@@ -4,15 +4,17 @@ const fs = require("fs");
 //Adding a new solar system
 const addSolarSystem = async (req, res) => {
     //Destructuring req data
-    const { user_id, connection, system_name } = req.body;
+    const { user_id, system_name, chargingPin, consumptionPin, capacity } =
+        req.body;
 
     try {
         //Assigning solar system attributes
         const newSystem = {
             name: system_name,
-            connection: connection,
-            charging: 0,
-            consumption: 0,
+            chargingPin: chargingPin,
+            consumptionPin: consumptionPin,
+            capacity: capacity,
+            items: [],
         };
 
         //Getting user to add solar system
@@ -34,7 +36,15 @@ const addSolarSystem = async (req, res) => {
 //Adding w new item to solar system
 const addItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_id, name, ideal_consumption, picture } = req.body;
+    const {
+        user_id,
+        system_id,
+        name,
+        ideal_consumption,
+        picture,
+        consumptionPin,
+        controlPin,
+    } = req.body;
 
     console.log(req.body);
     try {
@@ -51,8 +61,8 @@ const addItem = async (req, res) => {
             name: name,
             ideal_consumption: ideal_consumption,
             status: false,
-            live_consumption: 0,
-            timestamp: null,
+            consumptionPin: consumptionPin,
+            controlPin: controlPin,
         };
 
         //Adding item to solar system
@@ -68,7 +78,12 @@ const addItem = async (req, res) => {
             __dirname.replace("controllers", "public/images/") +
                 item_id +
                 ".png",
-            new_image
+            new_image,
+            err => {
+                if (err) {
+                    console.log(err);
+                }
+            }
         );
         //Returning created item
         res.status(200).json(system.items[system.items.length - 1]);

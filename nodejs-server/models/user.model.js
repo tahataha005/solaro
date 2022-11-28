@@ -4,23 +4,24 @@ const mongoose = require("mongoose");
 const itemSchema = mongoose.Schema({
     name: {
         type: String,
-        // required: "name is required",
+        required: "name is required",
         trim: true,
     },
     status: {
         type: Boolean,
         default: false,
     },
+    consumptionPin: {
+        type: String,
+        required: "consumptionPin is required",
+    },
+    controlPin: {
+        type: String,
+        required: "controlPin is required",
+    },
     ideal_consumption: {
         type: Number,
-        // required: "ideal consumption is required",
-    },
-    live_consumption: {
-        type: Number,
-        default: 0,
-    },
-    image: {
-        type: String,
+        required: "ideal consumption is required",
     },
 });
 
@@ -34,20 +35,20 @@ const solarSystemSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        // required: true,
+        required: true,
         trim: 0,
     },
-    connection: {
+    chargingPin: {
         type: String,
-        // required: "connection is required",
+        required: "charingPin is required",
     },
-    charging: {
-        type: Number,
-        default: 0,
+    consumptionPin: {
+        type: String,
+        required: "consumptionPin is required",
     },
-    consumption: {
+    capacity: {
         type: Number,
-        default: 0,
+        required: "capacity is required",
     },
     items: [itemSchema],
 });

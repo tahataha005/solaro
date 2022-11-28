@@ -21,7 +21,7 @@ class DrawerButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(
             selected
                 ? Theme.of(context).primaryColor
-                : Theme.of(context).primaryColorLight,
+                : Theme.of(context).cardColor,
           ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(

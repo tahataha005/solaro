@@ -38,6 +38,18 @@ const sendNotification = ({
     }
 };
 
+const testNotification = (req, res) => {
+    const { registrationToken, systemName, itemName, consumption } = req.body;
+    sendNotification({
+        registrationToken,
+        systemName: systemName,
+        itemName: itemName,
+        consumption: consumption,
+    });
+    res.status(200).json({ message: "Notification sent" });
+};
+
 module.exports = {
     sendNotification,
+    testNotification,
 };

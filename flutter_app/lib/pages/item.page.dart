@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/config/request.config.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
 import '../config/socket.config.dart';
 import 'package:flutter_app/providers/user.provider.dart';
@@ -85,8 +86,8 @@ class _ItemPageState extends State<ItemPage> {
                           borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
-                          child: Image.asset(
-                            "assets/images/Item 2.png",
+                          child: Image.network(
+                            "http://${RequestConfig.url}/images/${loadedItem.itemId}.png",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -111,7 +112,7 @@ class _ItemPageState extends State<ItemPage> {
               children: [
                 Text(
                   loadedItem.itemName,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 Text(
                   "Consumption:",
@@ -128,13 +129,12 @@ class _ItemPageState extends State<ItemPage> {
                       width: 60,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
-                          // loaded_item.ideal_consumption.toString(),
-                          loadedItem.idealConsumption.toString(),
+                          "${loadedItem.idealConsumption.toString()} A",
                         ),
                       ),
                     )
@@ -151,12 +151,15 @@ class _ItemPageState extends State<ItemPage> {
                       width: 60,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
-                          status ? loadedItem.liveConsumption.toString() : "0",
+                          status
+                              ? "${loadedItem.liveConsumption.toString()} A"
+                              : "0",
+                          style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ),
                     )

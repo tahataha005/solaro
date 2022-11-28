@@ -11,8 +11,25 @@ class ColumnChart extends StatelessWidget {
     return Center(
       child: Container(
         child: SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          primaryYAxis: NumericAxis(minimum: 0, maximum: 10, interval: 0.5),
+          primaryXAxis: CategoryAxis(
+            borderColor: Theme.of(context).backgroundColor,
+            axisLine: AxisLine(
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            labelStyle: Theme.of(context).textTheme.bodySmall,
+            majorGridLines: MajorGridLines(
+              width: 0,
+            ),
+          ),
+          primaryYAxis: NumericAxis(
+            minimum: 0,
+            maximum: 10,
+            interval: 0.5,
+            axisLine: AxisLine(
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            labelStyle: Theme.of(context).textTheme.bodySmall,
+          ),
           legend: Legend(
             isVisible: true,
           ),

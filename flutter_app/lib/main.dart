@@ -6,8 +6,12 @@ import 'package:flutter_app/pages/settings.page.dart';
 import 'package:flutter_app/providers/notifications.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
 import 'package:flutter_app/providers/auth.provider.dart';
+import 'package:flutter_app/providers/theme.provider.dart';
 import 'package:flutter_app/providers/user.provider.dart';
+import 'package:flutter_app/tools/themes/bright.theme.dart';
+import 'package:flutter_app/tools/themes/dark.theme.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './pages/create.item.page.dart';
 import './pages/details.page.dart';
@@ -34,7 +38,12 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -53,74 +62,30 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Notifications(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Themes(),
         )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: createMaterialColor(Color.fromRGBO(0, 114, 187, 1)),
-          accentColor: Color.fromRGBO(255, 186, 73, 1),
-          primaryColorLight: Color.fromRGBO(233, 235, 248, 1),
-          fontFamily: "Inter",
-          textTheme: ThemeData.light().textTheme.copyWith(
-                labelMedium: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-                labelLarge: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-                titleLarge: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(56, 56, 56, 1),
-                ),
-                titleMedium: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-                bodySmall: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 16,
-                ),
-                bodyMedium: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 20,
-                ),
-                bodyLarge: const TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 24,
-                ),
-                displayMedium: const TextStyle(
-                  color: Color.fromARGB(255, 183, 28, 28),
-                  fontFamily: "Inter",
-                  fontSize: 16,
-                ),
-                displaySmall: const TextStyle(
-                  color: Color.fromRGBO(0, 114, 187, 1),
-                  fontFamily: "Inter",
-                  fontSize: 20,
-                ),
-              ),
+      child: Consumer<Themes>(
+        builder: (context, value, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: Provider.of<Themes>(context).darkMode
+              ? DarkTheme().theme
+              : BrightTheme().themeData,
+          home: RegisterPage(),
+          routes: {
+            "/first": (context) => RegisterPage(),
+            "/landing": (context) => LandingPage(),
+            "/notifications": (context) => NotificationsPage(),
+            "/main": (context) => MainPage(),
+            "/details": (context) => DetailsPage(),
+            "/item": (context) => ItemPage(),
+            "/items": (context) => ItemsPage(),
+            "/create": (context) => CreateItemPage(),
+            "/settings": (context) => SettingsPage(),
+          },
         ),
-        home: RegisterPage(),
-        routes: {
-          "/first": (context) => RegisterPage(),
-          "/landing": (context) => LandingPage(),
-          "/notifications": (context) => NotificationsPage(),
-          "/main": (context) => MainPage(),
-          "/details": (context) => DetailsPage(),
-          "/item": (context) => ItemPage(),
-          "/items": (context) => ItemsPage(),
-          "/create": (context) => CreateItemPage(),
-          "/settings": (context) => SettingsPage(),
-        },
       ),
     );
   }

@@ -11,7 +11,13 @@ class Systems with ChangeNotifier {
   }
 
   Future addSystem(
-      String userId, String name, String connection, context) async {
+    String userId,
+    String name,
+    double capacitance,
+    String chargingPin,
+    String consumptionPin,
+    context,
+  ) async {
     try {
       final response = await sendRequest(
           method: "POST",
@@ -19,7 +25,9 @@ class Systems with ChangeNotifier {
           load: {
             "user_id": userId,
             "system_name": name,
-            "connection": connection,
+            "chargingPin": chargingPin,
+            "consumptionPin": consumptionPin,
+            "capacity": capacitance,
           },
           context: context);
       if (response["message"] != null) {
@@ -29,7 +37,9 @@ class Systems with ChangeNotifier {
       System newSystem = System(
         id: response["added"]["_id"],
         name: name,
-        connection: connection,
+        chargingPin: chargingPin,
+        consumptionPin: consumptionPin,
+        capacitance: capacitance,
         consumption: 0,
         charging: 0,
         items: [],
@@ -44,12 +54,15 @@ class Systems with ChangeNotifier {
 
   Future loadSystems(List fetchedSystems) async {
     for (Map system in fetchedSystems) {
+      print(system);
       System newSystem = System(
-        id: system["_id"],
+        id: system["_id"].toString(),
         name: system["name"],
-        connection: system["connection"],
-        consumption: system["consumption"].toDouble(),
-        charging: system["charging"].toDouble(),
+        chargingPin: system["chargingPin"],
+        capacitance: system["capacity"].toDouble(),
+        consumptionPin: system["consumptionPin"],
+        consumption: 0,
+        charging: 0,
         items: system["items"],
       );
       print(system["_id"]);

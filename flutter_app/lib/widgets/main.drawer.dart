@@ -3,24 +3,19 @@ import 'package:flutter_app/providers/auth.provider.dart';
 import 'package:flutter_app/providers/items.provider.dart';
 import 'package:flutter_app/providers/notifications.provider.dart';
 import 'package:flutter_app/providers/systems.provider.dart';
+import 'package:flutter_app/providers/user.provider.dart';
 import 'package:flutter_app/widgets/buttons/drawer.button.dart';
 import 'package:provider/provider.dart';
 
-class MainDrawer extends StatefulWidget {
-  @override
-  State<MainDrawer> createState() => _MainDrawerState();
-}
+class MainDrawer extends StatelessWidget {
+  String title;
 
-class _MainDrawerState extends State<MainDrawer> {
-  Map selections = {
-    "home": false,
-    "notifications": false,
-    "settings": false,
-  };
+  MainDrawer({required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,42 +30,42 @@ class _MainDrawerState extends State<MainDrawer> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   padding: EdgeInsets.only(top: 50),
-                  child: Image.asset("assets/images/Header-Logo.png"),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset("assets/images/Header-Logo.png"),
+                      Text(
+                        "Logged in as",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.grey,
+                            ),
+                      ),
+                      Text(
+                        Provider.of<User>(context)
+                            .getEmail
+                            .toString()
+                            .split("@")[0],
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
+                    ],
+                  ),
                 ),
                 DrawerButton(
                   text: "Home",
-                  selected: selections["home"],
-                  onPressed: () {
-                    setState(() {
-                      selections["home"] = true;
-                      selections["notifications"] = false;
-                      selections["settings"] = false;
-                    });
-                    Navigator.of(context).pushNamed("/landing");
-                  },
+                  selected: title == "home",
+                  onPressed: () =>
+                      Navigator.of(context).pushReplacementNamed("/landing"),
                 ),
                 DrawerButton(
                   text: "Notifications",
-                  selected: selections["notifications"],
-                  onPressed: () {
-                    setState(() {
-                      selections["home"] = false;
-                      selections["notifications"] = true;
-                      selections["settings"] = false;
-                    });
-                    Navigator.of(context).pushNamed("/notifications");
-                  },
+                  selected: title == "notifications",
+                  onPressed: () => Navigator.of(context)
+                      .pushReplacementNamed("/notifications"),
                 ),
                 DrawerButton(
                   text: "Settings",
-                  selected: selections["settings"],
-                  onPressed: () {
-                    setState(() {
-                      selections["home"] = false;
-                      selections["notifications"] = false;
-                      selections["settings"] = true;
-                    });
-                  },
+                  selected: title == "settings",
+                  onPressed: () => Navigator.of(context).pushNamed("/settings"),
                 ),
               ],
             ),

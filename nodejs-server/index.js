@@ -15,7 +15,8 @@ const app = express();
 app.use(express.json());
 
 //Initializing socket
-require("./config/socket.config")(app, address);
+const { init } = require("./config/socket.config")(app, address);
+init(app, address);
 
 //Assigning rouet for public folder
 app.use(express.static(path.join(__dirname, "./public")));

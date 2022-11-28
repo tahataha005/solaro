@@ -31,18 +31,18 @@ class LabeledProgressBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
             ),
-            FractionallySizedBox(
-              widthFactor: progress,
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: 15),
-                height: 40,
-                decoration: BoxDecoration(
-                    color: progress_color,
-                    borderRadius: BorderRadius.circular(10)),
+            AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              margin: EdgeInsets.symmetric(vertical: 15),
+              height: 40,
+              width: progress * 800,
+              decoration: BoxDecoration(
+                color: progress_color,
+                borderRadius: BorderRadius.circular(15),
               ),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

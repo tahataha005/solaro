@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/notifications.provider.dart';
+import 'package:flutter_app/providers/theme.provider.dart';
+import 'package:flutter_app/widgets/main.drawer.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -6,75 +11,58 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool darkMode = false;
-  bool notifications = false;
-
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Provider.of<Themes>(context, listen: false).darkMode;
+    bool showNotifications =
+        Provider.of<Notifications>(context).showNotifications;
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 100,
+        title: Text(
+          "Settings",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        elevation: 0.5,
+      ),
+      drawer: MainDrawer(
+        title: "settings",
+      ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  "Settings",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ],
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ListTile(
-                    title: Text(
-                      "Dark Mode",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    trailing: Switch(
-                      value: darkMode,
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          darkMode = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Notifications",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    trailing: Switch(
-                      value: notifications,
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          notifications = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
+            ListTile(
+              title: Text(
+                "Dark Mode",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            )
+              trailing: Switch(
+                value: darkMode,
+                onChanged: (value) async {
+                  final prefs = await SharedPreferences.getInstance();
+                  print(value);
+                  Provider.of<Themes>(context, listen: false)
+                      .setDarkMode(value);
+                },
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Notifications",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              trailing: Switch(
+                value: showNotifications,
+                onChanged: (value) async {
+                  final prefs = await SharedPreferences.getInstance();
+                  print(value);
+                  Provider.of<Notifications>(context, listen: false)
+                      .setShowNotifications(value);
+                },
+              ),
+            ),
           ],
         ),
       ),
