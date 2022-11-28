@@ -38,6 +38,19 @@ class BrightTheme {
             fontWeight: FontWeight.bold,
             color: Color.fromRGBO(255, 186, 73, 1),
           ),
+          labelMedium: const TextStyle(
+            //Inputs
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Color.fromRGBO(56, 56, 56, 1),
+          ),
+          labelLarge: const TextStyle(
+            //buttons
+            fontFamily: "Inter",
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
   );
 
