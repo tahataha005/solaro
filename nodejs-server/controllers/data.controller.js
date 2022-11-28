@@ -163,16 +163,14 @@ const getItemAvg = async (req, res) => {
     }
 };
 
-//Calculating item average consumption of past day
-
 //Emitting live item data to frontend
 const liveItem = async (req, res) => {
     const record = req.body;
     try {
         //send socket
-        io.emit("live", record);
+        socketIO.emit(`live ${record.id}`, record);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json(error.message);
     }
 };
 
@@ -181,9 +179,10 @@ const liveSystem = async (req, res) => {
     const record = req.body;
     try {
         //send socket
-        io.emit("liveSystem", record);
+        socketIO.emit(`live ${record.id}`, record);
+        res.status(200).json(record);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json(error.message);
     }
 };
 
