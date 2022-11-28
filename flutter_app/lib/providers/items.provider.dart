@@ -73,8 +73,10 @@ class Items with ChangeNotifier {
       Item newItem = Item(
         itemId: item["_id"],
         itemName: item["name"],
+        consumptionPin: item["consumptionPin"],
+        controlPin: item["controlPin"],
         idealConsumption: item["ideal_consumption"].toDouble(),
-        liveConsumption: item["live_consumption"].toDouble(),
+        liveConsumption: 0,
         status: item["status"],
       );
 
