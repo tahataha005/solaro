@@ -10,6 +10,25 @@ class CustomedSplashScreen extends StatefulWidget {
 class Customed_SplashScreenState extends State<CustomedSplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      width: double.infinity,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 150,
+              child: Image.asset(
+                "assets/images/Logo-Only.png",
+              ),
+            ),
+            Text(
+              "Welcome to the Solaro",
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
