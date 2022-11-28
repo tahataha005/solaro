@@ -112,6 +112,7 @@ class _ItemPageState extends State<ItemPage> {
               children: [
                 Text(
                   loadedItem.itemName,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 Text(
                   "Consumption:",
@@ -128,6 +129,7 @@ class _ItemPageState extends State<ItemPage> {
                       width: 60,
                       height: 40,
                       decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
@@ -149,12 +151,15 @@ class _ItemPageState extends State<ItemPage> {
                       width: 60,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
-                          status ? loadedItem.liveConsumption.toString() : "0",
+                          status
+                              ? "${loadedItem.liveConsumption.toString()} A"
+                              : "0",
+                          style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ),
                     )
