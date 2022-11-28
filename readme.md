@@ -66,6 +66,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Using the above mentioned tech stacks and the wireframes built with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
+| Log in                                                                                             | Sign up                                                                                              | Log in flow                                                                                            | Adding systems                                                                                                 |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| ![Log in](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Log-in.JPG) | ![Sign up](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Sign-up.JPG) | ![Log In Flow](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Login.gif) | ![Adding systems](https://github.com/tahataha005/solaro/blob/main/readme/assets/implementation/Add-system.gif) |
+
 <br><br>
 
 <img src="./readme/assets/titles/title6.svg"/>
