@@ -52,6 +52,24 @@ class DarkTheme {
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
+          bodySmall: const TextStyle(
+            //cards and account log/sign
+            fontFamily: "Inter",
+            fontSize: 16,
+            color: Colors.white,
+          ),
+          bodyMedium: const TextStyle(
+            //labels
+            fontFamily: "Inter",
+            fontSize: 20,
+            color: Colors.white,
+          ),
+          bodyLarge: const TextStyle(
+            // item page title small
+            fontFamily: "Inter",
+            fontSize: 24,
+            color: Colors.white,
+          ),
         ),
   );
 
