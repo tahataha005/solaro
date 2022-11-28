@@ -71,15 +71,16 @@ class _MainPageState extends State<MainPage> {
     });
 
     Socket.socket.on("live ${system.id}", (reading) {
-      print(reading);
       setState(() {
-        system.consumption = reading["consumption"];
+        system.setConsumption(reading["consumption"]);
         system.charging = reading["charging"];
       });
     });
 
+    double currentConsumption = system.consumption / system.capacitance;
+    double currentCharging = system.charging / system.capacitance;
+
     return Scaffold(
-      backgroundColor: Colors.white,
       body: NestedScrollView(
         controller: _scrollController,
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
