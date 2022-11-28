@@ -8,6 +8,14 @@ class Notifications with ChangeNotifier {
 
   bool get getShowNotifications => showNotifications;
 
+  void setShowNotifications(bool value) async {
+    showNotifications = value;
+    print(showNotifications);
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('showNotifications', value);
+    notifyListeners();
+  }
+
   List get getNotifications {
     return notifications;
   }
