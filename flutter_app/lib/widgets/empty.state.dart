@@ -25,10 +25,16 @@ class EmptyState extends StatelessWidget {
                 ),
                 Text(
                   text,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
             ),
           ),
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: Theme.of(context).hintColor,
+          )
         ],
       ),
     );
