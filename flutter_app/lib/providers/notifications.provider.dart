@@ -1,8 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/models/notifications.model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Notifications with ChangeNotifier {
   List notifications = [];
+  bool showNotifications = true;
+
+  bool get getShowNotifications => showNotifications;
 
   List get getNotifications {
     return notifications;
