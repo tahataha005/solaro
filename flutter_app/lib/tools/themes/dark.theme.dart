@@ -18,7 +18,28 @@ class DarkTheme {
     dividerColor: Color.fromARGB(255, 76, 76, 76),
     hintColor: Colors.black.withOpacity(0.4),
     fontFamily: "Inter",
-    textTheme: ThemeData.light().textTheme.copyWith(),
+    textTheme: ThemeData.light().textTheme.copyWith(
+          titleSmall: const TextStyle(
+            // drawer log in as
+            color: Color.fromRGBO(0, 114, 187, 1),
+            fontFamily: "kanit",
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: const TextStyle(
+            //cards
+            fontFamily: "Inter",
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          titleLarge: const TextStyle(
+            //pages title
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Color.fromRGBO(255, 186, 73, 1),
+          ),
+        ),
   );
 
   ThemeData get themeData => theme;
