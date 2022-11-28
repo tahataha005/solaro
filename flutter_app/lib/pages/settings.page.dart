@@ -14,6 +14,8 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     bool darkMode = Provider.of<Themes>(context, listen: false).darkMode;
+    bool showNotifications =
+        Provider.of<Notifications>(context).showNotifications;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
@@ -52,12 +54,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               trailing: Switch(
-                value: notifications,
-                onChanged: (value) {
+                value: showNotifications,
+                onChanged: (value) async {
+                  final prefs = await SharedPreferences.getInstance();
                   print(value);
-                  setState(() {
-                    notifications = value;
-                  });
+                  Provider.of<Notifications>(context, listen: false)
+                      .setShowNotifications(value);
                 },
               ),
             ),
