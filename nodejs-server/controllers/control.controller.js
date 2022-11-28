@@ -78,7 +78,12 @@ const addItem = async (req, res) => {
             __dirname.replace("controllers", "public/images/") +
                 item_id +
                 ".png",
-            new_image
+            new_image,
+            err => {
+                if (err) {
+                    console.log(err);
+                }
+            }
         );
         //Returning created item
         res.status(200).json(system.items[system.items.length - 1]);
