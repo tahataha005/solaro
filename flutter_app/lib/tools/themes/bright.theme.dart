@@ -51,6 +51,21 @@ class BrightTheme {
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
+          bodyLarge: const TextStyle(
+            // item page title small
+            fontFamily: "Inter",
+            fontSize: 24,
+          ),
+          bodyMedium: const TextStyle(
+            //labels
+            fontFamily: "Inter",
+            fontSize: 20,
+          ),
+          bodySmall: const TextStyle(
+            //cards and account log/sign
+            fontFamily: "Inter",
+            fontSize: 16,
+          ),
         ),
   );
 
