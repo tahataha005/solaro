@@ -1,9 +1,10 @@
+const User = require("../models/user.model.js");
 const ItemHistory = require("../models/items.history.model.js");
 const SolarHistory = require("../models/solar.history.model.js");
 const SolarAverage = require("../models/system.average.model.js");
 const Peak = require("../models/peak.model.js");
 const { sendNotification } = require("./notifications.controller");
-const User = require("../models/user.model.js");
+const { socketIO } = require("../config/socket.config")();
 
 //Insert item history data
 const insertItemData = async (req, res) => {
@@ -127,10 +128,6 @@ const getSystemData = async (req, res) => {
 
 //Get solar average last week
 const getSolarAvg = async (req, res) => {
-    // const end = new Date();
-    // const start = new Date(end.getTime());
-    // start.setDate(end.getDate() - 7);
-
     //Destructuring req body
     const { system_id } = req.body;
     try {
@@ -147,66 +144,8 @@ const getSolarAvg = async (req, res) => {
     }
 };
 
-//Calculating system average consumption of past day
-const solarDailyAvg = async (req, res) => {
-    //Array of week days to assign later
-    const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    //Setting range to calculate average on
-    const currentDate = new Date();
-    const previousDate = new Date(currentDate.getTime());
-    previousDate.setDate(currentDate.getDate() - 1);
-
-    //Destructuring req parameters
-    const { system_id } = req.params;
-
-    try {
-        //Getting data and calculating average automatically
-        const data = await SolarHistory.aggregate([
-            {
-                //Conditions
-                $match: {
-                    timestamp: { $gte: previousDate, $lte: currentDate },
-                },
-            },
-            {
-                //Calculating average consumption
-                $group: {
-                    _id: {
-                        system_id: system_id,
-                    },
-                    avg: { $avg: "$consumption" },
-                },
-            },
-        ]).exec();
-
-        //Assigning week day
-        const day = weekday[currentDate.getDay()];
-
-        //Creating a new record
-        const record = new SolarAverage();
-
-        //Assigning record values
-        record.system_id = system_id;
-        record.day = { day, date: currentDate };
-        record.avg_consumption = data[0].avg;
-
-        //Saving new record
-        record.save();
-
-        //Returning created record
-        res.status(200).json(record);
-    } catch (error) {
-        res.status(400).json(error);
-    }
-};
-
 //Get item average last week
 const getItemAvg = async (req, res) => {
-    // const end = new Date();
-    // const start = new Date(end.getTime());
-    // start.setDate(end.getDate() - 7);
-
     //Destructuring req body
     const { item_id } = req.body;
 
@@ -225,55 +164,6 @@ const getItemAvg = async (req, res) => {
 };
 
 //Calculating item average consumption of past day
-const itemDailyAvg = async (req, res) => {
-    //Setting range to calculate average on
-    const currentDate = new Date();
-    const previousDate = new Date(currentDate.getTime());
-    previousDate.setDate(currentDate.getDate() - 1);
-
-    //Destructuring req parameters
-    const { item_id } = req.params;
-
-    try {
-        //Getting data and calculating average automatically
-        const data = await ItemHistory.aggregate([
-            {
-                //Conditions
-                $match: {
-                    timestamp: { $gte: previousDate, $lte: currentDate },
-                },
-            },
-            {
-                //Calculating average consumption automatically
-                $group: {
-                    _id: {
-                        item_id: item_id,
-                    },
-                    avg: { $avg: "$consumption" },
-                },
-            },
-        ]).exec();
-
-        //Assigning week day
-        const day = weekday[currentDate.getDay()];
-
-        //Creating a new record
-        const record = new ItemAverage();
-
-        //Assigning record values
-        record.item_id = item_id;
-        record.day = { day, date: currentDate };
-        record.avg_consumption = data[0].avg;
-
-        //Saving new record
-        record.save();
-
-        //Returing created record
-        res.status(200).json(record);
-    } catch (error) {
-        res.status(400).json(error);
-    }
-};
 
 //Emitting live item data to frontend
 const liveItem = async (req, res) => {
@@ -303,9 +193,7 @@ module.exports = {
     insertSystemData,
     getSystemData,
     getSolarAvg,
-    solarDailyAvg,
     getItemAvg,
-    itemDailyAvg,
     liveItem,
     liveSystem,
 };
