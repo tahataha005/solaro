@@ -44,6 +44,11 @@ class BrightTheme {
             fontWeight: FontWeight.bold,
             color: Color.fromRGBO(56, 56, 56, 1),
           ),
+          labelSmall: const TextStyle(
+            //Inputs
+            fontSize: 20,
+            color: Color.fromRGBO(56, 56, 56, 1),
+          ),
           labelLarge: const TextStyle(
             //buttons
             fontFamily: "Inter",
