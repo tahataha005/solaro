@@ -16,6 +16,8 @@ class CreateItemPage extends StatefulWidget {
 class _CreateItemPageState extends State<CreateItemPage> {
   final _enteredName = TextEditingController();
   final _enteredIdealConsumption = TextEditingController();
+  final _enteredConsumptionPin = TextEditingController();
+  final _enteredControlPin = TextEditingController();
   final _form = GlobalKey<FormState>();
   String errMessage = "";
   String encodedImage = "";
@@ -34,7 +36,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
     }
   }
 
-  Future createItem(name, idealConsumption) async {
+  Future createItem(name, idealConsumption, consumptionPin, controlPin) async {
     if (!validate()) return;
 
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
@@ -42,8 +44,16 @@ class _CreateItemPageState extends State<CreateItemPage> {
         Provider.of<User>(context, listen: false).getCurrentSystemId;
 
     try {
-      await Provider.of<Items>(context, listen: false).addItem(
-          userId, name, idealConsumption, systemId, encodedImage, context);
+      final response = await Provider.of<Items>(context, listen: false).addItem(
+        userId,
+        name,
+        idealConsumption,
+        systemId,
+        consumptionPin,
+        controlPin,
+        encodedImage,
+        context,
+      );
 
       Navigator.of(context).pop();
     } on HttpException catch (e) {
@@ -243,8 +253,12 @@ class _CreateItemPageState extends State<CreateItemPage> {
                     background: Theme.of(context).primaryColor,
                     text: "ADD",
                     onPressed: () {
-                      createItem(_enteredName.text,
-                          double.parse(_enteredIdealConsumption.text));
+                      createItem(
+                        _enteredName.text,
+                        double.parse(_enteredIdealConsumption.text),
+                        _enteredConsumptionPin.text,
+                        _enteredControlPin.text,
+                      );
                     },
                   )
                 ],
