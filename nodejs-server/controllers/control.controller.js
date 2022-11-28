@@ -36,7 +36,15 @@ const addSolarSystem = async (req, res) => {
 //Adding w new item to solar system
 const addItem = async (req, res) => {
     //Destructuring req data
-    const { user_id, system_id, name, ideal_consumption, picture } = req.body;
+    const {
+        user_id,
+        system_id,
+        name,
+        ideal_consumption,
+        picture,
+        consumptionPin,
+        controlPin,
+    } = req.body;
 
     console.log(req.body);
     try {
@@ -53,8 +61,8 @@ const addItem = async (req, res) => {
             name: name,
             ideal_consumption: ideal_consumption,
             status: false,
-            live_consumption: 0,
-            timestamp: null,
+            consumptionPin: consumptionPin,
+            controlPin: controlPin,
         };
 
         //Adding item to solar system
