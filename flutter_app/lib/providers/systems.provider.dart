@@ -54,12 +54,15 @@ class Systems with ChangeNotifier {
 
   Future loadSystems(List fetchedSystems) async {
     for (Map system in fetchedSystems) {
+      print(system);
       System newSystem = System(
-        id: system["_id"],
+        id: system["_id"].toString(),
         name: system["name"],
-        connection: system["connection"],
-        consumption: system["consumption"].toDouble(),
-        charging: system["charging"].toDouble(),
+        chargingPin: system["chargingPin"],
+        capacitance: system["capacity"].toDouble(),
+        consumptionPin: system["consumptionPin"],
+        consumption: 0,
+        charging: 0,
         items: system["items"],
       );
       print(system["_id"]);
