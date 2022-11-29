@@ -33,6 +33,7 @@ app.listen(process.env.SERVER_PORT, address, err => {
 //Importing middlewares
 const controllerMiddleware = require("./middlewares/controller.middleware.js");
 const authMiddleware = require("./middlewares/auth.middleware.js");
+const arduinoMiddleware = require("./middlewares/arduino.middleware.js");
 
 //Using created routes
 const authRoutes = require("./routes/auth.route.js");
@@ -45,10 +46,10 @@ const controlRoutes = require("./routes/control.route.js");
 app.use("/control", authMiddleware, controllerMiddleware, controlRoutes);
 
 const dataRoutes = require("./routes/data.route.js");
-app.use("/data", dataRoutes);
+app.use("/data", authMiddleware, dataRoutes);
 
 const arduinoRoutes = require("./routes/arduino.route.js");
-app.use("/arduino", arduinoRoutes);
+app.use("/arduino", arduinoMiddleware, arduinoRoutes);
 
 const notificationsRoutes = require("./routes/notifications.route.js");
 app.use("/notifications", notificationsRoutes);
