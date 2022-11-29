@@ -54,9 +54,17 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 -   This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
 
+-   The app uses [Node.js](https://nodejs.org/en/) for the backend. Node.js is a JavaScript runtime environment that allow running JavaScript code outside of a browser. Node.js is designed to build scalable network applications. Using [Express.js](https://expressjs.com/) which is a web application framework for Node.js. It provides a robust set of features to develop web and mobile applications.
+
 -   For trusted database foundation, the app uses the [MongoDB Atlas](https://www.mongodb.com/atlas/database) that enables you to work with data the way you want – easily and effortlessly.
 
+-   For notifications, the app uses [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform messaging solution that lets you reliably deliver messages at no cost.
+
 -   To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
+
+-   For live data exchange, the app uses [Socket.io](https://socket.io/) which is a library that enables real-time, bidirectional and event-based communication between the client and the server.
+
+-   To schedule server tasks, the app uses [node-cron](https://www.npmjs.com/package/node-cron) which is a simple cron-like and not-cron-like job scheduler for Node.
 
 -   The app uses the font ["Inter"](https://fonts.google.com/specimen/Inter) as its main font, and the design of the app adheres to the material design guidelines.
 
@@ -65,6 +73,8 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 <img src="./readme/assets/titles/title5.svg"/>
 
 > Using the above mentioned tech stacks and the wireframes built with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
+
+<br>
 
 | Log in                                                                                             | Sign up                                                                                              | Log in Flow                                                                                            | Adding Systems                                                                                                 |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
