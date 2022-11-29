@@ -73,6 +73,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 -   To schedule server tasks, the app uses [node-cron](https://www.npmjs.com/package/node-cron) which is a simple cron-like and not-cron-like job scheduler for Node.
 
+-   Concerning arduino, I used [PlatformIO](https://platformio.org/) which is an open source ecosystem for IoT development. It includes a cross-platform build system, a library manager that integrates with the most popular embedded development platforms, and a full-featured online IDE with debugging and unit testing.
+
+-   To connect the arduino to the server, I used [ESP8266](https://www.espressif.com/en/products/socs/esp8266) which is a low-cost Wi-Fi microchip with full TCP/IP stack and microcontroller capability produced by Shanghai-based Chinese manufacturer, Espressif Systems.
+
 -   The app uses the font ["Inter"](https://fonts.google.com/specimen/Inter) as its main font, and the design of the app adheres to the material design guidelines.
 
 <br><br>
