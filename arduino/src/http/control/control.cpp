@@ -16,6 +16,7 @@ void controlItem(uint8_t pin, const char* userId, const char* systemId, const ch
     //Sending request
     http.begin("http://192.168.43.70:8000/arduino/read");
     http.addHeader("Content-Type", "application/json");
+    http.addHeader("pass", "sOlArO101");
     http.POST(json);
 
     //Reading response

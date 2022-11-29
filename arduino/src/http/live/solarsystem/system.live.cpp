@@ -38,6 +38,8 @@ void liveSystem(uint8_t consumptionPin, uint8_t chargingPin, const char* id,bool
 
     //Setting headers
     http.addHeader("Content-Type","application/json");
+    http.addHeader("pass", "sOlArO101");
+
     //Sending data
     int httpResponseCode = http.POST(result);
     

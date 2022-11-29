@@ -47,6 +47,8 @@ void liveItem(u_int8_t pin, const char* userId, const char* systemId, const char
 
     //Setting headers
     http.addHeader("Content-Type","application/json");
+    http.addHeader("pass", "sOlArO101");
+
     //Sending data
     int httpResponseCode = http.POST(result);
 
