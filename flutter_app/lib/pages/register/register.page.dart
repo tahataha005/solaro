@@ -49,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   child: Text(
                     content ? "Sign Up" : "Log In",
-                    style: TextStyle(fontFamily: "Inter", fontSize: 16),
+                    style: const TextStyle(fontFamily: "Inter", fontSize: 16),
                   ),
                 )
               ],

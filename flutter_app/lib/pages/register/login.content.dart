@@ -17,17 +17,22 @@ class _LoginState extends State<Login> {
   String err = "";
   bool successful = true;
 
+  //Inputs validation
   void validate() => _form.currentState?.validate();
 
-  Future submit(email, password) async {
+  //Log in
+  Future submit(email, password, context) async {
     try {
       setState(() {
         err = "";
       });
-      await Provider.of<Auth>(context, listen: false).login(email, password);
 
+      //Try logging in
+      await Provider.of<Auth>(context, listen: false)
+          .login(email, password, context);
       String? userId = Provider.of<Auth>(context, listen: false).getUserId;
 
+      //Navigate if log in is successful
       if (userId != null) {
         await Provider.of<User>(context, listen: false)
             .getUser(userId, context);
@@ -123,7 +128,7 @@ class _LoginState extends State<Login> {
                     setState(() {
                       successful = false;
                     });
-                    submit(enteredEmail.text, enteredPassword.text);
+                    submit(enteredEmail.text, enteredPassword.text, context);
                   },
                 ),
               ],

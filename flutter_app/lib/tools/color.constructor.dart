@@ -8,6 +8,7 @@ MaterialColor createMaterialColor(Color color) {
   for (int i = 1; i < 10; i++) {
     strengths.add(0.1 * i);
   }
+
   for (var strength in strengths) {
     final double ds = 0.5 - strength;
     swatch[(strength * 1000).round()] = Color.fromRGBO(
@@ -17,6 +18,6 @@ MaterialColor createMaterialColor(Color color) {
       1,
     );
   }
-  ;
+
   return MaterialColor(color.value, swatch);
 }

@@ -6,10 +6,13 @@ class Themes with ChangeNotifier {
 
   bool get darkMode => _darkMode;
 
+  //Setting dark mode
   void setDarkMode(bool value) async {
     _darkMode = value;
+
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('darkMode', value);
+
     notifyListeners();
   }
 }

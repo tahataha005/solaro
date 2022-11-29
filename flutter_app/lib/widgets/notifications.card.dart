@@ -4,7 +4,10 @@ import 'package:flutter_app/tools/random.color.dart';
 class NotificationCard extends StatelessWidget {
   final notification;
 
-  NotificationCard({required this.notification});
+  const NotificationCard({
+    super.key,
+    required this.notification,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class NotificationCard extends StatelessWidget {
       splashColor: Theme.of(context).accentColor,
       child: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(color: Color.fromARGB(255, 223, 223, 223)),
           ),
@@ -23,23 +26,23 @@ class NotificationCard extends StatelessWidget {
             margin: EdgeInsets.symmetric(
                 horizontal: 25,
                 vertical: MediaQuery.of(context).size.height * 0.035),
+            height: MediaQuery.of(context).size.height * 0.08,
+            width: MediaQuery.of(context).size.height * 0.08,
+            decoration: BoxDecoration(
+              color: randColor(notification.system_name, context),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
             child: Center(
               child: Text(
                 notification.system_name[0],
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: "Kanit",
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
                   color: Colors.white,
                 ),
-              ),
-            ),
-            height: MediaQuery.of(context).size.height * 0.08,
-            width: MediaQuery.of(context).size.height * 0.08,
-            decoration: BoxDecoration(
-              color: randColor(notification.system_name, context),
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
               ),
             ),
           ),

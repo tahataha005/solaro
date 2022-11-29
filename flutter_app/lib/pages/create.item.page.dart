@@ -9,6 +9,8 @@ import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:provider/provider.dart';
 
 class CreateItemPage extends StatefulWidget {
+  const CreateItemPage({super.key});
+
   @override
   State<CreateItemPage> createState() => _CreateItemPageState();
 }
@@ -23,6 +25,10 @@ class _CreateItemPageState extends State<CreateItemPage> {
   String encodedImage = "";
   Uint8List? decoded;
 
+  //Validating form
+  bool validate() => _form.currentState!.validate();
+
+  //Image picker
   Future inputImage() async {
     try {
       final imageInfo = await imagePicker();
@@ -36,13 +42,16 @@ class _CreateItemPageState extends State<CreateItemPage> {
     }
   }
 
+  //Creating item
   Future createItem(name, idealConsumption, consumptionPin, controlPin) async {
     if (!validate()) return;
 
+    //Getting user id and current system id
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
     final systemId =
         Provider.of<User>(context, listen: false).getCurrentSystemId;
 
+    //Saving item
     try {
       final response = await Provider.of<Items>(context, listen: false).addItem(
         userId,
@@ -55,8 +64,10 @@ class _CreateItemPageState extends State<CreateItemPage> {
         context,
       );
 
+      //Navigating to items page
       Navigator.of(context).pop();
     } on HttpException catch (e) {
+      //Setting error message
       String errMessage = "Sorry, something wrong happened";
 
       if (e.toString().contains("Unauthorized")) {
@@ -69,10 +80,6 @@ class _CreateItemPageState extends State<CreateItemPage> {
     }
   }
 
-  bool validate() {
-    return _form.currentState!.validate();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +87,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: double.infinity,
               child: Column(
                 children: [
@@ -94,7 +101,9 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: Icon(Icons.arrow_back),
+                        icon: const Icon(
+                          Icons.arrow_back,
+                        ),
                       ),
                     ],
                   ),
@@ -105,12 +114,12 @@ class _CreateItemPageState extends State<CreateItemPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               height: MediaQuery.of(context).size.height * 0.8,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: MediaQuery.of(context).size.width - 80,
                     child: Material(
@@ -128,7 +137,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                                   fit: StackFit.expand,
                                   children: [
                                     ClipRRect(
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                         Radius.circular(30),
                                       ),
                                       child: Image.memory(
@@ -138,7 +147,11 @@ class _CreateItemPageState extends State<CreateItemPage> {
                                     ),
                                   ],
                                 )
-                              : Icon(Icons.add, size: 200, color: Colors.white),
+                              : const Icon(
+                                  Icons.add,
+                                  size: 200,
+                                  color: Colors.white,
+                                ),
                         ),
                       ),
                     ),
@@ -167,7 +180,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                             }
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -195,7 +208,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                                 },
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Flexible(
@@ -218,7 +231,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                                 },
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Flexible(

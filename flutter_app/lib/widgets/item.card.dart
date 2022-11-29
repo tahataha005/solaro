@@ -6,7 +6,8 @@ class ItemCard extends StatelessWidget {
   final String item_name;
   final String item_id;
 
-  ItemCard({
+  const ItemCard({
+    super.key,
     required this.item_name,
     required this.item_id,
   });
@@ -26,7 +27,7 @@ class ItemCard extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height * 0.12,
             width: MediaQuery.of(context).size.height * 0.12,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -34,14 +35,16 @@ class ItemCard extends StatelessWidget {
             ),
             child: Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "http://${RequestConfig.url}/images/${item_id}.png"))),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "http://${RequestConfig.url}/images/${item_id}.png"),
+                    ),
+                  ),
                 ),
               ),
             ),

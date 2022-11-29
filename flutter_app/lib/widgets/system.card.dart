@@ -6,11 +6,12 @@ class SystemCard extends StatelessWidget {
   final onTap;
   final leadingColor;
 
-  SystemCard({
+  const SystemCard({
+    super.key,
     required this.system,
     required this.items,
     required this.leadingColor,
-    this.onTap = null,
+    this.onTap,
   });
 
   @override
@@ -29,11 +30,16 @@ class SystemCard extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.15,
         child: Row(children: [
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 25),
+            margin: const EdgeInsets.symmetric(horizontal: 25),
+            height: MediaQuery.of(context).size.height * 0.08,
+            width: MediaQuery.of(context).size.height * 0.08,
+            decoration: BoxDecoration(
+                color: leadingColor,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Center(
               child: Text(
                 system.name[0],
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: "Kanit",
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
@@ -41,11 +47,6 @@ class SystemCard extends StatelessWidget {
                 ),
               ),
             ),
-            height: MediaQuery.of(context).size.height * 0.08,
-            width: MediaQuery.of(context).size.height * 0.08,
-            decoration: BoxDecoration(
-                color: leadingColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
           ),
           Flexible(
             child: Padding(

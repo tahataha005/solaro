@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/content.card.dart';
 import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 
+//This page is still under development//
+
 class DetailsPage extends StatefulWidget {
+  const DetailsPage({super.key});
+
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
@@ -21,9 +25,10 @@ class _DetailsPageState extends State<DetailsPage> {
       'Saturday',
       'Sunday',
     ];
+
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         width: double.infinity,
         child: Column(
           children: [
@@ -35,14 +40,16 @@ class _DetailsPageState extends State<DetailsPage> {
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.amber,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: DropdownButton(
                     style: Theme.of(context).textTheme.bodyMedium,
                     value: dropdownvalue,
@@ -62,13 +69,13 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             ContentCard(
               content: Text("Graph"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CostumedButton(
@@ -77,7 +84,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 raduis: 15,
                 background: Theme.of(context).primaryColor,
                 text: "Graph"),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Column(

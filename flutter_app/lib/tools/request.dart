@@ -2,8 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../config/request.config.dart';
 
-Future sendRequest(
-    {required String route, method = "GET", load, context}) async {
+//Sending http request
+Future sendRequest({
+  required String route,
+  method = "GET",
+  load,
+  context,
+}) async {
   final url = Uri.http(RequestConfig.url, route);
   final Map<String, String> headers = RequestConfig().getHeaders(context);
 

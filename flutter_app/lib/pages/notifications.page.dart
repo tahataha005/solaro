@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/notifications.provider.dart';
-import 'package:flutter_app/widgets/empty.state.dart';
-import 'package:flutter_app/widgets/main.drawer.dart';
-import 'package:flutter_app/widgets/notifications.card.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/notifications.provider.dart';
+import '../widgets/empty.state.dart';
+import '../widgets/main.drawer.dart';
+import '../widgets/notifications.card.dart';
+
 class NotificationsPage extends StatefulWidget {
+  const NotificationsPage({super.key});
+
   @override
   State<NotificationsPage> createState() => _NotificationsPageState();
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-  Color randColor(String name) {
-    int countName = name.length;
-    while (countName >= 3) {
-      countName = countName % 3;
-    }
-    List colors = [
-      Theme.of(context).primaryColor,
-      Theme.of(context).accentColor,
-      Colors.blueGrey,
-    ];
-    return colors[countName];
-  }
-
   @override
   Widget build(BuildContext context) {
     final List notifications =
@@ -41,7 +31,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
       drawer: MainDrawer(title: "notifications"),
       body: notifications.isNotEmpty
           ? ListView(
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               children: notifications.reversed.map((notification) {
                 return NotificationCard(notification: notification);
               }).toList(),

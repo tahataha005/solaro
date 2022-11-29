@@ -1,45 +1,48 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/notificationservice/notification.dart';
-import 'package:flutter_app/notificationservice/push_notification.dart';
-import 'package:flutter_app/providers/auth.provider.dart';
-import 'package:flutter_app/providers/items.provider.dart';
-import 'package:flutter_app/providers/notifications.provider.dart';
-import 'package:flutter_app/providers/system.provider.dart';
-import 'package:flutter_app/providers/systems.provider.dart';
-import 'package:flutter_app/providers/user.provider.dart';
-import 'package:flutter_app/tools/random.color.dart';
-import 'package:flutter_app/tools/request.dart';
-import 'package:flutter_app/tools/string.builder.dart';
-import 'package:flutter_app/widgets/buttons/costumed.button.dart';
-import 'package:flutter_app/widgets/buttons/drawer.button.dart';
-import 'package:flutter_app/widgets/empty.state.dart';
-import 'package:flutter_app/widgets/main.drawer.dart';
-import 'package:flutter_app/widgets/modal.sheet.dart';
-import 'package:flutter_app/widgets/splash.screen.dart';
-import 'package:flutter_app/widgets/system.card.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../config/socket.config.dart';
+import '../notificationservice/notification.dart';
+import '../notificationservice/push_notification.dart';
+import '../providers/auth.provider.dart';
+import '../providers/items.provider.dart';
+import '../providers/notifications.provider.dart';
+import '../providers/systems.provider.dart';
+import '../providers/user.provider.dart';
+import '../tools/random.color.dart';
+import '../tools/request.dart';
+import '../tools/string.builder.dart';
+import '../widgets/empty.state.dart';
+import '../widgets/main.drawer.dart';
+import '../widgets/modal.sheet.dart';
+import '../widgets/system.card.dart';
 
 class LandingPage extends StatefulWidget {
+  const LandingPage({super.key});
+
   @override
   State<LandingPage> createState() => _LandingPageState();
 }
 
 class _LandingPageState extends State<LandingPage> {
+  List stats = [];
+
   @override
   void initState() {
     super.initState();
 
+    //Checking if show notifications is enabled
     final showNotifications =
         Provider.of<Notifications>(context, listen: false).getShowNotifications;
 
+    //If true then enable notifications
     if (showNotifications) {
       PushNotification.pushNotification(context);
     }
   }
 
+  //Getting weekly consumption
   Future getweekly(id) async {
     final response = await sendRequest(
       route: "/data/system/avg",
@@ -55,28 +58,53 @@ class _LandingPageState extends State<LandingPage> {
     });
   }
 
-  List stats = [];
-
   @override
   Widget build(BuildContext context) {
     List systems = Provider.of<Systems>(context).getSystems;
+
+    //Refreshing systems
     Future refresh() async {
       final prefs = await SharedPreferences.getInstance();
-
       final String? userID = prefs.getString("user_id");
-      print("here is prefs: $userID");
-
       final id = Provider.of<Auth>(context, listen: false).getUserId;
+
+      //Getting systems
       final response = await sendRequest(route: "/read/$id", context: context);
+
+      //Emptying systems
       Provider.of<Systems>(context, listen: false).emptySystems();
       await Provider.of<Systems>(context, listen: false)
           .loadSystems(response["system"]);
+
+      //Display new systems
       setState(() {
         systems = Provider.of<Systems>(context, listen: false).getSystems;
       });
     }
 
+    //Selecting system
+    Future selectSystem(system) async {
+      //Get weekly consumption
+      await getweekly(system.id);
+
+      //Get items
+      Provider.of<Items>(context, listen: false).loadItems(system.items);
+
+      //Settin current system
+      Provider.of<User>(context, listen: false).setCurrentSystemId(system.id);
+
+      //Navigating to main page
+      Navigator.pushNamed(
+        context,
+        "/main",
+        arguments: {"system": system, "stats": stats},
+      );
+    }
+
+    //Initializing socket
     Socket.connect();
+
+    //Getting device token
     MyNotification.getToken();
 
     return Scaffold(
@@ -109,9 +137,9 @@ class _LandingPageState extends State<LandingPage> {
       floatingActionButton: Container(
         width: 70,
         height: 70,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: FloatingActionButton(
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           ),
@@ -128,21 +156,13 @@ class _LandingPageState extends State<LandingPage> {
       body: RefreshIndicator(
         child: systems.isNotEmpty
             ? ListView(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 children: systems.map((system) {
                   return SystemCard(
                     system: system,
                     items: stringBuilder(system.items),
                     leadingColor: randColor(system.name, context),
-                    onTap: () async {
-                      await getweekly(system.id);
-                      Provider.of<Items>(context, listen: false)
-                          .loadItems(system.items);
-                      Provider.of<User>(context, listen: false)
-                          .setCurrentSystemId(system.id);
-                      Navigator.pushNamed(context, "/main",
-                          arguments: {"system": system, "stats": stats});
-                    },
+                    onTap: () => selectSystem(system),
                   );
                 }).toList(),
               )
@@ -150,7 +170,7 @@ class _LandingPageState extends State<LandingPage> {
                 text: "No systems added yet",
               ),
         onRefresh: () {
-          return Future.delayed(Duration(seconds: 1), () {
+          return Future.delayed(const Duration(seconds: 1), () {
             setState(() {
               refresh();
             });

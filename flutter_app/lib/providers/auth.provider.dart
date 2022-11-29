@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/config/request.config.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
+import '../config/request.config.dart';
 import '../tools/request.dart';
 import '../models/exception.model.dart';
 
@@ -27,46 +27,37 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  Future login(email, password) async {
-    final baseUrl = RequestConfig.url;
-    final url = Uri.http(baseUrl, "/auth/login");
-
+  //Login
+  Future login(email, password, context) async {
     try {
-      final response = await http.post(
-        url,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: json.encode(
-          {
+      final response = await sendRequest(
+          route: "/auth/login",
+          context: context,
+          method: "POST",
+          load: {
             "email": email,
             "password": password,
-          },
-        ),
-      );
-      final data = json.decode(response.body);
+          });
 
-      if (data["message"] != null) {
-        throw HttpException(data["message"]);
+      if (response["message"] != null) {
+        throw HttpException(response["message"]);
       }
 
+      //Save user id and token
       final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("user_id", response["user_id"]);
+      await prefs.setString("token", response["token"]);
 
-      await prefs.setString("user_id", data["user_id"]);
-      await prefs.setString("token", data["token"]);
-
-      userId = data["user_id"];
-      token = data["token"];
+      userId = response["user_id"];
+      token = response["token"];
       notifyListeners();
     } catch (e) {
       rethrow;
     }
   }
 
+  //Sign up
   Future signUp(email, password, userType, context) async {
-    final baseUrl = RequestConfig.url;
-    final url = Uri.http(baseUrl, "/auth/login");
-
     try {
       final response = await sendRequest(
         method: "POST",
@@ -83,8 +74,8 @@ class Auth with ChangeNotifier {
         throw HttpException(response["message"]);
       }
 
+      //Save user id and token
       final prefs = await SharedPreferences.getInstance();
-
       await prefs.setString("user_id", response["user_id"]);
       await prefs.setString("token", response["token"]);
 
@@ -96,6 +87,7 @@ class Auth with ChangeNotifier {
     }
   }
 
+  //Log out
   Future logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();

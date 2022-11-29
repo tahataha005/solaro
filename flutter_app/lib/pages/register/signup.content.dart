@@ -6,10 +6,13 @@ import 'package:flutter_app/widgets/buttons/costumed.button.dart';
 import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
+  const SignUp({super.key});
+
   @override
   State<SignUp> createState() => _SignUpState();
 }
 
+//Setting user types
 Map userTypes = {"controller": "controller", "viewer": "viewer"};
 
 class _SignUpState extends State<SignUp> {
@@ -21,21 +24,27 @@ class _SignUpState extends State<SignUp> {
   String _userType = userTypes["viewer"];
   bool successful = true;
 
+  //Sign up
   Future submit(email, password, userType, context) async {
     if (!validated()) {
       successful = true;
       return;
     }
+
     try {
       setState(() {
         errMessage = null;
       });
+
+      //Try signing up
       await Provider.of<Auth>(context, listen: false)
           .signUp(email, password, userType, context);
 
+      //Setting user id
       final userId = Provider.of<Auth>(context, listen: false).getUserId;
       Provider.of<User>(context, listen: false).getUser(userId!, context);
 
+      //Navigation
       Navigator.popAndPushNamed(context, "/landing");
     } on HttpException catch (e) {
       if (e.toString().contains("duplicate")) {
@@ -56,14 +65,14 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return successful
-        ? Container(
+        ? SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Form(
                   key: _form,
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.3,
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -136,32 +145,34 @@ class _SignUpState extends State<SignUp> {
                     errMessage!,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
-                Column(children: [
-                  ListTile(
-                    title: Text("Controller"),
-                    leading: Radio(
-                      value: userTypes["controller"],
-                      groupValue: _userType,
-                      onChanged: (value) {
-                        setState(() {
-                          _userType = value;
-                        });
-                      },
+                Column(
+                  children: [
+                    ListTile(
+                      title: const Text("Controller"),
+                      leading: Radio(
+                        value: userTypes["controller"],
+                        groupValue: _userType,
+                        onChanged: (value) {
+                          setState(() {
+                            _userType = value;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  ListTile(
-                    title: Text("Viewer"),
-                    leading: Radio(
-                      value: userTypes["viewer"],
-                      groupValue: _userType,
-                      onChanged: (value) {
-                        setState(() {
-                          _userType = value;
-                        });
-                      },
+                    ListTile(
+                      title: const Text("Viewer"),
+                      leading: Radio(
+                        value: userTypes["viewer"],
+                        groupValue: _userType,
+                        onChanged: (value) {
+                          setState(() {
+                            _userType = value;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
                 CostumedButton(
                   height: 60,
                   width: double.infinity,
@@ -179,9 +190,9 @@ class _SignUpState extends State<SignUp> {
               ],
             ),
           )
-        : Container(
+        : SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(),
             ),
           );

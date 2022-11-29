@@ -3,19 +3,19 @@ import 'package:flutter_app/tools/color.constructor.dart';
 
 class BrightTheme {
   ThemeData theme = ThemeData(
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       iconTheme: IconThemeData(
         color: Color.fromRGBO(0, 114, 187, 1),
       ),
     ),
     primarySwatch: createMaterialColor(Color.fromRGBO(0, 114, 187, 1)),
-    accentColor: Color.fromRGBO(255, 186, 73, 1),
-    primaryColorLight: Color.fromRGBO(233, 235, 248, 1),
+    accentColor: const Color.fromRGBO(255, 186, 73, 1),
+    primaryColorLight: const Color.fromRGBO(233, 235, 248, 1),
     scaffoldBackgroundColor: Colors.white,
     backgroundColor: Colors.white,
-    cardColor: Color.fromRGBO(233, 235, 248, 1),
-    dividerColor: Color.fromARGB(255, 223, 223, 223),
+    cardColor: const Color.fromRGBO(233, 235, 248, 1),
+    dividerColor: const Color.fromARGB(255, 223, 223, 223),
     hintColor: Colors.white.withOpacity(0.6),
     fontFamily: "Inter",
     textTheme: ThemeData.light().textTheme.copyWith(

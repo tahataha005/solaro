@@ -6,9 +6,10 @@ class DrawerButton extends StatelessWidget {
   final onPressed;
 
   DrawerButton({
+    super.key,
     required this.text,
     required this.selected,
-    this.onPressed = null,
+    this.onPressed,
   });
 
   @override

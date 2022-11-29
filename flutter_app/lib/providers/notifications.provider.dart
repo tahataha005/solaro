@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_app/models/notifications.model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/notifications.model.dart';
 
 class Notifications with ChangeNotifier {
   List notifications = [];
@@ -8,18 +9,20 @@ class Notifications with ChangeNotifier {
 
   bool get getShowNotifications => showNotifications;
 
+  List get getNotifications {
+    return notifications;
+  }
+
+  //Setting show notifications
   void setShowNotifications(bool value) async {
     showNotifications = value;
-    print(showNotifications);
+
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('showNotifications', value);
     notifyListeners();
   }
 
-  List get getNotifications {
-    return notifications;
-  }
-
+  //Creating a new notifications
   void addNotification(title, body, time) {
     final newNotification = Notification(
       system_name: title.split(":")[0],
@@ -32,14 +35,15 @@ class Notifications with ChangeNotifier {
     notifyListeners();
   }
 
+  //Getting all notifications
   void loadNotifications(notifications) {
     for (var notification in notifications) {
       addNotification(
           notification["title"], notification["body"], notification["time"]);
-      print(notification);
     }
   }
 
+  //Emptying notifications list
   void emptyNotifications() {
     notifications = [];
     notifyListeners();

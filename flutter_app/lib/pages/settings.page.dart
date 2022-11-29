@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
@@ -16,6 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
     bool darkMode = Provider.of<Themes>(context, listen: false).darkMode;
     bool showNotifications =
         Provider.of<Notifications>(context).showNotifications;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
@@ -29,7 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
         title: "settings",
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -40,12 +43,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               trailing: Switch(
                 value: darkMode,
-                onChanged: (value) async {
-                  final prefs = await SharedPreferences.getInstance();
-                  print(value);
-                  Provider.of<Themes>(context, listen: false)
-                      .setDarkMode(value);
-                },
+                onChanged: (value) =>
+                    Provider.of<Themes>(context, listen: false)
+                        .setDarkMode(value),
               ),
             ),
             ListTile(
@@ -55,12 +55,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               trailing: Switch(
                 value: showNotifications,
-                onChanged: (value) async {
-                  final prefs = await SharedPreferences.getInstance();
-                  print(value);
-                  Provider.of<Notifications>(context, listen: false)
-                      .setShowNotifications(value);
-                },
+                onChanged: (value) =>
+                    Provider.of<Notifications>(context, listen: false)
+                        .setShowNotifications(value),
               ),
             ),
           ],

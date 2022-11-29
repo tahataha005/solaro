@@ -1,19 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/models/exception.model.dart';
-import 'package:flutter_app/providers/notifications.provider.dart';
-import 'package:flutter_app/providers/systems.provider.dart';
-import 'package:flutter_app/tools/request.dart';
 import 'package:provider/provider.dart';
+
+import '../models/exception.model.dart';
+import '../providers/notifications.provider.dart';
+import '../providers/systems.provider.dart';
+import '../tools/request.dart';
 
 class User with ChangeNotifier {
   String? email;
   String? userType;
   String? currentSystemId;
-
-  void setCurrentSystemId(String systemId) {
-    currentSystemId = systemId;
-    notifyListeners();
-  }
 
   String? get getCurrentSystemId {
     return currentSystemId;
@@ -23,6 +19,13 @@ class User with ChangeNotifier {
     return email;
   }
 
+  //Setting current system
+  void setCurrentSystemId(String systemId) {
+    currentSystemId = systemId;
+    notifyListeners();
+  }
+
+  //Get user data
   Future getUser(String id, context) async {
     try {
       final response = await sendRequest(route: "/read/$id", context: context);
@@ -37,10 +40,12 @@ class User with ChangeNotifier {
       List notifications = response["notifications"]?.toList() ?? [];
 
       Provider.of<Systems>(context, listen: false).loadSystems(systems);
+
       notifications.length != 0
           ? Provider.of<Notifications>(context, listen: false)
               .loadNotifications(notifications)
-          : print("No notifications");
+          : null;
+
       notifyListeners();
     } catch (e) {
       rethrow;

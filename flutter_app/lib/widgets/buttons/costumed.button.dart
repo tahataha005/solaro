@@ -9,14 +9,15 @@ class CostumedButton extends StatelessWidget {
   final onPressed;
   final textStyle;
 
-  CostumedButton({
+  const CostumedButton({
+    super.key,
     required this.height,
     required this.width,
     required this.raduis,
     required this.background,
     required this.text,
-    this.onPressed = null,
-    this.textStyle = null,
+    this.onPressed,
+    this.textStyle,
   });
 
   @override
@@ -36,9 +37,7 @@ class CostumedButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: textStyle != null
-              ? textStyle
-              : Theme.of(context).textTheme.labelLarge,
+          style: textStyle ?? Theme.of(context).textTheme.labelLarge,
         ),
       ),
     );

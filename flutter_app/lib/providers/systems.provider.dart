@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/models/exception.model.dart';
-import 'package:flutter_app/providers/system.provider.dart';
-import 'package:flutter_app/tools/request.dart';
+import '../models/exception.model.dart';
+import '../providers/system.provider.dart';
+import '../tools/request.dart';
 
 class Systems with ChangeNotifier {
   List<System> systems = [];
@@ -10,6 +10,7 @@ class Systems with ChangeNotifier {
     return [...systems];
   }
 
+  //Creating new system
   Future addSystem(
     String userId,
     String name,
@@ -20,16 +21,18 @@ class Systems with ChangeNotifier {
   ) async {
     try {
       final response = await sendRequest(
-          method: "POST",
-          route: "/control/system",
-          load: {
-            "user_id": userId,
-            "system_name": name,
-            "chargingPin": chargingPin,
-            "consumptionPin": consumptionPin,
-            "capacity": capacitance,
-          },
-          context: context);
+        method: "POST",
+        route: "/control/system",
+        load: {
+          "user_id": userId,
+          "system_name": name,
+          "chargingPin": chargingPin,
+          "consumptionPin": consumptionPin,
+          "capacity": capacitance,
+        },
+        context: context,
+      );
+
       if (response["message"] != null) {
         throw HttpException(response["message"]);
       }
@@ -52,9 +55,9 @@ class Systems with ChangeNotifier {
     }
   }
 
+  //Get all systems
   Future loadSystems(List fetchedSystems) async {
     for (Map system in fetchedSystems) {
-      print(system);
       System newSystem = System(
         id: system["_id"].toString(),
         name: system["name"],
@@ -65,13 +68,13 @@ class Systems with ChangeNotifier {
         charging: 0,
         items: system["items"],
       );
-      print(system["_id"]);
 
       systems.add(newSystem);
     }
     notifyListeners();
   }
 
+  //Empty systems list
   void emptySystems() {
     systems = [];
     notifyListeners();

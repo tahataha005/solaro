@@ -17,6 +17,10 @@ class _ModalSheetState extends State<ModalSheet> {
   final _form = GlobalKey<FormState>();
   String? errMessage;
 
+  //Validation
+  bool? validate() => _form.currentState?.validate();
+
+  //Adding new system
   Future addSystem(
     userId,
     systemName,
@@ -29,6 +33,8 @@ class _ModalSheetState extends State<ModalSheet> {
       setState(() {
         errMessage = null;
       });
+
+      //Creating a new system
       await Provider.of<Systems>(context, listen: false).addSystem(
         userId,
         systemName,
@@ -37,10 +43,13 @@ class _ModalSheetState extends State<ModalSheet> {
         consumptionPin,
         context,
       );
+
+      //Closing modal sheet
       Navigator.of(context).pop();
     } on HttpException catch (e) {
-      print(e);
+      //Showing error message
       errMessage = "Sorry, something woring happened";
+
       if (e.toString().contains("Unauthorized")) {
         errMessage = "Unauthorized action, only controllers can add systems.";
       }
@@ -51,8 +60,6 @@ class _ModalSheetState extends State<ModalSheet> {
     }
   }
 
-  bool? validate() => _form.currentState?.validate();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,7 +69,7 @@ class _ModalSheetState extends State<ModalSheet> {
       child: Container(
         width: double.infinity,
         height: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(horizontal: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 50),
         color: Theme.of(context).backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -99,7 +106,7 @@ class _ModalSheetState extends State<ModalSheet> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -124,7 +131,7 @@ class _ModalSheetState extends State<ModalSheet> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Flexible(
@@ -150,7 +157,7 @@ class _ModalSheetState extends State<ModalSheet> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Flexible(

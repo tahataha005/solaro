@@ -5,7 +5,8 @@ class LabeledProgressBar extends StatelessWidget {
   final double progress;
   final progress_color;
 
-  LabeledProgressBar({
+  const LabeledProgressBar({
+    super.key,
     required this.label,
     required this.progress,
     required this.progress_color,
@@ -17,7 +18,7 @@ class LabeledProgressBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label + ":",
+          "$label:",
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         Stack(

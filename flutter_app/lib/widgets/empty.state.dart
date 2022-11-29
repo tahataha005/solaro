@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class EmptyState extends StatelessWidget {
   final String text;
 
-  EmptyState({
+  const EmptyState({
+    super.key,
     required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Stack(
         children: [

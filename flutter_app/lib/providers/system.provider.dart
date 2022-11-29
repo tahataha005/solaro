@@ -21,6 +21,7 @@ class System with ChangeNotifier {
     required this.items,
   });
 
+  //Update system consumption
   void setConsumption(double value) {
     consumption = value;
     notifyListeners();

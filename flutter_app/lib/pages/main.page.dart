@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/tools/random.color.dart';
-import 'package:flutter_app/widgets/empty.state.dart';
-import '../config/socket.config.dart';
-import 'package:flutter_app/providers/items.provider.dart';
-import 'package:flutter_app/providers/system.provider.dart';
-import 'package:flutter_app/widgets/column.chart.dart';
-import 'package:flutter_app/widgets/content.card.dart';
-import 'package:flutter_app/widgets/buttons/costumed.button.dart';
-import 'package:flutter_app/widgets/item.card.dart';
-import 'package:flutter_app/widgets/labeled.progress.bar.dart';
 import 'package:provider/provider.dart';
 
+import '../tools/random.color.dart';
+import '../widgets/empty.state.dart';
+import '../config/socket.config.dart';
+import '../providers/items.provider.dart';
+import '../providers/system.provider.dart';
+import '../widgets/column.chart.dart';
+import '../widgets/content.card.dart';
+import '../widgets/buttons/costumed.button.dart';
+import '../widgets/item.card.dart';
+import '../widgets/labeled.progress.bar.dart';
+
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -20,6 +23,9 @@ class _MainPageState extends State<MainPage> {
   ScrollController? _scrollController;
   bool lastStatus = true;
   double height = 200;
+  List stats = [];
+
+  //Default constructor
   System system = System(
     id: "1",
     name: "not found",
@@ -30,8 +36,8 @@ class _MainPageState extends State<MainPage> {
     charging: 0,
     items: [],
   );
-  List stats = [];
 
+  //Listening to scroll
   void _scrollListener() {
     if (_isShrink != lastStatus) {
       setState(() {
@@ -40,6 +46,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  //Checking if scroll is shrinked
   bool get _isShrink {
     return _scrollController != null &&
         _scrollController!.hasClients &&
@@ -64,21 +71,22 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    double currentConsumption = system.consumption / system.capacitance;
+    double currentCharging = system.charging / system.capacitance;
 
+    //Getting system and stats from arguments
     setState(() {
       system = arguments["system"] as System;
       stats = arguments["stats"];
     });
 
+    //Listening to live data
     Socket.socket.on("live ${system.id}", (reading) {
       setState(() {
         system.setConsumption(reading["consumption"]);
         system.charging = reading["charging"];
       });
     });
-
-    double currentConsumption = system.consumption / system.capacitance;
-    double currentCharging = system.charging / system.capacitance;
 
     return Scaffold(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -87,9 +95,11 @@ class _MainPageState extends State<MainPage> {
         headerSliverBuilder: (context, bool innerBoxIsScrolled) => [
           SliverAppBar(
             leading: Container(
-              margin: EdgeInsets.only(left: 10, top: 15),
+              margin: const EdgeInsets.only(left: 10, top: 15),
               child: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(
+                  Icons.arrow_back,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -116,11 +126,19 @@ class _MainPageState extends State<MainPage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 25),
+                          margin: const EdgeInsets.symmetric(horizontal: 25),
+                          height: MediaQuery.of(context).size.height * 0.08,
+                          width: MediaQuery.of(context).size.height * 0.08,
+                          decoration: BoxDecoration(
+                            color: randColor(system.name, context),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
                           child: Center(
                             child: Text(
                               system.name[0],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Kanit",
                                 fontWeight: FontWeight.bold,
                                 fontSize: 50,
@@ -128,44 +146,38 @@ class _MainPageState extends State<MainPage> {
                               ),
                             ),
                           ),
-                          height: MediaQuery.of(context).size.height * 0.08,
-                          width: MediaQuery.of(context).size.height * 0.08,
-                          decoration: BoxDecoration(
-                              color: randColor(system.name, context),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Text(
                       system.name,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
                       "Currently tracking: ${system.items.length} items",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
                       "Capacitance: ${system.capacitance}A",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
                       "Charging Pin: ${system.chargingPin}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
@@ -189,14 +201,14 @@ class _MainPageState extends State<MainPage> {
                               width: 45,
                               decoration: BoxDecoration(
                                 color: randColor(system.name, context),
-                                borderRadius: BorderRadius.all(
+                                borderRadius: const BorderRadius.all(
                                   Radius.circular(10),
                                 ),
                               ),
                               child: Center(
                                 child: Text(
                                   system.name[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: "Kanit",
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30,
@@ -231,7 +243,7 @@ class _MainPageState extends State<MainPage> {
         ],
         body: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: Theme.of(context).primaryColorLight,
@@ -239,7 +251,7 @@ class _MainPageState extends State<MainPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ContentCard(
@@ -249,7 +261,7 @@ class _MainPageState extends State<MainPage> {
                         "Statistics",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       LabeledProgressBar(
@@ -267,7 +279,7 @@ class _MainPageState extends State<MainPage> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ContentCard(
@@ -277,15 +289,15 @@ class _MainPageState extends State<MainPage> {
                         "History",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.8,
                         child: ColumnChart(data: []),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CostumedButton(
@@ -302,7 +314,7 @@ class _MainPageState extends State<MainPage> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Consumer<Items>(
@@ -312,11 +324,11 @@ class _MainPageState extends State<MainPage> {
                         "Items",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: 580,
                         child: items.getItems.isNotEmpty
-                            ? Container(
+                            ? SizedBox(
                                 width: double.infinity,
                                 height: 580,
                                 child: ListView.builder(
@@ -350,7 +362,7 @@ class _MainPageState extends State<MainPage> {
                     ]),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],

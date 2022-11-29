@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class MainDrawer extends StatelessWidget {
   String title;
 
-  MainDrawer({required this.title});
+  MainDrawer({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MainDrawer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             height: MediaQuery.of(context).size.height * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,17 +71,19 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 50, left: 20, right: 20),
+            padding: const EdgeInsets.only(bottom: 50, left: 20, right: 20),
             child: DrawerButton(
               text: "Log Out",
               selected: false,
               onPressed: () {
+                //Clear all providers
                 Provider.of<Auth>(context, listen: false).logout();
                 Provider.of<Systems>(context, listen: false).emptySystems();
                 Provider.of<Items>(context, listen: false).emptyItems();
                 Provider.of<Notifications>(context, listen: false)
                     .emptyNotifications();
 
+                //Navigate to login
                 Navigator.of(context).pushNamed("/first");
               },
             ),

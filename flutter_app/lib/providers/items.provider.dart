@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/models/exception.model.dart';
-import 'package:flutter_app/providers/item.provider.dart';
-import 'package:flutter_app/tools/request.dart';
+import '../models/exception.model.dart';
+import '../providers/item.provider.dart';
+import '../tools/request.dart';
 
 class Items with ChangeNotifier {
   List<Item> _items = [];
@@ -14,6 +14,7 @@ class Items with ChangeNotifier {
     return _items.firstWhere((item) => item.itemName == name);
   }
 
+  //Creating new item
   Future addItem(
     userId,
     name,
@@ -63,11 +64,7 @@ class Items with ChangeNotifier {
     notifyListeners();
   }
 
-  void emptyItems() {
-    _items = [];
-    notifyListeners();
-  }
-
+  //Get all items
   void loadItems(List items) {
     for (var item in items) {
       Item newItem = Item(
@@ -85,6 +82,7 @@ class Items with ChangeNotifier {
     notifyListeners();
   }
 
+  //Update item's status
   Future toggleStatus(userId, systemId, itemId, context) async {
     final item = _items.firstWhere((item) => item.itemId == itemId);
 
@@ -99,6 +97,12 @@ class Items with ChangeNotifier {
       context: context,
     );
     item.status = !item.status;
+    notifyListeners();
+  }
+
+  //Emptying items list
+  void emptyItems() {
+    _items = [];
     notifyListeners();
   }
 }

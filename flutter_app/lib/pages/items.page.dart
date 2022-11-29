@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/item.provider.dart';
-import 'package:flutter_app/providers/items.provider.dart';
-import 'package:flutter_app/widgets/buttons/costumed.button.dart';
-import 'package:flutter_app/widgets/item.card.dart';
+import 'package:flutter_app/widgets/empty.state.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/item.provider.dart';
+import '../providers/items.provider.dart';
+import '../widgets/buttons/costumed.button.dart';
+import '../widgets/item.card.dart';
+
 class ItemsPage extends StatefulWidget {
+  const ItemsPage({super.key});
+
   @override
   State<ItemsPage> createState() => _ItemsPageState();
 }
@@ -17,7 +21,7 @@ class _ItemsPageState extends State<ItemsPage> {
 
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         width: double.infinity,
         child: SingleChildScrollView(
           child: Column(
@@ -49,17 +53,19 @@ class _ItemsPageState extends State<ItemsPage> {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Column(
-                children: items
-                    .map((item) => ItemCard(
-                          item_name: item.itemName,
-                          item_id: item.itemId,
-                        ))
-                    .toList(),
-              ),
+              items.isNotEmpty
+                  ? Column(
+                      children: items
+                          .map((item) => ItemCard(
+                                item_name: item.itemName,
+                                item_id: item.itemId,
+                              ))
+                          .toList(),
+                    )
+                  : EmptyState(text: "No Items"),
             ],
           ),
         ),
