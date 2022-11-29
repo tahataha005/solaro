@@ -41,6 +41,8 @@
 
 <img src="./readme/assets/Plan.png"/>
 
+<br>
+
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
 | Log in                                                                                             | Sign up                                                                                              | Landing                                                                                              | Notifications                                                                                                    |
