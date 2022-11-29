@@ -36,6 +36,11 @@
 <img src="./readme/assets/titles/title3.svg"/>
 
 > This design was planned before on [excalidraw](https://excalidraw.com/), then moved to Figma app for the fine details and animations.
+
+> Here is a breif diagram of the app's architecture.
+
+<img src="./readme/assets/Plan.png"/>
+
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
 | Log in                                                                                             | Sign up                                                                                              | Landing                                                                                              | Notifications                                                                                                    |
